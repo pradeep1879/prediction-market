@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  balance  Int
+  bets     Bet[]
+}
+
+model Market {
+  id            String   @id @default(uuid())
+  title         String
+  initialWaeger Int
+  bet           BetType
+  createrId     String
+  expiry        DateTime
+  resolution    Boolean  @default(false)
+  bets          Bet[]
+}
+
+model Bet {
+  id        String @id @default(uuid())
+  userId    String
+  markedId  String
+  betAmount Int
+  user      User   @relation(fields: [userId], references: [id])
+  market    Market @relation(fields: [markedId], references: [id])
+}
+
+model walletEvent {
+  id          String      @id     @default(uuid())
+  tx_type     String  
+  externalId  Json
+  amount      Int
+    
+}
+
+
+
+enum BetType {
+  YES
+  NO
+}
