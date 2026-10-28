@@ -28,7 +28,7 @@ model Market {
   bet           BetType
   createrId     String
   expiry        DateTime
-  resolution    Boolean  @default(false)
+  resolution    BetType  @default(NO)
   user          User     @relation(fields: [createrId], references: [id])
   bets          Bet[]
 }
