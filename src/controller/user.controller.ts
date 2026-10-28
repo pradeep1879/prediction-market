@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { prisma } from "../db/client";
-import { userSignIn, userSignUp } from "../types/user.types";
+import { userBalance, userSignIn, userSignUp } from "../types/user.types";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken";
 
@@ -92,3 +92,49 @@ export const userSignin = async (req:Request, res:Response) => {
     });
   }
 }
+
+
+export const addBalance = async (req:Request, res:Response) => {
+  const result = userBalance.safeParse(req.body);
+  const { userId } = req;
+  if(!result.success){
+    throw new Error("Invalid balance")
+  }
+  try {
+    const user = await prisma.user.findFirst({
+      where:{
+        id: userId
+      }
+    });
+    if(!user){
+      return res.status(400).json({
+        success: false,
+        message: "User does not exit"
+      });
+    }
+
+
+    const updateUserBalance = await prisma.user.update({
+      where:{
+        id: userId
+      },
+      data:{
+        balance: {
+          increment: result.data.balance
+        }
+      }
+    });
+    res.status(200).json({
+      success: true,
+      message: "User Balance updated",
+      user: updateUserBalance
+    });
+
+  } catch (error:any) {
+    return res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+}
+
