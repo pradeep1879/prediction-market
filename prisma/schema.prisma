@@ -15,7 +15,7 @@ datasource db {
 model User {
   id       String @id @default(uuid())
   email    String @unique
-  password String
+  password String 
   balance  Int
   markets  Market[]
   bets     Bet[]
@@ -36,10 +36,10 @@ model Market {
 model Bet {
   id        String @id @default(uuid())
   userId    String
-  markedId  String
+  marketId  String
   betAmount Int
   user      User   @relation(fields: [userId], references: [id])
-  market    Market @relation(fields: [markedId], references: [id])
+  market    Market @relation(fields: [marketId], references: [id])
 }
 
 model walletEvent {
@@ -49,8 +49,6 @@ model walletEvent {
   amount      Int
     
 }
-
-
 
 enum BetType {
   YES
