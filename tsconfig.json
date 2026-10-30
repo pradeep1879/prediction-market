@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     // Environment setup & latest features
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "lib": ["ESNext"],
     "target": "ESNext",
     "module": "Preserve",

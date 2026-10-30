@@ -86,7 +86,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const MarketScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  initialWaeger: 'initialWaeger',
+  initialWager: 'initialWager',
   bet: 'bet',
   createrId: 'createrId',
   expiry: 'expiry',

@@ -208,6 +208,7 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   balance?: Prisma.IntFilter<"User"> | number
+  markets?: Prisma.MarketListRelationFilter
   bets?: Prisma.BetListRelationFilter
 }
 
@@ -216,6 +217,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  markets?: Prisma.MarketOrderByRelationAggregateInput
   bets?: Prisma.BetOrderByRelationAggregateInput
 }
 
@@ -227,6 +229,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   password?: Prisma.StringFilter<"User"> | string
   balance?: Prisma.IntFilter<"User"> | number
+  markets?: Prisma.MarketListRelationFilter
   bets?: Prisma.BetListRelationFilter
 }, "id" | "email">
 
@@ -257,6 +260,7 @@ export type UserCreateInput = {
   email: string
   password: string
   balance: number
+  markets?: Prisma.MarketCreateNestedManyWithoutUserInput
   bets?: Prisma.BetCreateNestedManyWithoutUserInput
 }
 
@@ -265,6 +269,7 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   balance: number
+  markets?: Prisma.MarketUncheckedCreateNestedManyWithoutUserInput
   bets?: Prisma.BetUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -273,6 +278,7 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   balance?: Prisma.IntFieldUpdateOperationsInput | number
+  markets?: Prisma.MarketUpdateManyWithoutUserNestedInput
   bets?: Prisma.BetUpdateManyWithoutUserNestedInput
 }
 
@@ -281,6 +287,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   balance?: Prisma.IntFieldUpdateOperationsInput | number
+  markets?: Prisma.MarketUncheckedUpdateManyWithoutUserNestedInput
   bets?: Prisma.BetUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -351,6 +358,20 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type UserCreateNestedOneWithoutMarketsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketsInput, Prisma.UserUncheckedCreateWithoutMarketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMarketsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketsInput, Prisma.UserUncheckedCreateWithoutMarketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketsInput
+  upsert?: Prisma.UserUpsertWithoutMarketsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMarketsInput, Prisma.UserUpdateWithoutMarketsInput>, Prisma.UserUncheckedUpdateWithoutMarketsInput>
+}
+
 export type UserCreateNestedOneWithoutBetsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBetsInput, Prisma.UserUncheckedCreateWithoutBetsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBetsInput
@@ -365,11 +386,60 @@ export type UserUpdateOneRequiredWithoutBetsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBetsInput, Prisma.UserUpdateWithoutBetsInput>, Prisma.UserUncheckedUpdateWithoutBetsInput>
 }
 
+export type UserCreateWithoutMarketsInput = {
+  id?: string
+  email: string
+  password: string
+  balance: number
+  bets?: Prisma.BetCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMarketsInput = {
+  id?: string
+  email: string
+  password: string
+  balance: number
+  bets?: Prisma.BetUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMarketsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarketsInput, Prisma.UserUncheckedCreateWithoutMarketsInput>
+}
+
+export type UserUpsertWithoutMarketsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMarketsInput, Prisma.UserUncheckedUpdateWithoutMarketsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarketsInput, Prisma.UserUncheckedCreateWithoutMarketsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMarketsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMarketsInput, Prisma.UserUncheckedUpdateWithoutMarketsInput>
+}
+
+export type UserUpdateWithoutMarketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  bets?: Prisma.BetUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMarketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  balance?: Prisma.IntFieldUpdateOperationsInput | number
+  bets?: Prisma.BetUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutBetsInput = {
   id?: string
   email: string
   password: string
   balance: number
+  markets?: Prisma.MarketCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBetsInput = {
@@ -377,6 +447,7 @@ export type UserUncheckedCreateWithoutBetsInput = {
   email: string
   password: string
   balance: number
+  markets?: Prisma.MarketUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBetsInput = {
@@ -400,6 +471,7 @@ export type UserUpdateWithoutBetsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   balance?: Prisma.IntFieldUpdateOperationsInput | number
+  markets?: Prisma.MarketUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBetsInput = {
@@ -407,6 +479,7 @@ export type UserUncheckedUpdateWithoutBetsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   balance?: Prisma.IntFieldUpdateOperationsInput | number
+  markets?: Prisma.MarketUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -415,10 +488,12 @@ export type UserUncheckedUpdateWithoutBetsInput = {
  */
 
 export type UserCountOutputType = {
+  markets: number
   bets: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  markets?: boolean | UserCountOutputTypeCountMarketsArgs
   bets?: boolean | UserCountOutputTypeCountBetsArgs
 }
 
@@ -435,6 +510,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountMarketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountBetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BetWhereInput
 }
@@ -445,6 +527,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   password?: boolean
   balance?: boolean
+  markets?: boolean | Prisma.User$marketsArgs<ExtArgs>
   bets?: boolean | Prisma.User$betsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -472,6 +555,7 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "balance", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  markets?: boolean | Prisma.User$marketsArgs<ExtArgs>
   bets?: boolean | Prisma.User$betsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -481,6 +565,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    markets: Prisma.$MarketPayload<ExtArgs>[]
     bets: Prisma.$BetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -882,6 +967,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  markets<T extends Prisma.User$marketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$marketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bets<T extends Prisma.User$betsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$betsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1306,6 +1392,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.markets
+ */
+export type User$marketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Market
+   */
+  select?: Prisma.MarketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Market
+   */
+  omit?: Prisma.MarketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketInclude<ExtArgs> | null
+  where?: Prisma.MarketWhereInput
+  orderBy?: Prisma.MarketOrderByWithRelationInput | Prisma.MarketOrderByWithRelationInput[]
+  cursor?: Prisma.MarketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketScalarFieldEnum | Prisma.MarketScalarFieldEnum[]
 }
 
 /**
