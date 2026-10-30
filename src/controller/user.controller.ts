@@ -47,7 +47,6 @@ export const userSignup = async (req:Request, res:Response) => {
   }
 }
 
-
 export const userSignin = async (req:Request, res:Response) => {
   try {
     const result = userSignIn.safeParse(req.body);
@@ -93,7 +92,6 @@ export const userSignin = async (req:Request, res:Response) => {
   }
 }
 
-
 export const addBalance = async (req:Request, res:Response) => {
   const result = userBalance.safeParse(req.body);
   const { userId } = req;
@@ -130,6 +128,44 @@ export const addBalance = async (req:Request, res:Response) => {
       user: updateUserBalance
     });
 
+  } catch (error:any) {
+    return res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+}
+
+export const getUserProfile = async (req:Request, res:Response) => {
+  const { userId } = req;
+  try {
+    const isUserExist = await prisma.user.findFirst({
+      where:{
+        id: userId
+      }
+    });
+    if(!isUserExist){
+      return res.status(400).json({
+        success: false,
+        message: "User does not exits"
+      });
+    }
+
+    const userProfile = await prisma.user.findFirst({
+      where:{
+        id: userId
+      },
+      select:{
+        balance:true,
+        bets: true
+      }
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "User Profile",
+      user: userProfile
+    })
   } catch (error:any) {
     return res.status(400).json({
       success: false,
