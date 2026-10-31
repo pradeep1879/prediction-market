@@ -12,45 +12,415 @@ datasource db {
   provider = "postgresql"
 }
 
+
+
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
-  password String 
-  balance  Int
-  markets  Market[]
-  bets     Bet[]
+  id                      String     @id @default(uuid())
+  username                String     @unique
+  password                String
+  role                    UserRole   @default(USER)
+  status                  UserStatus @default(ACTIVE)
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime
+  markets                 Market[]
+  wallets                 Wallet[]
+  deposites               Deposite[]
+  positions               Position[]
+  splitMergeOperations    SplitMergeOperation[]
+  orders                  Order[]
+  orderReservation        OrderReservation[]
+  trades                  Trade[]
+  settlementsRecord       SettlementRecord[]
 }
 
 model Market {
-  id            String   @id @default(uuid())
-  title         String
-  initialWager  Int
-  bet           BetType
-  createrId     String
-  expiry        DateTime
-  resolution    BetType  @default(NO)
-  user          User     @relation(fields: [createrId], references: [id])
-  bets          Bet[]
+  id                      String         @id @default(uuid())
+  createrId               String
+  title                   String
+  description             String?
+  status                  MarketStatus   @default(OPEN)
+  payoutPerContract       Int?
+  minPrice                Int?
+  maxPrice                Int?
+  tickSize                Int
+  minOrderQuantity        Int
+  tradingStartsAt         DateTime
+  tradingEndsAt           DateTime
+  expiresAt               DateTime
+  resolution              ResolutionType @default(NO)
+  resolutionSource        String?
+  totalPairsCreated       Int
+  totalPairsBurned        Int
+  totaParisIssued         Int
+
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime
+  user                    User               @relation(fields: [createrId], references: [id])
+  marketResolutions       MarketResolution[]
+  ledgerAccounts          LedgerAccount[]
+  positions               Position[]
+  collateralPools         CollaterlPool[]
+  splitMergOperations     SplitMergeOperation[]
+  orders                  Order[]
+  trades                  Trade[]
+  settlements             SettlementBatch[]
+  settlementsRecord       SettlementRecord[]
 }
 
-model Bet {
-  id        String @id @default(uuid())
-  userId    String
-  marketId  String
-  betAmount Int
-  user      User   @relation(fields: [userId], references: [id])
-  market    Market @relation(fields: [marketId], references: [id])
+model MarketResolution {
+  id                      String                 @id @default(uuid())
+  marketId                String
+  resolvedBy              String
+  outcome                 String
+  status                  MarketResolutionStatus @default(PROPOSED)
+  resolvedAt              DateTime               @default(now())
+  market                  Market                 @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  settlements             SettlementBatch[]
 }
 
-model walletEvent {
-  id          String      @id     @default(uuid())
-  tx_type     String  
-  externalId  Json
-  amount      Int
-    
+model Wallet {
+  id                      String       @id @default(uuid())
+  userId                  String
+  availableBalance        Int
+  reservedBalance         Int
+  status                  WalletStatus @default(ACTIVE)
+  createdAt               DateTime     @default(now())
+  updatedAt               DateTime
+  desposites              Deposite[]
+  user                    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum BetType {
+model Deposite {
+  id                      String         @id @default(uuid())
+  userId                  String
+  walletId                String
+  amount                  Int
+  status                  DepositeStatus
+  completedAt             DateTime
+  updatedAt               DateTime
+  createdAt               DateTime
+  wallet                  Wallet         @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  user                    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LedgerAccount {
+  id                      String      @id       @default(uuid())
+  ownerUserId             String
+  marketId                String
+  accountType             LedgerAccountType
+  status                  LedgerAccountStatus
+  createdAt               DateTime
+  market                  Market    @relation(fields: [marketId], references: [id], onDelete: Cascade)
+}
+
+model LedgerTransaction {
+  id                      String                  @id @default(uuid())
+  referenceType           LedgerTransactionType
+  referenceId             String
+  idemptoencyKey          String
+  status                  LedgerTransactionStatus
+  createdAt               DateTime
+  ledgerEntries           LedgerEntry[]
+  splitMergeOperations    SplitMergeOperation[]
+  settlementsRecord       SettlementRecord[]
+}
+
+model LedgerEntry {
+  id                      String          @id @default(uuid())
+  transactionId           String
+  accountId               String
+  amount                  Int
+  direction               LedgerEntryType
+  createdAt               DateTime
+  ledgerTransaction       LedgerTransaction @relation(fields: [transactionId], references: [id])
+}
+
+model  Position  {
+  id                      String    @id   @default(uuid())
+  userId                  String
+  marketId                String
+  outcome                 OutComeType
+  quantity                Int
+  lockedQuatity           Int
+  createdAt               DateTime
+  updatedAt               DateTime
+  user                    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market                  Market    @relation(fields: [marketId], references: [id], onDelete: Cascade)
+}
+
+model  CollaterlPool {
+  id                      String    @id       @default(uuid())
+  marektId                String
+  lockedAmount            Int
+  payoutPerPair           Int
+  status                  CollaterlPoolStatus
+  createdAt               DateTime
+  updatedAt               DateTime
+  market                  Market    @relation(fields: [marektId], references: [id])
+}
+
+model  SplitMergeOperation {
+  id                      String    @id     @default(uuid())
+  userId                  String
+  marketId                String
+  ledgerTransactionId     String
+  operationType           SplitMergeoperationType
+  quantity                Int
+  collateralAmount        Int
+  status                  SplitMergeOperationStatus
+  createdAt               DateTime
+  completedAt             DateTime
+  user                    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market                  Market    @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  ledgerTransaction       LedgerTransaction     @relation(fields: [ledgerTransactionId], references: [id], onDelete: Cascade)
+
+}
+
+
+model Order {
+  id                      String    @id     @default(uuid())
+  userId                  String
+  marketId                String
+  outcome                 OutComeType
+  action                  OrderAction
+  orderType               OrderType
+  timelnForce             TimelnForce
+  price                   Int
+  originalQuantity        Int
+  filledQuantity          Int
+  remainingQuantity       Int
+  status                  OrderStatus
+  sequence                Int
+  expiresAt               DateTime
+  idempotencyKey          String
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime
+  cancelledAt             DateTime
+
+  user                    User      @relation(fields: [userId], references: [id])
+  market                  Market    @relation(fields: [marketId], references: [id])
+  orderReservations       OrderReservation[]
+
+}
+
+
+model OrderReservation {
+  id                      String        @id       @default(uuid())
+  orderId                 String
+  userId                  String
+  reservationType         OrderReservationType
+  outcome                 OutComeType
+  reservedAmount          Int
+  reservedQuantity        Int
+  releasedAmount          Int
+  releasedQuantity        Int
+  status                  OrderReservationStatus
+  createdAt               DateTime
+  updatedAt               DateTime
+  order                   Order       @relation(fields: [orderId], references: [id])
+  user                    User        @relation(fields: [userId], references: [id])
+
+}
+
+model Trade {
+  id                      String        @id       @default(uuid())
+  userId                  String
+  marketId                String
+  makerOrderId            String
+  takerOrderId            String
+  buyerId                 String
+  sellerId                String
+  executionPrice          Int
+  quantity                Int
+  totalTradeAmount        Int
+  status                  TradeStatus
+  executedAt              DateTime
+  createdAt               DateTime
+  user                    User        @relation(fields: [userId], references: [id])
+  market                  Market      @relation(fields: [marketId], references: [id])
+}
+
+model SettlementBatch {
+  id                      String      @id         @default(uuid())
+  marketId                String
+  resolutionId            String
+  status                  SettleBatchStatus
+  totalWinnigQuantity     Int
+  totalPayoutAmount       Int
+  startedAt               DateTime
+  completedAt             DateTime
+  createdAt               DateTime
+  market                  Market      @relation(fields: [marketId], references: [id])
+  resolution              MarketResolution    @relation(fields: [resolutionId], references: [id])
+  settlementRecords       SettlementRecord[]
+}
+
+model SettlementRecord {
+  id                      String          @id       @default(uuid())
+  batchId                 String
+  userId                  String
+  marketId                String
+  ledgerTransactionId     String
+  status                  SettlementRecordStatus
+  outcome                 OutComeType
+  quantity                Int
+  payoutPerContract       Int
+  payoutAmount            Int
+  settledAt               DateTime
+  batch                   SettlementBatch     @relation(fields: [batchId], references: [id])
+  user                    User                @relation(fields: [userId], references: [id])
+  market                  Market              @relation(fields: [marketId],references: [id])
+  ledgerTransaction       LedgerTransaction   @relation(fields: [ledgerTransactionId], references: [id])
+}
+
+
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum MarketStatus {
+  DRAFT
+  OPEN
+  CLOSED
+  RESOLVED
+  CANCELLED
+}
+
+enum ResolutionType {
   YES
   NO
+}
+
+enum MarketResolutionStatus {
+  PROPOSED
+  CONFIRMED
+  REVERSED
+}
+
+enum WalletStatus {
+  ACTIVE
+  BLOCED
+  CLOSED
+}
+
+enum DepositeStatus {
+  COMPLETED
+  PENDING
+  FAILED
+}
+
+enum LedgerTransactionStatus {
+  COMPLETED
+  PENDING
+  FAILED
+}
+
+enum LedgerTransactionType {
+  DEPOSITE
+  WITHDRAWAL
+  SPLIT
+  MERGE
+  TRADE
+  SETTLEMENT
+}
+
+enum LedgerEntryType {
+  DEBIT
+  CREDIT
+}
+
+enum  LedgerAccountType {
+  USER_AVAILABLE
+  USER_RESERVED
+  MARKET_COLLATERAL
+  CLEARING
+}
+
+enum  LedgerAccountStatus {
+  ACTIVE
+  BLOCED
+  CLOSED
+}
+
+enum  OutComeType {
+  YES
+  NO
+}
+
+enum  CollaterlPoolStatus {
+  ACTIVE
+  BLOCED
+  SETTLED
+}
+
+enum  SplitMergeoperationType {
+  SPLIT
+  MERGE
+}
+
+enum  SplitMergeOperationStatus {
+  COMPLETED
+  PENDING
+  FAILED
+}
+
+enum  OrderAction {
+  BUY
+  SELL
+}
+
+enum  OrderType {
+  LIMIT
+}
+enum  OrderStatus {
+  PENDING
+  OPEN
+  PARTIALLY_FILLED
+  FILLED
+  CANCELLED
+  REJECTED
+  EXPIRED
+}
+
+enum TimelnForce {
+  GTC
+  IOC
+  FOK
+}
+
+enum  OrderReservationType {
+  CASH
+  CONTRACT
+}
+
+enum  OrderReservationStatus {
+  ACTIVE
+  PARTIALLY_RELEASED
+  RELEASED
+}
+
+enum  TradeStatus {
+  EXECUTED
+  SETTLED
+  REVERSED
+}
+
+enum SettleBatchStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum SettlementRecordStatus {
+  PENDING
+  COMPLETED
+  FAILED
 }
