@@ -52,12 +52,77 @@ export type User = Prisma.UserModel
  */
 export type Market = Prisma.MarketModel
 /**
- * Model Bet
+ * Model MarketResolution
  * 
  */
-export type Bet = Prisma.BetModel
+export type MarketResolution = Prisma.MarketResolutionModel
 /**
- * Model walletEvent
+ * Model Wallet
  * 
  */
-export type walletEvent = Prisma.walletEventModel
+export type Wallet = Prisma.WalletModel
+/**
+ * Model Deposit
+ * 
+ */
+export type Deposit = Prisma.DepositModel
+/**
+ * Model Withdrawal
+ * 
+ */
+export type Withdrawal = Prisma.WithdrawalModel
+/**
+ * Model LedgerAccount
+ * 
+ */
+export type LedgerAccount = Prisma.LedgerAccountModel
+/**
+ * Model LedgerTransaction
+ * 
+ */
+export type LedgerTransaction = Prisma.LedgerTransactionModel
+/**
+ * Model LedgerEntry
+ * 
+ */
+export type LedgerEntry = Prisma.LedgerEntryModel
+/**
+ * Model Position
+ * 
+ */
+export type Position = Prisma.PositionModel
+/**
+ * Model CollateralPool
+ * 
+ */
+export type CollateralPool = Prisma.CollateralPoolModel
+/**
+ * Model SplitMergeOperation
+ * 
+ */
+export type SplitMergeOperation = Prisma.SplitMergeOperationModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderReservation
+ * 
+ */
+export type OrderReservation = Prisma.OrderReservationModel
+/**
+ * Model Trade
+ * 
+ */
+export type Trade = Prisma.TradeModel
+/**
+ * Model SettlementBatch
+ * 
+ */
+export type SettlementBatch = Prisma.SettlementBatchModel
+/**
+ * Model SettlementRecord
+ * 
+ */
+export type SettlementRecord = Prisma.SettlementRecordModel

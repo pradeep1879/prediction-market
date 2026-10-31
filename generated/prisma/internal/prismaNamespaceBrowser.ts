@@ -53,8 +53,21 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Market: 'Market',
-  Bet: 'Bet',
-  walletEvent: 'walletEvent'
+  MarketResolution: 'MarketResolution',
+  Wallet: 'Wallet',
+  Deposit: 'Deposit',
+  Withdrawal: 'Withdrawal',
+  LedgerAccount: 'LedgerAccount',
+  LedgerTransaction: 'LedgerTransaction',
+  LedgerEntry: 'LedgerEntry',
+  Position: 'Position',
+  CollateralPool: 'CollateralPool',
+  SplitMergeOperation: 'SplitMergeOperation',
+  Order: 'Order',
+  OrderReservation: 'OrderReservation',
+  Trade: 'Trade',
+  SettlementBatch: 'SettlementBatch',
+  SettlementRecord: 'SettlementRecord'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -75,9 +88,12 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  email: 'email',
+  username: 'username',
   password: 'password',
-  balance: 'balance'
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -85,35 +101,256 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const MarketScalarFieldEnum = {
   id: 'id',
+  creatorId: 'creatorId',
   title: 'title',
-  initialWager: 'initialWager',
-  bet: 'bet',
-  createrId: 'createrId',
-  expiry: 'expiry',
-  resolution: 'resolution'
+  description: 'description',
+  status: 'status',
+  payoutPerContract: 'payoutPerContract',
+  minPrice: 'minPrice',
+  maxPrice: 'maxPrice',
+  tickSize: 'tickSize',
+  minOrderQuantity: 'minOrderQuantity',
+  tradingStartsAt: 'tradingStartsAt',
+  tradingEndsAt: 'tradingEndsAt',
+  expiresAt: 'expiresAt',
+  resolution: 'resolution',
+  totalPairsCreated: 'totalPairsCreated',
+  totalPairsBurned: 'totalPairsBurned',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type MarketScalarFieldEnum = (typeof MarketScalarFieldEnum)[keyof typeof MarketScalarFieldEnum]
 
 
-export const BetScalarFieldEnum = {
+export const MarketResolutionScalarFieldEnum = {
+  id: 'id',
+  marketId: 'marketId',
+  resolvedBy: 'resolvedBy',
+  outcome: 'outcome',
+  resolutionSource: 'resolutionSource',
+  status: 'status',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type MarketResolutionScalarFieldEnum = (typeof MarketResolutionScalarFieldEnum)[keyof typeof MarketResolutionScalarFieldEnum]
+
+
+export const WalletScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  markedId: 'markedId',
-  betAmount: 'betAmount'
+  availableBalance: 'availableBalance',
+  reservedBalance: 'reservedBalance',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type BetScalarFieldEnum = (typeof BetScalarFieldEnum)[keyof typeof BetScalarFieldEnum]
+export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
-export const WalletEventScalarFieldEnum = {
+export const DepositScalarFieldEnum = {
   id: 'id',
-  tx_type: 'tx_type',
-  externalId: 'externalId',
-  amount: 'amount'
+  walletId: 'walletId',
+  amount: 'amount',
+  provider: 'provider',
+  providerOrderId: 'providerOrderId',
+  providerPaymentId: 'providerPaymentId',
+  status: 'status',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type WalletEventScalarFieldEnum = (typeof WalletEventScalarFieldEnum)[keyof typeof WalletEventScalarFieldEnum]
+export type DepositScalarFieldEnum = (typeof DepositScalarFieldEnum)[keyof typeof DepositScalarFieldEnum]
+
+
+export const WithdrawalScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  amount: 'amount',
+  provider: 'provider',
+  providerTransactionId: 'providerTransactionId',
+  status: 'status',
+  requestedAt: 'requestedAt',
+  completedAt: 'completedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WithdrawalScalarFieldEnum = (typeof WithdrawalScalarFieldEnum)[keyof typeof WithdrawalScalarFieldEnum]
+
+
+export const LedgerAccountScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  marketId: 'marketId',
+  accountType: 'accountType',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type LedgerAccountScalarFieldEnum = (typeof LedgerAccountScalarFieldEnum)[keyof typeof LedgerAccountScalarFieldEnum]
+
+
+export const LedgerTransactionScalarFieldEnum = {
+  id: 'id',
+  referenceType: 'referenceType',
+  referenceId: 'referenceId',
+  idempotencyKey: 'idempotencyKey',
+  status: 'status',
+  createdAt: 'createdAt',
+  postedAt: 'postedAt',
+  reversedAt: 'reversedAt'
+} as const
+
+export type LedgerTransactionScalarFieldEnum = (typeof LedgerTransactionScalarFieldEnum)[keyof typeof LedgerTransactionScalarFieldEnum]
+
+
+export const LedgerEntryScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  accountId: 'accountId',
+  amount: 'amount',
+  direction: 'direction',
+  createdAt: 'createdAt'
+} as const
+
+export type LedgerEntryScalarFieldEnum = (typeof LedgerEntryScalarFieldEnum)[keyof typeof LedgerEntryScalarFieldEnum]
+
+
+export const PositionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  marketId: 'marketId',
+  outcome: 'outcome',
+  quantity: 'quantity',
+  lockedQuantity: 'lockedQuantity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PositionScalarFieldEnum = (typeof PositionScalarFieldEnum)[keyof typeof PositionScalarFieldEnum]
+
+
+export const CollateralPoolScalarFieldEnum = {
+  id: 'id',
+  marketId: 'marketId',
+  lockedAmount: 'lockedAmount',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CollateralPoolScalarFieldEnum = (typeof CollateralPoolScalarFieldEnum)[keyof typeof CollateralPoolScalarFieldEnum]
+
+
+export const SplitMergeOperationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  marketId: 'marketId',
+  ledgerTransactionId: 'ledgerTransactionId',
+  operationType: 'operationType',
+  quantity: 'quantity',
+  collateralAmount: 'collateralAmount',
+  status: 'status',
+  createdAt: 'createdAt',
+  completedAt: 'completedAt'
+} as const
+
+export type SplitMergeOperationScalarFieldEnum = (typeof SplitMergeOperationScalarFieldEnum)[keyof typeof SplitMergeOperationScalarFieldEnum]
+
+
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  marketId: 'marketId',
+  outcome: 'outcome',
+  action: 'action',
+  timeInForce: 'timeInForce',
+  price: 'price',
+  originalQuantity: 'originalQuantity',
+  filledQuantity: 'filledQuantity',
+  status: 'status',
+  sequence: 'sequence',
+  expiresAt: 'expiresAt',
+  idempotencyKey: 'idempotencyKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  cancelledAt: 'cancelledAt'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const OrderReservationScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  walletId: 'walletId',
+  positionId: 'positionId',
+  reservationType: 'reservationType',
+  reservedAmount: 'reservedAmount',
+  reservedQuantity: 'reservedQuantity',
+  releasedAmount: 'releasedAmount',
+  releasedQuantity: 'releasedQuantity',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderReservationScalarFieldEnum = (typeof OrderReservationScalarFieldEnum)[keyof typeof OrderReservationScalarFieldEnum]
+
+
+export const TradeScalarFieldEnum = {
+  id: 'id',
+  marketId: 'marketId',
+  outcome: 'outcome',
+  makerOrderId: 'makerOrderId',
+  takerOrderId: 'takerOrderId',
+  buyerId: 'buyerId',
+  sellerId: 'sellerId',
+  executionPrice: 'executionPrice',
+  quantity: 'quantity',
+  status: 'status',
+  executedAt: 'executedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TradeScalarFieldEnum = (typeof TradeScalarFieldEnum)[keyof typeof TradeScalarFieldEnum]
+
+
+export const SettlementBatchScalarFieldEnum = {
+  id: 'id',
+  marketId: 'marketId',
+  resolutionId: 'resolutionId',
+  status: 'status',
+  totalWinningQuantity: 'totalWinningQuantity',
+  totalPayoutAmount: 'totalPayoutAmount',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SettlementBatchScalarFieldEnum = (typeof SettlementBatchScalarFieldEnum)[keyof typeof SettlementBatchScalarFieldEnum]
+
+
+export const SettlementRecordScalarFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  marketId: 'marketId',
+  userId: 'userId',
+  positionId: 'positionId',
+  ledgerTransactionId: 'ledgerTransactionId',
+  outcome: 'outcome',
+  quantity: 'quantity',
+  payoutPerContract: 'payoutPerContract',
+  payoutAmount: 'payoutAmount',
+  status: 'status',
+  settledAt: 'settledAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SettlementRecordScalarFieldEnum = (typeof SettlementRecordScalarFieldEnum)[keyof typeof SettlementRecordScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -124,13 +361,6 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -139,11 +369,10 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
 } as const
 
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

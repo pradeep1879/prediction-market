@@ -27,81 +27,171 @@ export type AggregateMarket = {
 }
 
 export type MarketAvgAggregateOutputType = {
-  initialWager: number | null
+  payoutPerContract: number | null
+  minPrice: number | null
+  maxPrice: number | null
+  tickSize: number | null
+  minOrderQuantity: number | null
+  totalPairsCreated: number | null
+  totalPairsBurned: number | null
 }
 
 export type MarketSumAggregateOutputType = {
-  initialWager: number | null
+  payoutPerContract: number | null
+  minPrice: number | null
+  maxPrice: number | null
+  tickSize: number | null
+  minOrderQuantity: number | null
+  totalPairsCreated: number | null
+  totalPairsBurned: number | null
 }
 
 export type MarketMinAggregateOutputType = {
   id: string | null
+  creatorId: string | null
   title: string | null
-  initialWager: number | null
-  bet: $Enums.BetType | null
-  createrId: string | null
-  expiry: Date | null
-  resolution: $Enums.BetType | null
+  description: string | null
+  status: $Enums.MarketStatus | null
+  payoutPerContract: number | null
+  minPrice: number | null
+  maxPrice: number | null
+  tickSize: number | null
+  minOrderQuantity: number | null
+  tradingStartsAt: Date | null
+  tradingEndsAt: Date | null
+  expiresAt: Date | null
+  resolution: $Enums.ResolutionType | null
+  totalPairsCreated: number | null
+  totalPairsBurned: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type MarketMaxAggregateOutputType = {
   id: string | null
+  creatorId: string | null
   title: string | null
-  initialWager: number | null
-  bet: $Enums.BetType | null
-  createrId: string | null
-  expiry: Date | null
-  resolution: $Enums.BetType | null
+  description: string | null
+  status: $Enums.MarketStatus | null
+  payoutPerContract: number | null
+  minPrice: number | null
+  maxPrice: number | null
+  tickSize: number | null
+  minOrderQuantity: number | null
+  tradingStartsAt: Date | null
+  tradingEndsAt: Date | null
+  expiresAt: Date | null
+  resolution: $Enums.ResolutionType | null
+  totalPairsCreated: number | null
+  totalPairsBurned: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type MarketCountAggregateOutputType = {
   id: number
+  creatorId: number
   title: number
-  initialWager: number
-  bet: number
-  createrId: number
-  expiry: number
+  description: number
+  status: number
+  payoutPerContract: number
+  minPrice: number
+  maxPrice: number
+  tickSize: number
+  minOrderQuantity: number
+  tradingStartsAt: number
+  tradingEndsAt: number
+  expiresAt: number
   resolution: number
+  totalPairsCreated: number
+  totalPairsBurned: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type MarketAvgAggregateInputType = {
-  initialWager?: true
+  payoutPerContract?: true
+  minPrice?: true
+  maxPrice?: true
+  tickSize?: true
+  minOrderQuantity?: true
+  totalPairsCreated?: true
+  totalPairsBurned?: true
 }
 
 export type MarketSumAggregateInputType = {
-  initialWager?: true
+  payoutPerContract?: true
+  minPrice?: true
+  maxPrice?: true
+  tickSize?: true
+  minOrderQuantity?: true
+  totalPairsCreated?: true
+  totalPairsBurned?: true
 }
 
 export type MarketMinAggregateInputType = {
   id?: true
+  creatorId?: true
   title?: true
-  initialWager?: true
-  bet?: true
-  createrId?: true
-  expiry?: true
+  description?: true
+  status?: true
+  payoutPerContract?: true
+  minPrice?: true
+  maxPrice?: true
+  tickSize?: true
+  minOrderQuantity?: true
+  tradingStartsAt?: true
+  tradingEndsAt?: true
+  expiresAt?: true
   resolution?: true
+  totalPairsCreated?: true
+  totalPairsBurned?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type MarketMaxAggregateInputType = {
   id?: true
+  creatorId?: true
   title?: true
-  initialWager?: true
-  bet?: true
-  createrId?: true
-  expiry?: true
+  description?: true
+  status?: true
+  payoutPerContract?: true
+  minPrice?: true
+  maxPrice?: true
+  tickSize?: true
+  minOrderQuantity?: true
+  tradingStartsAt?: true
+  tradingEndsAt?: true
+  expiresAt?: true
   resolution?: true
+  totalPairsCreated?: true
+  totalPairsBurned?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type MarketCountAggregateInputType = {
   id?: true
+  creatorId?: true
   title?: true
-  initialWager?: true
-  bet?: true
-  createrId?: true
-  expiry?: true
+  description?: true
+  status?: true
+  payoutPerContract?: true
+  minPrice?: true
+  maxPrice?: true
+  tickSize?: true
+  minOrderQuantity?: true
+  tradingStartsAt?: true
+  tradingEndsAt?: true
+  expiresAt?: true
   resolution?: true
+  totalPairsCreated?: true
+  totalPairsBurned?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -193,12 +283,23 @@ export type MarketGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type MarketGroupByOutputType = {
   id: string
+  creatorId: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  createrId: string
-  expiry: Date
-  resolution: $Enums.BetType
+  description: string | null
+  status: $Enums.MarketStatus
+  payoutPerContract: number
+  minPrice: number
+  maxPrice: number
+  tickSize: number
+  minOrderQuantity: number
+  tradingStartsAt: Date
+  tradingEndsAt: Date
+  expiresAt: Date
+  resolution: $Enums.ResolutionType | null
+  totalPairsCreated: number
+  totalPairsBurned: number
+  createdAt: Date
+  updatedAt: Date
   _count: MarketCountAggregateOutputType | null
   _avg: MarketAvgAggregateOutputType | null
   _sum: MarketSumAggregateOutputType | null
@@ -226,26 +327,64 @@ export type MarketWhereInput = {
   OR?: Prisma.MarketWhereInput[]
   NOT?: Prisma.MarketWhereInput | Prisma.MarketWhereInput[]
   id?: Prisma.StringFilter<"Market"> | string
+  creatorId?: Prisma.StringFilter<"Market"> | string
   title?: Prisma.StringFilter<"Market"> | string
-  initialWager?: Prisma.IntFilter<"Market"> | number
-  bet?: Prisma.EnumBetTypeFilter<"Market"> | $Enums.BetType
-  createrId?: Prisma.StringFilter<"Market"> | string
-  expiry?: Prisma.DateTimeFilter<"Market"> | Date | string
-  resolution?: Prisma.EnumBetTypeFilter<"Market"> | $Enums.BetType
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  bets?: Prisma.BetListRelationFilter
+  description?: Prisma.StringNullableFilter<"Market"> | string | null
+  status?: Prisma.EnumMarketStatusFilter<"Market"> | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFilter<"Market"> | number
+  minPrice?: Prisma.IntFilter<"Market"> | number
+  maxPrice?: Prisma.IntFilter<"Market"> | number
+  tickSize?: Prisma.IntFilter<"Market"> | number
+  minOrderQuantity?: Prisma.IntFilter<"Market"> | number
+  tradingStartsAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  tradingEndsAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  expiresAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  resolution?: Prisma.EnumResolutionTypeNullableFilter<"Market"> | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFilter<"Market"> | number
+  totalPairsBurned?: Prisma.IntFilter<"Market"> | number
+  createdAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  resolutions?: Prisma.MarketResolutionListRelationFilter
+  ledgerAccounts?: Prisma.LedgerAccountListRelationFilter
+  positions?: Prisma.PositionListRelationFilter
+  collateralPool?: Prisma.XOR<Prisma.CollateralPoolNullableScalarRelationFilter, Prisma.CollateralPoolWhereInput> | null
+  splitMergeOperations?: Prisma.SplitMergeOperationListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
+  trades?: Prisma.TradeListRelationFilter
+  settlementBatches?: Prisma.SettlementBatchListRelationFilter
+  settlementRecords?: Prisma.SettlementRecordListRelationFilter
 }
 
 export type MarketOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  initialWager?: Prisma.SortOrder
-  bet?: Prisma.SortOrder
-  createrId?: Prisma.SortOrder
-  expiry?: Prisma.SortOrder
-  resolution?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
-  bets?: Prisma.BetOrderByRelationAggregateInput
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  payoutPerContract?: Prisma.SortOrder
+  minPrice?: Prisma.SortOrder
+  maxPrice?: Prisma.SortOrder
+  tickSize?: Prisma.SortOrder
+  minOrderQuantity?: Prisma.SortOrder
+  tradingStartsAt?: Prisma.SortOrder
+  tradingEndsAt?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
+  resolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalPairsCreated?: Prisma.SortOrder
+  totalPairsBurned?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  creator?: Prisma.UserOrderByWithRelationInput
+  resolutions?: Prisma.MarketResolutionOrderByRelationAggregateInput
+  ledgerAccounts?: Prisma.LedgerAccountOrderByRelationAggregateInput
+  positions?: Prisma.PositionOrderByRelationAggregateInput
+  collateralPool?: Prisma.CollateralPoolOrderByWithRelationInput
+  splitMergeOperations?: Prisma.SplitMergeOperationOrderByRelationAggregateInput
+  orders?: Prisma.OrderOrderByRelationAggregateInput
+  trades?: Prisma.TradeOrderByRelationAggregateInput
+  settlementBatches?: Prisma.SettlementBatchOrderByRelationAggregateInput
+  settlementRecords?: Prisma.SettlementRecordOrderByRelationAggregateInput
 }
 
 export type MarketWhereUniqueInput = Prisma.AtLeast<{
@@ -253,24 +392,54 @@ export type MarketWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MarketWhereInput | Prisma.MarketWhereInput[]
   OR?: Prisma.MarketWhereInput[]
   NOT?: Prisma.MarketWhereInput | Prisma.MarketWhereInput[]
+  creatorId?: Prisma.StringFilter<"Market"> | string
   title?: Prisma.StringFilter<"Market"> | string
-  initialWager?: Prisma.IntFilter<"Market"> | number
-  bet?: Prisma.EnumBetTypeFilter<"Market"> | $Enums.BetType
-  createrId?: Prisma.StringFilter<"Market"> | string
-  expiry?: Prisma.DateTimeFilter<"Market"> | Date | string
-  resolution?: Prisma.EnumBetTypeFilter<"Market"> | $Enums.BetType
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  bets?: Prisma.BetListRelationFilter
+  description?: Prisma.StringNullableFilter<"Market"> | string | null
+  status?: Prisma.EnumMarketStatusFilter<"Market"> | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFilter<"Market"> | number
+  minPrice?: Prisma.IntFilter<"Market"> | number
+  maxPrice?: Prisma.IntFilter<"Market"> | number
+  tickSize?: Prisma.IntFilter<"Market"> | number
+  minOrderQuantity?: Prisma.IntFilter<"Market"> | number
+  tradingStartsAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  tradingEndsAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  expiresAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  resolution?: Prisma.EnumResolutionTypeNullableFilter<"Market"> | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFilter<"Market"> | number
+  totalPairsBurned?: Prisma.IntFilter<"Market"> | number
+  createdAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  resolutions?: Prisma.MarketResolutionListRelationFilter
+  ledgerAccounts?: Prisma.LedgerAccountListRelationFilter
+  positions?: Prisma.PositionListRelationFilter
+  collateralPool?: Prisma.XOR<Prisma.CollateralPoolNullableScalarRelationFilter, Prisma.CollateralPoolWhereInput> | null
+  splitMergeOperations?: Prisma.SplitMergeOperationListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
+  trades?: Prisma.TradeListRelationFilter
+  settlementBatches?: Prisma.SettlementBatchListRelationFilter
+  settlementRecords?: Prisma.SettlementRecordListRelationFilter
 }, "id">
 
 export type MarketOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  initialWager?: Prisma.SortOrder
-  bet?: Prisma.SortOrder
-  createrId?: Prisma.SortOrder
-  expiry?: Prisma.SortOrder
-  resolution?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  payoutPerContract?: Prisma.SortOrder
+  minPrice?: Prisma.SortOrder
+  maxPrice?: Prisma.SortOrder
+  tickSize?: Prisma.SortOrder
+  minOrderQuantity?: Prisma.SortOrder
+  tradingStartsAt?: Prisma.SortOrder
+  tradingEndsAt?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
+  resolution?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalPairsCreated?: Prisma.SortOrder
+  totalPairsBurned?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.MarketCountOrderByAggregateInput
   _avg?: Prisma.MarketAvgOrderByAggregateInput
   _max?: Prisma.MarketMaxOrderByAggregateInput
@@ -283,85 +452,205 @@ export type MarketScalarWhereWithAggregatesInput = {
   OR?: Prisma.MarketScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MarketScalarWhereWithAggregatesInput | Prisma.MarketScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Market"> | string
+  creatorId?: Prisma.StringWithAggregatesFilter<"Market"> | string
   title?: Prisma.StringWithAggregatesFilter<"Market"> | string
-  initialWager?: Prisma.IntWithAggregatesFilter<"Market"> | number
-  bet?: Prisma.EnumBetTypeWithAggregatesFilter<"Market"> | $Enums.BetType
-  createrId?: Prisma.StringWithAggregatesFilter<"Market"> | string
-  expiry?: Prisma.DateTimeWithAggregatesFilter<"Market"> | Date | string
-  resolution?: Prisma.EnumBetTypeWithAggregatesFilter<"Market"> | $Enums.BetType
+  description?: Prisma.StringNullableWithAggregatesFilter<"Market"> | string | null
+  status?: Prisma.EnumMarketStatusWithAggregatesFilter<"Market"> | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntWithAggregatesFilter<"Market"> | number
+  minPrice?: Prisma.IntWithAggregatesFilter<"Market"> | number
+  maxPrice?: Prisma.IntWithAggregatesFilter<"Market"> | number
+  tickSize?: Prisma.IntWithAggregatesFilter<"Market"> | number
+  minOrderQuantity?: Prisma.IntWithAggregatesFilter<"Market"> | number
+  tradingStartsAt?: Prisma.DateTimeWithAggregatesFilter<"Market"> | Date | string
+  tradingEndsAt?: Prisma.DateTimeWithAggregatesFilter<"Market"> | Date | string
+  expiresAt?: Prisma.DateTimeWithAggregatesFilter<"Market"> | Date | string
+  resolution?: Prisma.EnumResolutionTypeNullableWithAggregatesFilter<"Market"> | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntWithAggregatesFilter<"Market"> | number
+  totalPairsBurned?: Prisma.IntWithAggregatesFilter<"Market"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Market"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Market"> | Date | string
 }
 
 export type MarketCreateInput = {
   id?: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  expiry: Date | string
-  resolution?: $Enums.BetType
-  user: Prisma.UserCreateNestedOneWithoutMarketsInput
-  bets?: Prisma.BetCreateNestedManyWithoutMarketInput
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
 }
 
 export type MarketUncheckedCreateInput = {
   id?: string
+  creatorId: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  createrId: string
-  expiry: Date | string
-  resolution?: $Enums.BetType
-  bets?: Prisma.BetUncheckedCreateNestedManyWithoutMarketInput
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
 }
 
 export type MarketUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  user?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
-  bets?: Prisma.BetUpdateManyWithoutMarketNestedInput
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
 }
 
 export type MarketUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  createrId?: Prisma.StringFieldUpdateOperationsInput | string
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  bets?: Prisma.BetUncheckedUpdateManyWithoutMarketNestedInput
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
 }
 
 export type MarketCreateManyInput = {
   id?: string
+  creatorId: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  createrId: string
-  expiry: Date | string
-  resolution?: $Enums.BetType
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MarketUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MarketUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  createrId?: Prisma.StringFieldUpdateOperationsInput | string
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MarketListRelationFilter = {
@@ -376,40 +665,85 @@ export type MarketOrderByRelationAggregateInput = {
 
 export type MarketCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  initialWager?: Prisma.SortOrder
-  bet?: Prisma.SortOrder
-  createrId?: Prisma.SortOrder
-  expiry?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  payoutPerContract?: Prisma.SortOrder
+  minPrice?: Prisma.SortOrder
+  maxPrice?: Prisma.SortOrder
+  tickSize?: Prisma.SortOrder
+  minOrderQuantity?: Prisma.SortOrder
+  tradingStartsAt?: Prisma.SortOrder
+  tradingEndsAt?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   resolution?: Prisma.SortOrder
+  totalPairsCreated?: Prisma.SortOrder
+  totalPairsBurned?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MarketAvgOrderByAggregateInput = {
-  initialWager?: Prisma.SortOrder
+  payoutPerContract?: Prisma.SortOrder
+  minPrice?: Prisma.SortOrder
+  maxPrice?: Prisma.SortOrder
+  tickSize?: Prisma.SortOrder
+  minOrderQuantity?: Prisma.SortOrder
+  totalPairsCreated?: Prisma.SortOrder
+  totalPairsBurned?: Prisma.SortOrder
 }
 
 export type MarketMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  initialWager?: Prisma.SortOrder
-  bet?: Prisma.SortOrder
-  createrId?: Prisma.SortOrder
-  expiry?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  payoutPerContract?: Prisma.SortOrder
+  minPrice?: Prisma.SortOrder
+  maxPrice?: Prisma.SortOrder
+  tickSize?: Prisma.SortOrder
+  minOrderQuantity?: Prisma.SortOrder
+  tradingStartsAt?: Prisma.SortOrder
+  tradingEndsAt?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   resolution?: Prisma.SortOrder
+  totalPairsCreated?: Prisma.SortOrder
+  totalPairsBurned?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MarketMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  initialWager?: Prisma.SortOrder
-  bet?: Prisma.SortOrder
-  createrId?: Prisma.SortOrder
-  expiry?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  payoutPerContract?: Prisma.SortOrder
+  minPrice?: Prisma.SortOrder
+  maxPrice?: Prisma.SortOrder
+  tickSize?: Prisma.SortOrder
+  minOrderQuantity?: Prisma.SortOrder
+  tradingStartsAt?: Prisma.SortOrder
+  tradingEndsAt?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   resolution?: Prisma.SortOrder
+  totalPairsCreated?: Prisma.SortOrder
+  totalPairsBurned?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MarketSumOrderByAggregateInput = {
-  initialWager?: Prisma.SortOrder
+  payoutPerContract?: Prisma.SortOrder
+  minPrice?: Prisma.SortOrder
+  maxPrice?: Prisma.SortOrder
+  tickSize?: Prisma.SortOrder
+  minOrderQuantity?: Prisma.SortOrder
+  totalPairsCreated?: Prisma.SortOrder
+  totalPairsBurned?: Prisma.SortOrder
 }
 
 export type MarketScalarRelationFilter = {
@@ -417,114 +751,283 @@ export type MarketScalarRelationFilter = {
   isNot?: Prisma.MarketWhereInput
 }
 
-export type MarketCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.MarketCreateWithoutUserInput, Prisma.MarketUncheckedCreateWithoutUserInput> | Prisma.MarketCreateWithoutUserInput[] | Prisma.MarketUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutUserInput | Prisma.MarketCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.MarketCreateManyUserInputEnvelope
+export type MarketNullableScalarRelationFilter = {
+  is?: Prisma.MarketWhereInput | null
+  isNot?: Prisma.MarketWhereInput | null
+}
+
+export type MarketCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutCreatorInput, Prisma.MarketUncheckedCreateWithoutCreatorInput> | Prisma.MarketCreateWithoutCreatorInput[] | Prisma.MarketUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutCreatorInput | Prisma.MarketCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.MarketCreateManyCreatorInputEnvelope
   connect?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
 }
 
-export type MarketUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.MarketCreateWithoutUserInput, Prisma.MarketUncheckedCreateWithoutUserInput> | Prisma.MarketCreateWithoutUserInput[] | Prisma.MarketUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutUserInput | Prisma.MarketCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.MarketCreateManyUserInputEnvelope
+export type MarketUncheckedCreateNestedManyWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutCreatorInput, Prisma.MarketUncheckedCreateWithoutCreatorInput> | Prisma.MarketCreateWithoutCreatorInput[] | Prisma.MarketUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutCreatorInput | Prisma.MarketCreateOrConnectWithoutCreatorInput[]
+  createMany?: Prisma.MarketCreateManyCreatorInputEnvelope
   connect?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
 }
 
-export type MarketUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.MarketCreateWithoutUserInput, Prisma.MarketUncheckedCreateWithoutUserInput> | Prisma.MarketCreateWithoutUserInput[] | Prisma.MarketUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutUserInput | Prisma.MarketCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.MarketUpsertWithWhereUniqueWithoutUserInput | Prisma.MarketUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.MarketCreateManyUserInputEnvelope
+export type MarketUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutCreatorInput, Prisma.MarketUncheckedCreateWithoutCreatorInput> | Prisma.MarketCreateWithoutCreatorInput[] | Prisma.MarketUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutCreatorInput | Prisma.MarketCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.MarketUpsertWithWhereUniqueWithoutCreatorInput | Prisma.MarketUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.MarketCreateManyCreatorInputEnvelope
   set?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
   disconnect?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
   delete?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
   connect?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
-  update?: Prisma.MarketUpdateWithWhereUniqueWithoutUserInput | Prisma.MarketUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.MarketUpdateManyWithWhereWithoutUserInput | Prisma.MarketUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.MarketUpdateWithWhereUniqueWithoutCreatorInput | Prisma.MarketUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.MarketUpdateManyWithWhereWithoutCreatorInput | Prisma.MarketUpdateManyWithWhereWithoutCreatorInput[]
   deleteMany?: Prisma.MarketScalarWhereInput | Prisma.MarketScalarWhereInput[]
 }
 
-export type MarketUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.MarketCreateWithoutUserInput, Prisma.MarketUncheckedCreateWithoutUserInput> | Prisma.MarketCreateWithoutUserInput[] | Prisma.MarketUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutUserInput | Prisma.MarketCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.MarketUpsertWithWhereUniqueWithoutUserInput | Prisma.MarketUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.MarketCreateManyUserInputEnvelope
+export type MarketUncheckedUpdateManyWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutCreatorInput, Prisma.MarketUncheckedCreateWithoutCreatorInput> | Prisma.MarketCreateWithoutCreatorInput[] | Prisma.MarketUncheckedCreateWithoutCreatorInput[]
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutCreatorInput | Prisma.MarketCreateOrConnectWithoutCreatorInput[]
+  upsert?: Prisma.MarketUpsertWithWhereUniqueWithoutCreatorInput | Prisma.MarketUpsertWithWhereUniqueWithoutCreatorInput[]
+  createMany?: Prisma.MarketCreateManyCreatorInputEnvelope
   set?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
   disconnect?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
   delete?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
   connect?: Prisma.MarketWhereUniqueInput | Prisma.MarketWhereUniqueInput[]
-  update?: Prisma.MarketUpdateWithWhereUniqueWithoutUserInput | Prisma.MarketUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.MarketUpdateManyWithWhereWithoutUserInput | Prisma.MarketUpdateManyWithWhereWithoutUserInput[]
+  update?: Prisma.MarketUpdateWithWhereUniqueWithoutCreatorInput | Prisma.MarketUpdateWithWhereUniqueWithoutCreatorInput[]
+  updateMany?: Prisma.MarketUpdateManyWithWhereWithoutCreatorInput | Prisma.MarketUpdateManyWithWhereWithoutCreatorInput[]
   deleteMany?: Prisma.MarketScalarWhereInput | Prisma.MarketScalarWhereInput[]
 }
 
-export type EnumBetTypeFieldUpdateOperationsInput = {
-  set?: $Enums.BetType
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type EnumMarketStatusFieldUpdateOperationsInput = {
+  set?: $Enums.MarketStatus
 }
 
-export type MarketCreateNestedOneWithoutBetsInput = {
-  create?: Prisma.XOR<Prisma.MarketCreateWithoutBetsInput, Prisma.MarketUncheckedCreateWithoutBetsInput>
-  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutBetsInput
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableEnumResolutionTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ResolutionType | null
+}
+
+export type MarketCreateNestedOneWithoutResolutionsInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutResolutionsInput, Prisma.MarketUncheckedCreateWithoutResolutionsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutResolutionsInput
   connect?: Prisma.MarketWhereUniqueInput
 }
 
-export type MarketUpdateOneRequiredWithoutBetsNestedInput = {
-  create?: Prisma.XOR<Prisma.MarketCreateWithoutBetsInput, Prisma.MarketUncheckedCreateWithoutBetsInput>
-  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutBetsInput
-  upsert?: Prisma.MarketUpsertWithoutBetsInput
+export type MarketUpdateOneRequiredWithoutResolutionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutResolutionsInput, Prisma.MarketUncheckedCreateWithoutResolutionsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutResolutionsInput
+  upsert?: Prisma.MarketUpsertWithoutResolutionsInput
   connect?: Prisma.MarketWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutBetsInput, Prisma.MarketUpdateWithoutBetsInput>, Prisma.MarketUncheckedUpdateWithoutBetsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutResolutionsInput, Prisma.MarketUpdateWithoutResolutionsInput>, Prisma.MarketUncheckedUpdateWithoutResolutionsInput>
 }
 
-export type MarketCreateWithoutUserInput = {
+export type MarketCreateNestedOneWithoutLedgerAccountsInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutLedgerAccountsInput, Prisma.MarketUncheckedCreateWithoutLedgerAccountsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutLedgerAccountsInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneWithoutLedgerAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutLedgerAccountsInput, Prisma.MarketUncheckedCreateWithoutLedgerAccountsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutLedgerAccountsInput
+  upsert?: Prisma.MarketUpsertWithoutLedgerAccountsInput
+  disconnect?: Prisma.MarketWhereInput | boolean
+  delete?: Prisma.MarketWhereInput | boolean
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutLedgerAccountsInput, Prisma.MarketUpdateWithoutLedgerAccountsInput>, Prisma.MarketUncheckedUpdateWithoutLedgerAccountsInput>
+}
+
+export type MarketCreateNestedOneWithoutPositionsInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutPositionsInput, Prisma.MarketUncheckedCreateWithoutPositionsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutPositionsInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneRequiredWithoutPositionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutPositionsInput, Prisma.MarketUncheckedCreateWithoutPositionsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutPositionsInput
+  upsert?: Prisma.MarketUpsertWithoutPositionsInput
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutPositionsInput, Prisma.MarketUpdateWithoutPositionsInput>, Prisma.MarketUncheckedUpdateWithoutPositionsInput>
+}
+
+export type MarketCreateNestedOneWithoutCollateralPoolInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutCollateralPoolInput, Prisma.MarketUncheckedCreateWithoutCollateralPoolInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutCollateralPoolInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneRequiredWithoutCollateralPoolNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutCollateralPoolInput, Prisma.MarketUncheckedCreateWithoutCollateralPoolInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutCollateralPoolInput
+  upsert?: Prisma.MarketUpsertWithoutCollateralPoolInput
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutCollateralPoolInput, Prisma.MarketUpdateWithoutCollateralPoolInput>, Prisma.MarketUncheckedUpdateWithoutCollateralPoolInput>
+}
+
+export type MarketCreateNestedOneWithoutSplitMergeOperationsInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutSplitMergeOperationsInput, Prisma.MarketUncheckedCreateWithoutSplitMergeOperationsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutSplitMergeOperationsInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneRequiredWithoutSplitMergeOperationsNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutSplitMergeOperationsInput, Prisma.MarketUncheckedCreateWithoutSplitMergeOperationsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutSplitMergeOperationsInput
+  upsert?: Prisma.MarketUpsertWithoutSplitMergeOperationsInput
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutSplitMergeOperationsInput, Prisma.MarketUpdateWithoutSplitMergeOperationsInput>, Prisma.MarketUncheckedUpdateWithoutSplitMergeOperationsInput>
+}
+
+export type MarketCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutOrdersInput, Prisma.MarketUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutOrdersInput, Prisma.MarketUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.MarketUpsertWithoutOrdersInput
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutOrdersInput, Prisma.MarketUpdateWithoutOrdersInput>, Prisma.MarketUncheckedUpdateWithoutOrdersInput>
+}
+
+export type MarketCreateNestedOneWithoutTradesInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutTradesInput, Prisma.MarketUncheckedCreateWithoutTradesInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutTradesInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneRequiredWithoutTradesNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutTradesInput, Prisma.MarketUncheckedCreateWithoutTradesInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutTradesInput
+  upsert?: Prisma.MarketUpsertWithoutTradesInput
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutTradesInput, Prisma.MarketUpdateWithoutTradesInput>, Prisma.MarketUncheckedUpdateWithoutTradesInput>
+}
+
+export type MarketCreateNestedOneWithoutSettlementBatchesInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutSettlementBatchesInput, Prisma.MarketUncheckedCreateWithoutSettlementBatchesInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutSettlementBatchesInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneRequiredWithoutSettlementBatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutSettlementBatchesInput, Prisma.MarketUncheckedCreateWithoutSettlementBatchesInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutSettlementBatchesInput
+  upsert?: Prisma.MarketUpsertWithoutSettlementBatchesInput
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutSettlementBatchesInput, Prisma.MarketUpdateWithoutSettlementBatchesInput>, Prisma.MarketUncheckedUpdateWithoutSettlementBatchesInput>
+}
+
+export type MarketCreateNestedOneWithoutSettlementRecordsInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutSettlementRecordsInput, Prisma.MarketUncheckedCreateWithoutSettlementRecordsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutSettlementRecordsInput
+  connect?: Prisma.MarketWhereUniqueInput
+}
+
+export type MarketUpdateOneRequiredWithoutSettlementRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketCreateWithoutSettlementRecordsInput, Prisma.MarketUncheckedCreateWithoutSettlementRecordsInput>
+  connectOrCreate?: Prisma.MarketCreateOrConnectWithoutSettlementRecordsInput
+  upsert?: Prisma.MarketUpsertWithoutSettlementRecordsInput
+  connect?: Prisma.MarketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MarketUpdateToOneWithWhereWithoutSettlementRecordsInput, Prisma.MarketUpdateWithoutSettlementRecordsInput>, Prisma.MarketUncheckedUpdateWithoutSettlementRecordsInput>
+}
+
+export type MarketCreateWithoutCreatorInput = {
   id?: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  expiry: Date | string
-  resolution?: $Enums.BetType
-  bets?: Prisma.BetCreateNestedManyWithoutMarketInput
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
 }
 
-export type MarketUncheckedCreateWithoutUserInput = {
+export type MarketUncheckedCreateWithoutCreatorInput = {
   id?: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  expiry: Date | string
-  resolution?: $Enums.BetType
-  bets?: Prisma.BetUncheckedCreateNestedManyWithoutMarketInput
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
 }
 
-export type MarketCreateOrConnectWithoutUserInput = {
+export type MarketCreateOrConnectWithoutCreatorInput = {
   where: Prisma.MarketWhereUniqueInput
-  create: Prisma.XOR<Prisma.MarketCreateWithoutUserInput, Prisma.MarketUncheckedCreateWithoutUserInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutCreatorInput, Prisma.MarketUncheckedCreateWithoutCreatorInput>
 }
 
-export type MarketCreateManyUserInputEnvelope = {
-  data: Prisma.MarketCreateManyUserInput | Prisma.MarketCreateManyUserInput[]
+export type MarketCreateManyCreatorInputEnvelope = {
+  data: Prisma.MarketCreateManyCreatorInput | Prisma.MarketCreateManyCreatorInput[]
   skipDuplicates?: boolean
 }
 
-export type MarketUpsertWithWhereUniqueWithoutUserInput = {
+export type MarketUpsertWithWhereUniqueWithoutCreatorInput = {
   where: Prisma.MarketWhereUniqueInput
-  update: Prisma.XOR<Prisma.MarketUpdateWithoutUserInput, Prisma.MarketUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.MarketCreateWithoutUserInput, Prisma.MarketUncheckedCreateWithoutUserInput>
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutCreatorInput, Prisma.MarketUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutCreatorInput, Prisma.MarketUncheckedCreateWithoutCreatorInput>
 }
 
-export type MarketUpdateWithWhereUniqueWithoutUserInput = {
+export type MarketUpdateWithWhereUniqueWithoutCreatorInput = {
   where: Prisma.MarketWhereUniqueInput
-  data: Prisma.XOR<Prisma.MarketUpdateWithoutUserInput, Prisma.MarketUncheckedUpdateWithoutUserInput>
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutCreatorInput, Prisma.MarketUncheckedUpdateWithoutCreatorInput>
 }
 
-export type MarketUpdateManyWithWhereWithoutUserInput = {
+export type MarketUpdateManyWithWhereWithoutCreatorInput = {
   where: Prisma.MarketScalarWhereInput
-  data: Prisma.XOR<Prisma.MarketUpdateManyMutationInput, Prisma.MarketUncheckedUpdateManyWithoutUserInput>
+  data: Prisma.XOR<Prisma.MarketUpdateManyMutationInput, Prisma.MarketUncheckedUpdateManyWithoutCreatorInput>
 }
 
 export type MarketScalarWhereInput = {
@@ -532,106 +1035,1309 @@ export type MarketScalarWhereInput = {
   OR?: Prisma.MarketScalarWhereInput[]
   NOT?: Prisma.MarketScalarWhereInput | Prisma.MarketScalarWhereInput[]
   id?: Prisma.StringFilter<"Market"> | string
+  creatorId?: Prisma.StringFilter<"Market"> | string
   title?: Prisma.StringFilter<"Market"> | string
-  initialWager?: Prisma.IntFilter<"Market"> | number
-  bet?: Prisma.EnumBetTypeFilter<"Market"> | $Enums.BetType
-  createrId?: Prisma.StringFilter<"Market"> | string
-  expiry?: Prisma.DateTimeFilter<"Market"> | Date | string
-  resolution?: Prisma.EnumBetTypeFilter<"Market"> | $Enums.BetType
+  description?: Prisma.StringNullableFilter<"Market"> | string | null
+  status?: Prisma.EnumMarketStatusFilter<"Market"> | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFilter<"Market"> | number
+  minPrice?: Prisma.IntFilter<"Market"> | number
+  maxPrice?: Prisma.IntFilter<"Market"> | number
+  tickSize?: Prisma.IntFilter<"Market"> | number
+  minOrderQuantity?: Prisma.IntFilter<"Market"> | number
+  tradingStartsAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  tradingEndsAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  expiresAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  resolution?: Prisma.EnumResolutionTypeNullableFilter<"Market"> | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFilter<"Market"> | number
+  totalPairsBurned?: Prisma.IntFilter<"Market"> | number
+  createdAt?: Prisma.DateTimeFilter<"Market"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Market"> | Date | string
 }
 
-export type MarketCreateWithoutBetsInput = {
+export type MarketCreateWithoutResolutionsInput = {
   id?: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  expiry: Date | string
-  resolution?: $Enums.BetType
-  user: Prisma.UserCreateNestedOneWithoutMarketsInput
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
 }
 
-export type MarketUncheckedCreateWithoutBetsInput = {
+export type MarketUncheckedCreateWithoutResolutionsInput = {
   id?: string
+  creatorId: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  createrId: string
-  expiry: Date | string
-  resolution?: $Enums.BetType
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
 }
 
-export type MarketCreateOrConnectWithoutBetsInput = {
+export type MarketCreateOrConnectWithoutResolutionsInput = {
   where: Prisma.MarketWhereUniqueInput
-  create: Prisma.XOR<Prisma.MarketCreateWithoutBetsInput, Prisma.MarketUncheckedCreateWithoutBetsInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutResolutionsInput, Prisma.MarketUncheckedCreateWithoutResolutionsInput>
 }
 
-export type MarketUpsertWithoutBetsInput = {
-  update: Prisma.XOR<Prisma.MarketUpdateWithoutBetsInput, Prisma.MarketUncheckedUpdateWithoutBetsInput>
-  create: Prisma.XOR<Prisma.MarketCreateWithoutBetsInput, Prisma.MarketUncheckedCreateWithoutBetsInput>
+export type MarketUpsertWithoutResolutionsInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutResolutionsInput, Prisma.MarketUncheckedUpdateWithoutResolutionsInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutResolutionsInput, Prisma.MarketUncheckedCreateWithoutResolutionsInput>
   where?: Prisma.MarketWhereInput
 }
 
-export type MarketUpdateToOneWithWhereWithoutBetsInput = {
+export type MarketUpdateToOneWithWhereWithoutResolutionsInput = {
   where?: Prisma.MarketWhereInput
-  data: Prisma.XOR<Prisma.MarketUpdateWithoutBetsInput, Prisma.MarketUncheckedUpdateWithoutBetsInput>
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutResolutionsInput, Prisma.MarketUncheckedUpdateWithoutResolutionsInput>
 }
 
-export type MarketUpdateWithoutBetsInput = {
+export type MarketUpdateWithoutResolutionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  user?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
 }
 
-export type MarketUncheckedUpdateWithoutBetsInput = {
+export type MarketUncheckedUpdateWithoutResolutionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  createrId?: Prisma.StringFieldUpdateOperationsInput | string
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
 }
 
-export type MarketCreateManyUserInput = {
+export type MarketCreateWithoutLedgerAccountsInput = {
   id?: string
   title: string
-  initialWager: number
-  bet: $Enums.BetType
-  expiry: Date | string
-  resolution?: $Enums.BetType
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
 }
 
-export type MarketUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  bets?: Prisma.BetUpdateManyWithoutMarketNestedInput
+export type MarketUncheckedCreateWithoutLedgerAccountsInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
 }
 
-export type MarketUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  bets?: Prisma.BetUncheckedUpdateManyWithoutMarketNestedInput
+export type MarketCreateOrConnectWithoutLedgerAccountsInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutLedgerAccountsInput, Prisma.MarketUncheckedCreateWithoutLedgerAccountsInput>
 }
 
-export type MarketUncheckedUpdateManyWithoutUserInput = {
+export type MarketUpsertWithoutLedgerAccountsInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutLedgerAccountsInput, Prisma.MarketUncheckedUpdateWithoutLedgerAccountsInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutLedgerAccountsInput, Prisma.MarketUncheckedCreateWithoutLedgerAccountsInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutLedgerAccountsInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutLedgerAccountsInput, Prisma.MarketUncheckedUpdateWithoutLedgerAccountsInput>
+}
+
+export type MarketUpdateWithoutLedgerAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  initialWager?: Prisma.IntFieldUpdateOperationsInput | number
-  bet?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
-  expiry?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolution?: Prisma.EnumBetTypeFieldUpdateOperationsInput | $Enums.BetType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutLedgerAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateWithoutPositionsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
+}
+
+export type MarketUncheckedCreateWithoutPositionsInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
+}
+
+export type MarketCreateOrConnectWithoutPositionsInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutPositionsInput, Prisma.MarketUncheckedCreateWithoutPositionsInput>
+}
+
+export type MarketUpsertWithoutPositionsInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutPositionsInput, Prisma.MarketUncheckedUpdateWithoutPositionsInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutPositionsInput, Prisma.MarketUncheckedCreateWithoutPositionsInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutPositionsInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutPositionsInput, Prisma.MarketUncheckedUpdateWithoutPositionsInput>
+}
+
+export type MarketUpdateWithoutPositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutPositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateWithoutCollateralPoolInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
+}
+
+export type MarketUncheckedCreateWithoutCollateralPoolInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
+}
+
+export type MarketCreateOrConnectWithoutCollateralPoolInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutCollateralPoolInput, Prisma.MarketUncheckedCreateWithoutCollateralPoolInput>
+}
+
+export type MarketUpsertWithoutCollateralPoolInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutCollateralPoolInput, Prisma.MarketUncheckedUpdateWithoutCollateralPoolInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutCollateralPoolInput, Prisma.MarketUncheckedCreateWithoutCollateralPoolInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutCollateralPoolInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutCollateralPoolInput, Prisma.MarketUncheckedUpdateWithoutCollateralPoolInput>
+}
+
+export type MarketUpdateWithoutCollateralPoolInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutCollateralPoolInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateWithoutSplitMergeOperationsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
+}
+
+export type MarketUncheckedCreateWithoutSplitMergeOperationsInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
+}
+
+export type MarketCreateOrConnectWithoutSplitMergeOperationsInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutSplitMergeOperationsInput, Prisma.MarketUncheckedCreateWithoutSplitMergeOperationsInput>
+}
+
+export type MarketUpsertWithoutSplitMergeOperationsInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutSplitMergeOperationsInput, Prisma.MarketUncheckedUpdateWithoutSplitMergeOperationsInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutSplitMergeOperationsInput, Prisma.MarketUncheckedCreateWithoutSplitMergeOperationsInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutSplitMergeOperationsInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutSplitMergeOperationsInput, Prisma.MarketUncheckedUpdateWithoutSplitMergeOperationsInput>
+}
+
+export type MarketUpdateWithoutSplitMergeOperationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutSplitMergeOperationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateWithoutOrdersInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
+}
+
+export type MarketUncheckedCreateWithoutOrdersInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
+}
+
+export type MarketCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutOrdersInput, Prisma.MarketUncheckedCreateWithoutOrdersInput>
+}
+
+export type MarketUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutOrdersInput, Prisma.MarketUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutOrdersInput, Prisma.MarketUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutOrdersInput, Prisma.MarketUncheckedUpdateWithoutOrdersInput>
+}
+
+export type MarketUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateWithoutTradesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
+}
+
+export type MarketUncheckedCreateWithoutTradesInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
+}
+
+export type MarketCreateOrConnectWithoutTradesInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutTradesInput, Prisma.MarketUncheckedCreateWithoutTradesInput>
+}
+
+export type MarketUpsertWithoutTradesInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutTradesInput, Prisma.MarketUncheckedUpdateWithoutTradesInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutTradesInput, Prisma.MarketUncheckedCreateWithoutTradesInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutTradesInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutTradesInput, Prisma.MarketUncheckedUpdateWithoutTradesInput>
+}
+
+export type MarketUpdateWithoutTradesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutTradesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateWithoutSettlementBatchesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordCreateNestedManyWithoutMarketInput
+}
+
+export type MarketUncheckedCreateWithoutSettlementBatchesInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutMarketInput
+}
+
+export type MarketCreateOrConnectWithoutSettlementBatchesInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutSettlementBatchesInput, Prisma.MarketUncheckedCreateWithoutSettlementBatchesInput>
+}
+
+export type MarketUpsertWithoutSettlementBatchesInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutSettlementBatchesInput, Prisma.MarketUncheckedUpdateWithoutSettlementBatchesInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutSettlementBatchesInput, Prisma.MarketUncheckedCreateWithoutSettlementBatchesInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutSettlementBatchesInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutSettlementBatchesInput, Prisma.MarketUncheckedUpdateWithoutSettlementBatchesInput>
+}
+
+export type MarketUpdateWithoutSettlementBatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutSettlementBatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateWithoutSettlementRecordsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutMarketsInput
+  resolutions?: Prisma.MarketResolutionCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchCreateNestedManyWithoutMarketInput
+}
+
+export type MarketUncheckedCreateWithoutSettlementRecordsInput = {
+  id?: string
+  creatorId: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutMarketInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedCreateNestedManyWithoutMarketInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutMarketInput
+  collateralPool?: Prisma.CollateralPoolUncheckedCreateNestedOneWithoutMarketInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutMarketInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutMarketInput
+  trades?: Prisma.TradeUncheckedCreateNestedManyWithoutMarketInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedCreateNestedManyWithoutMarketInput
+}
+
+export type MarketCreateOrConnectWithoutSettlementRecordsInput = {
+  where: Prisma.MarketWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketCreateWithoutSettlementRecordsInput, Prisma.MarketUncheckedCreateWithoutSettlementRecordsInput>
+}
+
+export type MarketUpsertWithoutSettlementRecordsInput = {
+  update: Prisma.XOR<Prisma.MarketUpdateWithoutSettlementRecordsInput, Prisma.MarketUncheckedUpdateWithoutSettlementRecordsInput>
+  create: Prisma.XOR<Prisma.MarketCreateWithoutSettlementRecordsInput, Prisma.MarketUncheckedCreateWithoutSettlementRecordsInput>
+  where?: Prisma.MarketWhereInput
+}
+
+export type MarketUpdateToOneWithWhereWithoutSettlementRecordsInput = {
+  where?: Prisma.MarketWhereInput
+  data: Prisma.XOR<Prisma.MarketUpdateWithoutSettlementRecordsInput, Prisma.MarketUncheckedUpdateWithoutSettlementRecordsInput>
+}
+
+export type MarketUpdateWithoutSettlementRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutMarketsNestedInput
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutSettlementRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketCreateManyCreatorInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.MarketStatus
+  payoutPerContract?: number
+  minPrice?: number
+  maxPrice?: number
+  tickSize?: number
+  minOrderQuantity?: number
+  tradingStartsAt: Date | string
+  tradingEndsAt: Date | string
+  expiresAt: Date | string
+  resolution?: $Enums.ResolutionType | null
+  totalPairsCreated?: number
+  totalPairsBurned?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type MarketUpdateWithoutCreatorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutMarketNestedInput
+  ledgerAccounts?: Prisma.LedgerAccountUncheckedUpdateManyWithoutMarketNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutMarketNestedInput
+  collateralPool?: Prisma.CollateralPoolUncheckedUpdateOneWithoutMarketNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutMarketNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutMarketNestedInput
+  trades?: Prisma.TradeUncheckedUpdateManyWithoutMarketNestedInput
+  settlementBatches?: Prisma.SettlementBatchUncheckedUpdateManyWithoutMarketNestedInput
+  settlementRecords?: Prisma.SettlementRecordUncheckedUpdateManyWithoutMarketNestedInput
+}
+
+export type MarketUncheckedUpdateManyWithoutCreatorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketStatusFieldUpdateOperationsInput | $Enums.MarketStatus
+  payoutPerContract?: Prisma.IntFieldUpdateOperationsInput | number
+  minPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  maxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  tickSize?: Prisma.IntFieldUpdateOperationsInput | number
+  minOrderQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  tradingStartsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tradingEndsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.NullableEnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType | null
+  totalPairsCreated?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPairsBurned?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -640,11 +2346,25 @@ export type MarketUncheckedUpdateManyWithoutUserInput = {
  */
 
 export type MarketCountOutputType = {
-  bets: number
+  resolutions: number
+  ledgerAccounts: number
+  positions: number
+  splitMergeOperations: number
+  orders: number
+  trades: number
+  settlementBatches: number
+  settlementRecords: number
 }
 
 export type MarketCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  bets?: boolean | MarketCountOutputTypeCountBetsArgs
+  resolutions?: boolean | MarketCountOutputTypeCountResolutionsArgs
+  ledgerAccounts?: boolean | MarketCountOutputTypeCountLedgerAccountsArgs
+  positions?: boolean | MarketCountOutputTypeCountPositionsArgs
+  splitMergeOperations?: boolean | MarketCountOutputTypeCountSplitMergeOperationsArgs
+  orders?: boolean | MarketCountOutputTypeCountOrdersArgs
+  trades?: boolean | MarketCountOutputTypeCountTradesArgs
+  settlementBatches?: boolean | MarketCountOutputTypeCountSettlementBatchesArgs
+  settlementRecords?: boolean | MarketCountOutputTypeCountSettlementRecordsArgs
 }
 
 /**
@@ -660,83 +2380,211 @@ export type MarketCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * MarketCountOutputType without action
  */
-export type MarketCountOutputTypeCountBetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BetWhereInput
+export type MarketCountOutputTypeCountResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketResolutionWhereInput
+}
+
+/**
+ * MarketCountOutputType without action
+ */
+export type MarketCountOutputTypeCountLedgerAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LedgerAccountWhereInput
+}
+
+/**
+ * MarketCountOutputType without action
+ */
+export type MarketCountOutputTypeCountPositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PositionWhereInput
+}
+
+/**
+ * MarketCountOutputType without action
+ */
+export type MarketCountOutputTypeCountSplitMergeOperationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SplitMergeOperationWhereInput
+}
+
+/**
+ * MarketCountOutputType without action
+ */
+export type MarketCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderWhereInput
+}
+
+/**
+ * MarketCountOutputType without action
+ */
+export type MarketCountOutputTypeCountTradesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TradeWhereInput
+}
+
+/**
+ * MarketCountOutputType without action
+ */
+export type MarketCountOutputTypeCountSettlementBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SettlementBatchWhereInput
+}
+
+/**
+ * MarketCountOutputType without action
+ */
+export type MarketCountOutputTypeCountSettlementRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SettlementRecordWhereInput
 }
 
 
 export type MarketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  creatorId?: boolean
   title?: boolean
-  initialWager?: boolean
-  bet?: boolean
-  createrId?: boolean
-  expiry?: boolean
+  description?: boolean
+  status?: boolean
+  payoutPerContract?: boolean
+  minPrice?: boolean
+  maxPrice?: boolean
+  tickSize?: boolean
+  minOrderQuantity?: boolean
+  tradingStartsAt?: boolean
+  tradingEndsAt?: boolean
+  expiresAt?: boolean
   resolution?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  bets?: boolean | Prisma.Market$betsArgs<ExtArgs>
+  totalPairsCreated?: boolean
+  totalPairsBurned?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  resolutions?: boolean | Prisma.Market$resolutionsArgs<ExtArgs>
+  ledgerAccounts?: boolean | Prisma.Market$ledgerAccountsArgs<ExtArgs>
+  positions?: boolean | Prisma.Market$positionsArgs<ExtArgs>
+  collateralPool?: boolean | Prisma.Market$collateralPoolArgs<ExtArgs>
+  splitMergeOperations?: boolean | Prisma.Market$splitMergeOperationsArgs<ExtArgs>
+  orders?: boolean | Prisma.Market$ordersArgs<ExtArgs>
+  trades?: boolean | Prisma.Market$tradesArgs<ExtArgs>
+  settlementBatches?: boolean | Prisma.Market$settlementBatchesArgs<ExtArgs>
+  settlementRecords?: boolean | Prisma.Market$settlementRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.MarketCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["market"]>
 
 export type MarketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  creatorId?: boolean
   title?: boolean
-  initialWager?: boolean
-  bet?: boolean
-  createrId?: boolean
-  expiry?: boolean
+  description?: boolean
+  status?: boolean
+  payoutPerContract?: boolean
+  minPrice?: boolean
+  maxPrice?: boolean
+  tickSize?: boolean
+  minOrderQuantity?: boolean
+  tradingStartsAt?: boolean
+  tradingEndsAt?: boolean
+  expiresAt?: boolean
   resolution?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  totalPairsCreated?: boolean
+  totalPairsBurned?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["market"]>
 
 export type MarketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  creatorId?: boolean
   title?: boolean
-  initialWager?: boolean
-  bet?: boolean
-  createrId?: boolean
-  expiry?: boolean
+  description?: boolean
+  status?: boolean
+  payoutPerContract?: boolean
+  minPrice?: boolean
+  maxPrice?: boolean
+  tickSize?: boolean
+  minOrderQuantity?: boolean
+  tradingStartsAt?: boolean
+  tradingEndsAt?: boolean
+  expiresAt?: boolean
   resolution?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  totalPairsCreated?: boolean
+  totalPairsBurned?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["market"]>
 
 export type MarketSelectScalar = {
   id?: boolean
+  creatorId?: boolean
   title?: boolean
-  initialWager?: boolean
-  bet?: boolean
-  createrId?: boolean
-  expiry?: boolean
+  description?: boolean
+  status?: boolean
+  payoutPerContract?: boolean
+  minPrice?: boolean
+  maxPrice?: boolean
+  tickSize?: boolean
+  minOrderQuantity?: boolean
+  tradingStartsAt?: boolean
+  tradingEndsAt?: boolean
+  expiresAt?: boolean
   resolution?: boolean
+  totalPairsCreated?: boolean
+  totalPairsBurned?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type MarketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "initialWager" | "bet" | "createrId" | "expiry" | "resolution", ExtArgs["result"]["market"]>
+export type MarketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "creatorId" | "title" | "description" | "status" | "payoutPerContract" | "minPrice" | "maxPrice" | "tickSize" | "minOrderQuantity" | "tradingStartsAt" | "tradingEndsAt" | "expiresAt" | "resolution" | "totalPairsCreated" | "totalPairsBurned" | "createdAt" | "updatedAt", ExtArgs["result"]["market"]>
 export type MarketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  bets?: boolean | Prisma.Market$betsArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  resolutions?: boolean | Prisma.Market$resolutionsArgs<ExtArgs>
+  ledgerAccounts?: boolean | Prisma.Market$ledgerAccountsArgs<ExtArgs>
+  positions?: boolean | Prisma.Market$positionsArgs<ExtArgs>
+  collateralPool?: boolean | Prisma.Market$collateralPoolArgs<ExtArgs>
+  splitMergeOperations?: boolean | Prisma.Market$splitMergeOperationsArgs<ExtArgs>
+  orders?: boolean | Prisma.Market$ordersArgs<ExtArgs>
+  trades?: boolean | Prisma.Market$tradesArgs<ExtArgs>
+  settlementBatches?: boolean | Prisma.Market$settlementBatchesArgs<ExtArgs>
+  settlementRecords?: boolean | Prisma.Market$settlementRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.MarketCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MarketIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type MarketIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $MarketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Market"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
-    bets: Prisma.$BetPayload<ExtArgs>[]
+    creator: Prisma.$UserPayload<ExtArgs>
+    resolutions: Prisma.$MarketResolutionPayload<ExtArgs>[]
+    ledgerAccounts: Prisma.$LedgerAccountPayload<ExtArgs>[]
+    positions: Prisma.$PositionPayload<ExtArgs>[]
+    collateralPool: Prisma.$CollateralPoolPayload<ExtArgs> | null
+    splitMergeOperations: Prisma.$SplitMergeOperationPayload<ExtArgs>[]
+    orders: Prisma.$OrderPayload<ExtArgs>[]
+    trades: Prisma.$TradePayload<ExtArgs>[]
+    settlementBatches: Prisma.$SettlementBatchPayload<ExtArgs>[]
+    settlementRecords: Prisma.$SettlementRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    creatorId: string
     title: string
-    initialWager: number
-    bet: $Enums.BetType
-    createrId: string
-    expiry: Date
-    resolution: $Enums.BetType
+    description: string | null
+    status: $Enums.MarketStatus
+    payoutPerContract: number
+    minPrice: number
+    maxPrice: number
+    tickSize: number
+    minOrderQuantity: number
+    tradingStartsAt: Date
+    tradingEndsAt: Date
+    expiresAt: Date
+    resolution: $Enums.ResolutionType | null
+    totalPairsCreated: number
+    totalPairsBurned: number
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["market"]>
   composites: {}
 }
@@ -1131,8 +2979,16 @@ readonly fields: MarketFieldRefs;
  */
 export interface Prisma__MarketClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  bets<T extends Prisma.Market$betsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$betsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  creator<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  resolutions<T extends Prisma.Market$resolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$resolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ledgerAccounts<T extends Prisma.Market$ledgerAccountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$ledgerAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  positions<T extends Prisma.Market$positionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$positionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  collateralPool<T extends Prisma.Market$collateralPoolArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$collateralPoolArgs<ExtArgs>>): Prisma.Prisma__CollateralPoolClient<runtime.Types.Result.GetResult<Prisma.$CollateralPoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  splitMergeOperations<T extends Prisma.Market$splitMergeOperationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$splitMergeOperationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SplitMergeOperationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orders<T extends Prisma.Market$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trades<T extends Prisma.Market$tradesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$tradesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  settlementBatches<T extends Prisma.Market$settlementBatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$settlementBatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SettlementBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  settlementRecords<T extends Prisma.Market$settlementRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Market$settlementRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SettlementRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1163,12 +3019,23 @@ export interface Prisma__MarketClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface MarketFieldRefs {
   readonly id: Prisma.FieldRef<"Market", 'String'>
+  readonly creatorId: Prisma.FieldRef<"Market", 'String'>
   readonly title: Prisma.FieldRef<"Market", 'String'>
-  readonly initialWager: Prisma.FieldRef<"Market", 'Int'>
-  readonly bet: Prisma.FieldRef<"Market", 'BetType'>
-  readonly createrId: Prisma.FieldRef<"Market", 'String'>
-  readonly expiry: Prisma.FieldRef<"Market", 'DateTime'>
-  readonly resolution: Prisma.FieldRef<"Market", 'BetType'>
+  readonly description: Prisma.FieldRef<"Market", 'String'>
+  readonly status: Prisma.FieldRef<"Market", 'MarketStatus'>
+  readonly payoutPerContract: Prisma.FieldRef<"Market", 'Int'>
+  readonly minPrice: Prisma.FieldRef<"Market", 'Int'>
+  readonly maxPrice: Prisma.FieldRef<"Market", 'Int'>
+  readonly tickSize: Prisma.FieldRef<"Market", 'Int'>
+  readonly minOrderQuantity: Prisma.FieldRef<"Market", 'Int'>
+  readonly tradingStartsAt: Prisma.FieldRef<"Market", 'DateTime'>
+  readonly tradingEndsAt: Prisma.FieldRef<"Market", 'DateTime'>
+  readonly expiresAt: Prisma.FieldRef<"Market", 'DateTime'>
+  readonly resolution: Prisma.FieldRef<"Market", 'ResolutionType'>
+  readonly totalPairsCreated: Prisma.FieldRef<"Market", 'Int'>
+  readonly totalPairsBurned: Prisma.FieldRef<"Market", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Market", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Market", 'DateTime'>
 }
     
 
@@ -1570,27 +3437,214 @@ export type MarketDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Market.bets
+ * Market.resolutions
  */
-export type Market$betsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Market$resolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Bet
+   * Select specific fields to fetch from the MarketResolution
    */
-  select?: Prisma.BetSelect<ExtArgs> | null
+  select?: Prisma.MarketResolutionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Bet
+   * Omit specific fields from the MarketResolution
    */
-  omit?: Prisma.BetOmit<ExtArgs> | null
+  omit?: Prisma.MarketResolutionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BetInclude<ExtArgs> | null
-  where?: Prisma.BetWhereInput
-  orderBy?: Prisma.BetOrderByWithRelationInput | Prisma.BetOrderByWithRelationInput[]
-  cursor?: Prisma.BetWhereUniqueInput
+  include?: Prisma.MarketResolutionInclude<ExtArgs> | null
+  where?: Prisma.MarketResolutionWhereInput
+  orderBy?: Prisma.MarketResolutionOrderByWithRelationInput | Prisma.MarketResolutionOrderByWithRelationInput[]
+  cursor?: Prisma.MarketResolutionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BetScalarFieldEnum | Prisma.BetScalarFieldEnum[]
+  distinct?: Prisma.MarketResolutionScalarFieldEnum | Prisma.MarketResolutionScalarFieldEnum[]
+}
+
+/**
+ * Market.ledgerAccounts
+ */
+export type Market$ledgerAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LedgerAccount
+   */
+  select?: Prisma.LedgerAccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LedgerAccount
+   */
+  omit?: Prisma.LedgerAccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LedgerAccountInclude<ExtArgs> | null
+  where?: Prisma.LedgerAccountWhereInput
+  orderBy?: Prisma.LedgerAccountOrderByWithRelationInput | Prisma.LedgerAccountOrderByWithRelationInput[]
+  cursor?: Prisma.LedgerAccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LedgerAccountScalarFieldEnum | Prisma.LedgerAccountScalarFieldEnum[]
+}
+
+/**
+ * Market.positions
+ */
+export type Market$positionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Position
+   */
+  select?: Prisma.PositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Position
+   */
+  omit?: Prisma.PositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PositionInclude<ExtArgs> | null
+  where?: Prisma.PositionWhereInput
+  orderBy?: Prisma.PositionOrderByWithRelationInput | Prisma.PositionOrderByWithRelationInput[]
+  cursor?: Prisma.PositionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PositionScalarFieldEnum | Prisma.PositionScalarFieldEnum[]
+}
+
+/**
+ * Market.collateralPool
+ */
+export type Market$collateralPoolArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CollateralPool
+   */
+  select?: Prisma.CollateralPoolSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CollateralPool
+   */
+  omit?: Prisma.CollateralPoolOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CollateralPoolInclude<ExtArgs> | null
+  where?: Prisma.CollateralPoolWhereInput
+}
+
+/**
+ * Market.splitMergeOperations
+ */
+export type Market$splitMergeOperationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SplitMergeOperation
+   */
+  select?: Prisma.SplitMergeOperationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SplitMergeOperation
+   */
+  omit?: Prisma.SplitMergeOperationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SplitMergeOperationInclude<ExtArgs> | null
+  where?: Prisma.SplitMergeOperationWhereInput
+  orderBy?: Prisma.SplitMergeOperationOrderByWithRelationInput | Prisma.SplitMergeOperationOrderByWithRelationInput[]
+  cursor?: Prisma.SplitMergeOperationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SplitMergeOperationScalarFieldEnum | Prisma.SplitMergeOperationScalarFieldEnum[]
+}
+
+/**
+ * Market.orders
+ */
+export type Market$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null
+  where?: Prisma.OrderWhereInput
+  orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[]
+  cursor?: Prisma.OrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * Market.trades
+ */
+export type Market$tradesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Trade
+   */
+  select?: Prisma.TradeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Trade
+   */
+  omit?: Prisma.TradeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TradeInclude<ExtArgs> | null
+  where?: Prisma.TradeWhereInput
+  orderBy?: Prisma.TradeOrderByWithRelationInput | Prisma.TradeOrderByWithRelationInput[]
+  cursor?: Prisma.TradeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TradeScalarFieldEnum | Prisma.TradeScalarFieldEnum[]
+}
+
+/**
+ * Market.settlementBatches
+ */
+export type Market$settlementBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SettlementBatch
+   */
+  select?: Prisma.SettlementBatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SettlementBatch
+   */
+  omit?: Prisma.SettlementBatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SettlementBatchInclude<ExtArgs> | null
+  where?: Prisma.SettlementBatchWhereInput
+  orderBy?: Prisma.SettlementBatchOrderByWithRelationInput | Prisma.SettlementBatchOrderByWithRelationInput[]
+  cursor?: Prisma.SettlementBatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SettlementBatchScalarFieldEnum | Prisma.SettlementBatchScalarFieldEnum[]
+}
+
+/**
+ * Market.settlementRecords
+ */
+export type Market$settlementRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SettlementRecord
+   */
+  select?: Prisma.SettlementRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SettlementRecord
+   */
+  omit?: Prisma.SettlementRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SettlementRecordInclude<ExtArgs> | null
+  where?: Prisma.SettlementRecordWhereInput
+  orderBy?: Prisma.SettlementRecordOrderByWithRelationInput | Prisma.SettlementRecordOrderByWithRelationInput[]
+  cursor?: Prisma.SettlementRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SettlementRecordScalarFieldEnum | Prisma.SettlementRecordScalarFieldEnum[]
 }
 
 /**

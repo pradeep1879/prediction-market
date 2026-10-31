@@ -13,7 +13,7 @@ export const userSignup = async (req:Request, res:Response) => {
 
     const isUserExist = await prisma.user.findFirst({
       where:{
-        email: result.data.email
+        username: result.data.username
       }
     });
     if(isUserExist){
@@ -27,9 +27,8 @@ export const userSignup = async (req:Request, res:Response) => {
 
     const newUser = await prisma.user.create({
       data:{
-        email: result.data.email,
+        username: result.data.username,
         password: hashedPassword,
-        balance: result.data.balance
       }
     });
 
@@ -56,7 +55,7 @@ export const userSignin = async (req:Request, res:Response) => {
 
     const isUserExist = await prisma.user.findFirst({
       where:{
-        email: result.data.email
+        username: result.data.username
       }
     });
     if(!isUserExist){
@@ -155,10 +154,6 @@ export const getUserProfile = async (req:Request, res:Response) => {
       where:{
         id: userId
       },
-      select:{
-        balance:true,
-        bets: true
-      }
     });
 
     res.status(200).json({

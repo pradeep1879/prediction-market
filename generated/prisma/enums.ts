@@ -9,9 +9,230 @@
 * 🟢 You can import this file directly.
 */
 
-export const BetType = {
+export const UserRole = {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+} as const
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const UserStatus = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
+
+
+export const MarketStatus = {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED',
+  RESOLVED: 'RESOLVED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type MarketStatus = (typeof MarketStatus)[keyof typeof MarketStatus]
+
+
+export const ResolutionType = {
   YES: 'YES',
   NO: 'NO'
 } as const
 
-export type BetType = (typeof BetType)[keyof typeof BetType]
+export type ResolutionType = (typeof ResolutionType)[keyof typeof ResolutionType]
+
+
+export const MarketResolutionStatus = {
+  PROPOSED: 'PROPOSED',
+  CONFIRMED: 'CONFIRMED',
+  REVERSED: 'REVERSED'
+} as const
+
+export type MarketResolutionStatus = (typeof MarketResolutionStatus)[keyof typeof MarketResolutionStatus]
+
+
+export const WalletStatus = {
+  ACTIVE: 'ACTIVE',
+  BLOCKED: 'BLOCKED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type WalletStatus = (typeof WalletStatus)[keyof typeof WalletStatus]
+
+
+export const DepositStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type DepositStatus = (typeof DepositStatus)[keyof typeof DepositStatus]
+
+
+export const WithdrawalStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type WithdrawalStatus = (typeof WithdrawalStatus)[keyof typeof WithdrawalStatus]
+
+
+export const LedgerTransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type LedgerTransactionStatus = (typeof LedgerTransactionStatus)[keyof typeof LedgerTransactionStatus]
+
+
+export const LedgerTransactionType = {
+  DEPOSIT: 'DEPOSIT',
+  WITHDRAWAL: 'WITHDRAWAL',
+  SPLIT: 'SPLIT',
+  MERGE: 'MERGE',
+  TRADE: 'TRADE',
+  SETTLEMENT: 'SETTLEMENT'
+} as const
+
+export type LedgerTransactionType = (typeof LedgerTransactionType)[keyof typeof LedgerTransactionType]
+
+
+export const LedgerEntryType = {
+  DEBIT: 'DEBIT',
+  CREDIT: 'CREDIT'
+} as const
+
+export type LedgerEntryType = (typeof LedgerEntryType)[keyof typeof LedgerEntryType]
+
+
+export const LedgerAccountType = {
+  USER_AVAILABLE: 'USER_AVAILABLE',
+  USER_RESERVED: 'USER_RESERVED',
+  MARKET_COLLATERAL: 'MARKET_COLLATERAL',
+  CLEARING: 'CLEARING'
+} as const
+
+export type LedgerAccountType = (typeof LedgerAccountType)[keyof typeof LedgerAccountType]
+
+
+export const LedgerAccountStatus = {
+  ACTIVE: 'ACTIVE',
+  BLOCKED: 'BLOCKED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type LedgerAccountStatus = (typeof LedgerAccountStatus)[keyof typeof LedgerAccountStatus]
+
+
+export const OutcomeType = {
+  YES: 'YES',
+  NO: 'NO'
+} as const
+
+export type OutcomeType = (typeof OutcomeType)[keyof typeof OutcomeType]
+
+
+export const CollateralPoolStatus = {
+  ACTIVE: 'ACTIVE',
+  BLOCKED: 'BLOCKED',
+  SETTLED: 'SETTLED'
+} as const
+
+export type CollateralPoolStatus = (typeof CollateralPoolStatus)[keyof typeof CollateralPoolStatus]
+
+
+export const SplitMergeOperationType = {
+  SPLIT: 'SPLIT',
+  MERGE: 'MERGE'
+} as const
+
+export type SplitMergeOperationType = (typeof SplitMergeOperationType)[keyof typeof SplitMergeOperationType]
+
+
+export const SplitMergeOperationStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type SplitMergeOperationStatus = (typeof SplitMergeOperationStatus)[keyof typeof SplitMergeOperationStatus]
+
+
+export const OrderAction = {
+  BUY: 'BUY',
+  SELL: 'SELL'
+} as const
+
+export type OrderAction = (typeof OrderAction)[keyof typeof OrderAction]
+
+
+export const TimeInForce = {
+  GTC: 'GTC',
+  IOC: 'IOC',
+  FOK: 'FOK'
+} as const
+
+export type TimeInForce = (typeof TimeInForce)[keyof typeof TimeInForce]
+
+
+export const OrderStatus = {
+  PENDING: 'PENDING',
+  OPEN: 'OPEN',
+  PARTIALLY_FILLED: 'PARTIALLY_FILLED',
+  FILLED: 'FILLED',
+  CANCELLED: 'CANCELLED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const OrderReservationType = {
+  CASH: 'CASH',
+  CONTRACT: 'CONTRACT'
+} as const
+
+export type OrderReservationType = (typeof OrderReservationType)[keyof typeof OrderReservationType]
+
+
+export const OrderReservationStatus = {
+  ACTIVE: 'ACTIVE',
+  PARTIALLY_RELEASED: 'PARTIALLY_RELEASED',
+  RELEASED: 'RELEASED'
+} as const
+
+export type OrderReservationStatus = (typeof OrderReservationStatus)[keyof typeof OrderReservationStatus]
+
+
+export const TradeStatus = {
+  EXECUTED: 'EXECUTED',
+  REVERSED: 'REVERSED'
+} as const
+
+export type TradeStatus = (typeof TradeStatus)[keyof typeof TradeStatus]
+
+
+export const SettlementBatchStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type SettlementBatchStatus = (typeof SettlementBatchStatus)[keyof typeof SettlementBatchStatus]
+
+
+export const SettlementRecordStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type SettlementRecordStatus = (typeof SettlementRecordStatus)[keyof typeof SettlementRecordStatus]
