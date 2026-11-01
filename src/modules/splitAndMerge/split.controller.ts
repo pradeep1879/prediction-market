@@ -1,0 +1,28 @@
+import { AppError } from '../../utils/AppError';
+import { splitMergeSchema } from './split.schema';
+import * as splitMergeService from './split.service';
+import type { NextFunction, Request, Response } from "express";
+
+export const splitMarket = async (req:Request, res: Response, next: NextFunction) => {
+  try {
+    const userId = req.userId;
+    const { marketId } = req.params;
+    const { data, success, error } = splitMergeSchema.safeParse(req.body);
+    if(typeof marketId !== "string" || !marketId){
+      throw new AppError(400, "marketId is not valid")
+    }
+    if(!success){
+      throw new AppError(400, error.issues[0]?.message!)
+    }
+
+    const result = await splitMergeService.splitMarket(userId!, marketId, data.quantity);
+
+    return res.status(201).json({
+      success: true,
+      message: "Market split successfully",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
