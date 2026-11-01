@@ -7,8 +7,7 @@ import { AppError } from "../../utils/AppError";
 
 
 
-export const signup = async (body:unknown) => {
-  console.log("user signup", body)
+export const signup = async (body: unknown) => {
   const { data, success, error } = userSignUp.safeParse(body);
 
   if (!success) {
@@ -27,31 +26,50 @@ export const signup = async (body:unknown) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const newUser = await prisma.user.create({
-    data: {
-      username,
-      password: hashedPassword,
-    },
-    select: {
-      id: true,
-      username: true,
-      role: true,
-      createdAt: true,
-    },
+  const result = await prisma.$transaction(async (tx) => {
+    // create user
+    const newUser = await tx.user.create({
+      data: {
+        username,
+        password: hashedPassword,
+      },
+      select: {
+        id: true,
+        username: true,
+        role: true,
+        createdAt: true,
+      },
+    });
+
+    // create wallet
+    const wallet = await tx.wallet.create({
+      data: {
+        userId: newUser.id,
+      },
+    });
+
+    // create ledger accounts
+    await tx.ledgerAccount.createMany({
+      data: [
+        {
+          walletId: wallet.id,
+          accountType: "USER_AVAILABLE",
+        },
+        {
+          walletId: wallet.id,
+          accountType: "USER_RESERVED",
+        },
+      ],
+    });
+
+    return {
+      newUser,
+      wallet,
+    };
   });
 
-  // create wallet of user at time of user signup
-  const wallet = await prisma.wallet.create({
-    data:{
-      userId: newUser.id
-    }
-  })
-
-  return {
-    newUser,
-    wallet
-  } 
-}
+  return result;
+};
 
 export const signin = async (body: unknown) => {
   const {data, success, error} = userSignIn.safeParse(body);
