@@ -5,37 +5,57 @@ import { marketSchema } from "./market.schema"
 
 export const createMarket = async (body: unknown, userId: string) => {
   const { data, success, error } = marketSchema.safeParse(body);
-  if(!success){
-    throw new AppError(404, error.issues[0]?.message!)
-  }
-  const user = await prisma.user.findFirst({
-    where:{ id: userId }
-  });
 
-  if(!user){
-    throw new AppError(404, "User does not exits");
+  if (!success) {
+    throw new AppError(400, error.issues[0]!.message);
   }
 
-  const isMarketExit = await prisma.market.findFirst({
-    where: { title: data.title }
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { id: true },
   });
 
-  if(isMarketExit){
-    throw new AppError(400, "Market with title name already exits.")
+  if (!user) {
+    throw new AppError(404, "User does not exist");
   }
 
-  const market = await prisma.market.create({
-    data:{
-      creatorId: userId,
-      title: data.title,
-      description: data.description,
-      expiresAt: "2027-05-15T00:11:00.000Z",
-      tradingEndsAt: "2027-05-15T00:11:00.000Z",
-      tradingStartsAt: "2027-05-15T00:11:00.000Z"
-    }
+  const isMarketExist = await prisma.market.findFirst({
+    where: { title: data.title },
   });
-  return market;
-}
+
+  if (isMarketExist) {
+    throw new AppError(409, "Market with this title already exists");
+  }
+
+  const result = await prisma.$transaction(async (tx) => {
+    // create market
+    const market = await tx.market.create({
+      data: {
+        creatorId: userId,
+        title: data.title,
+        description: data.description,
+        expiresAt: data.expiresAt,
+        tradingStartsAt: data.tradingStartsAt,
+        tradingEndsAt: data.tradingEndsAt,
+      },
+    });
+
+    // create market collateral ledger account
+    const ledgerAccount = await tx.ledgerAccount.create({
+      data: {
+        marketId: market.id,
+        accountType: "MARKET_COLLATERAL",
+      },
+    });
+
+    return {
+      market,
+      ledgerAccount,
+    };
+  });
+
+  return result;
+};
 
 
 export const getMarkets = async (userId:string) => {

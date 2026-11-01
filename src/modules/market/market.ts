@@ -8,13 +8,13 @@ export const validateMarketOpening  = (market:Market): void => {
     throw new AppError(400, "Trading start time must be in the future")
   }
 
-  if(market.tradingEndsAt <= market.tradingStartsAt){
-    throw new AppError(400, "Trading end time must be after start time.")
-  }
+  // if(market.tradingEndsAt <= market.tradingStartsAt){
+  //   throw new AppError(400, "Trading end time must be after start time.")
+  // }
 
-  if(market.expiresAt <= market.tradingEndsAt){
-    throw new AppError(400, "Expiry time must be after trading end time.")
-  }
+  // if(market.expiresAt <= market.tradingEndsAt){
+  //   throw new AppError(400, "Expiry time must be after trading end time.")
+  // }
 
   if (market.payoutPerContract <= 0) {
     throw new AppError(400, "Payout per contract must be greater than zero");
