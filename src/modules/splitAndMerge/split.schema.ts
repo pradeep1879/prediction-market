@@ -1,5 +1,9 @@
 import z from "zod";
 
-export const splitMergeSchema = z.object({
-  quantity: z.number().min(1, "Quantity can't be less than 1.")
-})
+export const splitSchema = z.object({
+  quantity: z.number().int().min(1, "Quantity must be at least 1"),
+});
+
+export const mergeSchema = z.object({
+  quantity: z.number().int().min(1, "Quantity must be at least 1"),
+});
