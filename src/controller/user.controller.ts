@@ -1,171 +1,171 @@
-import type { Request, Response } from "express";
-import { prisma } from "../db/client";
-import { userBalance, userSignIn, userSignUp } from "../types/user.types";
-import bcrypt from 'bcrypt'
-import jwt from "jsonwebtoken";
+// import type { Request, Response } from "express";
+// import { prisma } from "../db/client";
+// import { userBalance, userSignIn, userSignUp } from "../types/user.types";
+// import bcrypt from 'bcrypt'
+// import jwt from "jsonwebtoken";
 
-export const userSignup = async (req:Request, res:Response) => {
-  try {
-    const result = userSignUp.safeParse(req.body);
-    if(!result.success){
-      throw new Error("Validation error");
-    }
+// export const userSignup = async (req:Request, res:Response) => {
+//   try {
+//     const result = userSignUp.safeParse(req.body);
+//     if(!result.success){
+//       throw new Error("Validation error");
+//     }
 
-    const isUserExist = await prisma.user.findFirst({
-      where:{
-        username: result.data.username
-      }
-    });
-    if(isUserExist){
-      return res.status(400).json({
-        success: false,
-        message: "User already exits"
-      });
-    }
+//     const isUserExist = await prisma.user.findFirst({
+//       where:{
+//         username: result.data.username
+//       }
+//     });
+//     if(isUserExist){
+//       return res.status(400).json({
+//         success: false,
+//         message: "User already exits"
+//       });
+//     }
 
-    const hashedPassword = await bcrypt.hash(result.data.password, 5);
+//     const hashedPassword = await bcrypt.hash(result.data.password, 5);
 
-    const newUser = await prisma.user.create({
-      data:{
-        username: result.data.username,
-        password: hashedPassword,
-      }
-    });
+//     const newUser = await prisma.user.create({
+//       data:{
+//         username: result.data.username,
+//         password: hashedPassword,
+//       }
+//     });
 
-    res.status(200).json({
-      success: true,
-      message: "User crated Successfully",
-      user: newUser
-    });
+//     res.status(200).json({
+//       success: true,
+//       message: "User crated Successfully",
+//       user: newUser
+//     });
 
-  } catch (error:any) {
-    return res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-}
+//   } catch (error:any) {
+//     return res.status(400).json({
+//       success: false,
+//       message: error.message
+//     });
+//   }
+// }
 
-export const userSignin = async (req:Request, res:Response) => {
-  try {
-    const result = userSignIn.safeParse(req.body);
-    if(!result.success){
-      throw new Error("Validation error");
-    }
+// export const userSignin = async (req:Request, res:Response) => {
+//   try {
+//     const result = userSignIn.safeParse(req.body);
+//     if(!result.success){
+//       throw new Error("Validation error");
+//     }
 
-    const isUserExist = await prisma.user.findFirst({
-      where:{
-        username: result.data.username
-      }
-    });
-    if(!isUserExist){
-      return res.status(400).json({
-        success: false,
-        message: "User does not exit"
-      });
-    }
+//     const isUserExist = await prisma.user.findFirst({
+//       where:{
+//         username: result.data.username
+//       }
+//     });
+//     if(!isUserExist){
+//       return res.status(400).json({
+//         success: false,
+//         message: "User does not exit"
+//       });
+//     }
 
-    const hashedPassword = await bcrypt.compare(result.data.password, isUserExist.password);
-    if(!hashedPassword){
-      return res.status(400).json({
-        success: false,
-        message: "Invalid Password"
-      });
-    }
+//     const hashedPassword = await bcrypt.compare(result.data.password, isUserExist.password);
+//     if(!hashedPassword){
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid Password"
+//       });
+//     }
 
-    const token = jwt.sign({
-      userId: isUserExist.id
-    }, process.env.JWT_SECRET!)
+//     const token = jwt.sign({
+//       userId: isUserExist.id
+//     }, process.env.JWT_SECRET!)
 
-    res.status(200).json({
-      success: true,
-      message: "User signedUp successfully",
-      token: token
-    });
+//     res.status(200).json({
+//       success: true,
+//       message: "User signedUp successfully",
+//       token: token
+//     });
 
-  } catch (error:any) {
-    return res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-}
+//   } catch (error:any) {
+//     return res.status(400).json({
+//       success: false,
+//       message: error.message
+//     });
+//   }
+// }
 
-export const addBalance = async (req:Request, res:Response) => {
-  const result = userBalance.safeParse(req.body);
-  const { userId } = req;
-  if(!result.success){
-    throw new Error("Invalid balance")
-  }
-  try {
-    const user = await prisma.user.findFirst({
-      where:{
-        id: userId
-      }
-    });
-    if(!user){
-      return res.status(400).json({
-        success: false,
-        message: "User does not exit"
-      });
-    }
+// export const addBalance = async (req:Request, res:Response) => {
+//   const result = userBalance.safeParse(req.body);
+//   const { userId } = req;
+//   if(!result.success){
+//     throw new Error("Invalid balance")
+//   }
+//   try {
+//     const user = await prisma.user.findFirst({
+//       where:{
+//         id: userId
+//       }
+//     });
+//     if(!user){
+//       return res.status(400).json({
+//         success: false,
+//         message: "User does not exit"
+//       });
+//     }
 
 
-    const updateUserBalance = await prisma.user.update({
-      where:{
-        id: userId
-      },
-      data:{
-        balance: {
-          increment: result.data.balance
-        }
-      }
-    });
-    res.status(200).json({
-      success: true,
-      message: "User Balance updated",
-      user: updateUserBalance
-    });
+//     const updateUserBalance = await prisma.user.update({
+//       where:{
+//         id: userId
+//       },
+//       data:{
+//         balance: {
+//           increment: result.data.balance
+//         }
+//       }
+//     });
+//     res.status(200).json({
+//       success: true,
+//       message: "User Balance updated",
+//       user: updateUserBalance
+//     });
 
-  } catch (error:any) {
-    return res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-}
+//   } catch (error:any) {
+//     return res.status(400).json({
+//       success: false,
+//       message: error.message
+//     });
+//   }
+// }
 
-export const getUserProfile = async (req:Request, res:Response) => {
-  const { userId } = req;
-  try {
-    const isUserExist = await prisma.user.findFirst({
-      where:{
-        id: userId
-      }
-    });
-    if(!isUserExist){
-      return res.status(400).json({
-        success: false,
-        message: "User does not exits"
-      });
-    }
+// export const getUserProfile = async (req:Request, res:Response) => {
+//   const { userId } = req;
+//   try {
+//     const isUserExist = await prisma.user.findFirst({
+//       where:{
+//         id: userId
+//       }
+//     });
+//     if(!isUserExist){
+//       return res.status(400).json({
+//         success: false,
+//         message: "User does not exits"
+//       });
+//     }
 
-    const userProfile = await prisma.user.findFirst({
-      where:{
-        id: userId
-      },
-    });
+//     const userProfile = await prisma.user.findFirst({
+//       where:{
+//         id: userId
+//       },
+//     });
 
-    res.status(200).json({
-      success: true,
-      message: "User Profile",
-      user: userProfile
-    })
-  } catch (error:any) {
-    return res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-}
+//     res.status(200).json({
+//       success: true,
+//       message: "User Profile",
+//       user: userProfile
+//     })
+//   } catch (error:any) {
+//     return res.status(400).json({
+//       success: false,
+//       message: error.message
+//     });
+//   }
+// }
 
