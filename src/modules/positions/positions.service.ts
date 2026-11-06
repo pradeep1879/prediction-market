@@ -75,3 +75,10 @@ export const getUserPositions = async (
     }
   }
 }
+
+export const getPositionById = async (
+  userId:string,
+  positionId: string,
+) => {
+  
+}
