@@ -80,5 +80,32 @@ export const getPositionById = async (
   userId:string,
   positionId: string,
 ) => {
-  
+  const position = await prisma.position.findUnique({
+    where: {
+      id: positionId,
+      userId
+    },
+    include:{
+      market: {
+        select: {
+          id: true,
+          title: true,
+          status: true,
+          payoutPerContract: true,
+          resolution: true,
+        },
+      }
+    }
+  });
+
+  if(!position){
+    throw new AppError(400, "Position not found")
+  }
+
+  // calculate available contracts
+  const availableQuantity = position.quantity - position.lockedQuantity;
+  return {
+    ...position,
+    availableQuantity
+  }
 }
