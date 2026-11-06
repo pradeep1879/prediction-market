@@ -4,6 +4,7 @@ import { authMiddleware } from '../../middleware/auth.middleware';
 const router = express.Router();
 
 router.get("/", authMiddleware, positionController.getUserPositions);
+router.get("/:positionId", authMiddleware, positionController.getPositionById);
 
 export default router;
 
