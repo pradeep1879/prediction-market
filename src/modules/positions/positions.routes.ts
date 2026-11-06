@@ -3,7 +3,7 @@ import * as positionController from './positions.controller'
 import { authMiddleware } from '../../middleware/auth.middleware';
 const router = express.Router();
 
-router.post("/", authMiddleware, positionController.createPosition);
+router.get("/", authMiddleware, positionController.getUserPositions);
 
 export default router;
 

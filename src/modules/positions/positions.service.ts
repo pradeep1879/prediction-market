@@ -1,3 +1,3 @@
-export const createPosition = async () => {
+export const getUserPositions = async (userId:string, query:string) => {
   
 }
