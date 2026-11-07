@@ -11,14 +11,14 @@ export const placeOrder = async (req: Request, res: Response, next: NextFunction
       throw new AppError(400, result.error.issues[0]?.message!)
     }
 
-    const order = await orderService.placeOrder(userId, result.data);
+    const order = await orderService.placeOrder(userId!, result.data);
 
     return res.status(201).json({
       success: true,
-      message: "Your order created successfully"
+      message: "Your order created successfully",
       data: order
     })
   } catch (error) {
-    
+    next(error)
   }
 }
