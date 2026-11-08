@@ -52,3 +52,23 @@ export const getUserOrders = async(req: Request, res: Response, next: NextFuncti
     next(error)
   }
 }
+
+export const getOrderById = async (req:Request, res:Response, next:NextFunction) => {
+ try {
+  const userId = req.userId;
+  const { orderId } = req.params;
+
+  if(!orderId || typeof orderId !== "string"){
+    throw new AppError(400, "orederId is not valid.")
+  }
+
+  const order = await orderService.getOrderById(userId!, orderId);
+  return res.status(200).json({
+    success: true,
+    message: "Oreder fetched successfully",
+    data: order
+  })
+ } catch (error) {
+  next(error)
+ }
+}

@@ -292,3 +292,34 @@ export const getUserOrders = async (
     }
   }
 }
+
+export const getOrderById = async (
+  userId: string,
+  orderId: string
+) => {
+  const order = await prisma.order.findFirst({
+    where: {
+      id: orderId,
+      userId, // users can access only their own orders
+    },
+    include: {
+      market: true,
+      orderReservations: true,
+      makerTrades: true,
+      takerTrades: true,
+    },
+  });
+
+  if (!order) {
+    throw new AppError(404, "Order not found");
+  }
+
+  const remainingQuantity =
+    order.originalQuantity - order.filledQuantity;
+
+  return {
+    ...order,
+    remainingQuantity,
+  };
+};
+
