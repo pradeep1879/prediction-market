@@ -4,6 +4,7 @@ import { authMiddleware } from '../../middleware/auth.middleware';
 const router = express.Router();
 
 
-router.post("/", authMiddleware, orderController.placeOrder);
+router.post("/:marketId", authMiddleware, orderController.placeOrder);
+router.get("/:marketId", authMiddleware, orderController.getUserOrders);
 
 export default router

@@ -1,15 +1,17 @@
 import type z from "zod";
 import { prisma } from "../../db/client"
 import { AppError } from "../../utils/AppError";
-import type { placeOrderSchema } from "./order.schema";
+import type { getUserOrdersSchema, placeOrderSchema } from "./order.schema";
 
 type PlaceOrderInput = z.infer<typeof placeOrderSchema>;
+type GetUserOrdersInput = z.infer<typeof getUserOrdersSchema>;
 
 export const placeOrder = async (
   userId: string,
+  marketId: string,
   input: PlaceOrderInput
 ) => {
-  const { marketId, outcome, action, price, quantity, timeInForce } = input;
+  const { outcome, action, price, quantity, timeInForce } = input;
 
   const market = await prisma.market.findUnique({
     where: { id: marketId },
@@ -232,4 +234,61 @@ export const placeOrder = async (
     isolationLevel: "Serializable"
   }
 )
+}
+
+
+export const getUserOrders = async (
+  userId: string,
+  marketId: string,
+  query: GetUserOrdersInput
+) => {
+  const { status, outcome, action, page, limit } = query;
+
+  const where = {
+    userId,
+    ...(marketId && { marketId }),
+    ...(status && { status }),
+    ...(outcome && { outcome }),
+    ...(action && { action }),
+  };
+
+  const [orders, total] = await prisma.$transaction([
+    prisma.order.findMany({
+      where,
+      include:{
+        market:{
+          select:{
+            id: true,
+            title: true,
+            status: true,
+            payoutPerContract: true,
+          }
+        }
+      },
+      orderBy:{
+        createdAt: "desc"
+      },
+      skip: (page - 1) * limit,
+      take: limit,
+    }),
+
+    prisma.order.count({
+      where
+    })
+  ]);
+
+  const formattedOrders = orders.map((order) => ({
+    ...order,
+    remainingQuantity: order.originalQuantity - order.filledQuantity,
+  }));
+
+  return {
+    orders: formattedOrders,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPage: Math.ceil(total/limit)
+    }
+  }
 }
