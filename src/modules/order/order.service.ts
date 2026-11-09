@@ -323,3 +323,48 @@ export const getOrderById = async (
   };
 };
 
+
+export const cancelOrder = async(
+  userId: string,
+  orderId: string,
+) => {
+  const order = await prisma.order.findUnique({
+    where:{
+      id: orderId,
+      userId
+    }
+  });
+
+  if(!order){
+    throw new AppError(404, "Order not found")
+  };
+
+  if(order.status === "FILLED"){
+    throw new AppError(400, "Order already filled")
+  }
+
+  if(order.status === "CANCELLED"){
+    throw new AppError(400, "Order already cancelled")
+  }
+
+  if(order.status === "EXPIRED" || order.status === "REJECTED"){
+    throw new AppError(400, "Order can't be cancelled")
+  }
+
+  // calculate remainingQuantity
+  const remainingQuantity = order.originalQuantity - order.filledQuantity;
+
+  return prisma.$transaction(async(tx) => {
+    if(order.action === "BUY"){
+      const wallet = await tx.wallet.findUnique({
+        where:{ userId }
+      });
+
+      const cashReservation = wallet?.reservedBalance;
+
+      const remainingAmount = cashReservation - 
+    }
+  })
+
+}
+
