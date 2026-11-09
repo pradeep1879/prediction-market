@@ -324,47 +324,207 @@ export const getOrderById = async (
 };
 
 
-export const cancelOrder = async(
+export const cancelOrder = async (
   userId: string,
-  orderId: string,
+  orderId: string
 ) => {
-  const order = await prisma.order.findUnique({
-    where:{
+  const order = await prisma.order.findFirst({
+    where: {
       id: orderId,
-      userId
-    }
+      userId,
+    },
   });
 
-  if(!order){
-    throw new AppError(404, "Order not found")
-  };
-
-  if(order.status === "FILLED"){
-    throw new AppError(400, "Order already filled")
+  if (!order) {
+    throw new AppError(404, "Order not found");
   }
 
-  if(order.status === "CANCELLED"){
-    throw new AppError(400, "Order already cancelled")
+  if (order.status === "FILLED") {
+    throw new AppError(400, "Order already filled");
   }
 
-  if(order.status === "EXPIRED" || order.status === "REJECTED"){
-    throw new AppError(400, "Order can't be cancelled")
+  if (order.status === "CANCELLED") {
+    throw new AppError(400, "Order already cancelled");
   }
 
-  // calculate remainingQuantity
-  const remainingQuantity = order.originalQuantity - order.filledQuantity;
+  if (
+    order.status === "EXPIRED" ||
+    order.status === "REJECTED"
+  ) {
+    throw new AppError(400, "Order can't be cancelled");
+  }
 
-  return prisma.$transaction(async(tx) => {
-    if(order.action === "BUY"){
+  if (
+    order.status !== "OPEN" &&
+    order.status !== "PARTIALLY_FILLED"
+  ) {
+    throw new AppError(400, "Order can't be cancelled");
+  }
+
+  const remainingQuantity =
+    order.originalQuantity - order.filledQuantity;
+
+  return prisma.$transaction(async (tx) => {
+    const reservation = await tx.orderReservation.findFirst({
+      where: {
+        orderId: order.id,
+        status: {
+          in: ["ACTIVE", "PARTIALLY_RELEASED"],
+        },
+      },
+    });
+
+    if (!reservation) {
+      throw new AppError(400, "Order reservation not found");
+    }
+
+    // BUY: Release reserved cash
+    if (order.action === "BUY") {
+      const remainingAmount = order.price * remainingQuantity;
+
+      if (!reservation.walletId) {
+        throw new AppError(400, "Wallet reservation not found");
+      }
+
       const wallet = await tx.wallet.findUnique({
-        where:{ userId }
+        where: {
+          id: reservation.walletId,
+        },
       });
 
-      const cashReservation = wallet?.reservedBalance;
+      if (!wallet) {
+        throw new AppError(404, "Wallet not found");
+      }
 
-      const remainingAmount = cashReservation - 
+      if (wallet.reservedBalance < remainingAmount) {
+        throw new AppError(400, "Insufficient reserved balance");
+      }
+
+      await tx.wallet.update({
+        where: {
+          id: wallet.id,
+        },
+        data: {
+          availableBalance: {
+            increment: remainingAmount,
+          },
+          reservedBalance: {
+            decrement: remainingAmount,
+          },
+        },
+      });
+
+      // Ledger entries: Reserved -> Available
+      const [reservedAccount, availableAccount] =
+        await Promise.all([
+          tx.ledgerAccount.findFirst({
+            where: {
+              walletId: wallet.id,
+              accountType: "USER_RESERVED",
+            },
+          }),
+          tx.ledgerAccount.findFirst({
+            where: {
+              walletId: wallet.id,
+              accountType: "USER_AVAILABLE",
+            },
+          }),
+        ]);
+
+      if (!reservedAccount || !availableAccount) {
+        throw new AppError(500, "Required ledger accounts not found");
+      }
+
+      const ledgerTransaction = await tx.ledgerTransaction.create({
+        data: {
+          referenceType: "TRADE",
+          referenceId: order.id,
+          idempotencyKey: `CANCEL_ORDER_${order.id}`,
+          status: "COMPLETED",
+          postedAt: new Date(),
+        },
+      });
+
+      await tx.ledgerEntry.createMany({
+        data: [
+          {
+            transactionId: ledgerTransaction.id,
+            accountId: reservedAccount.id,
+            amount: remainingAmount,
+            direction: "DEBIT",
+          },
+          {
+            transactionId: ledgerTransaction.id,
+            accountId: availableAccount.id,
+            amount: remainingAmount,
+            direction: "CREDIT",
+          },
+        ],
+      });
+
+      await tx.orderReservation.update({
+        where: {
+          id: reservation.id,
+        },
+        data: {
+          releasedAmount: {
+            increment: remainingAmount,
+          },
+          status: "RELEASED",
+        },
+      });
     }
-  })
 
-}
+    // SELL: Release reserved contracts
+    if (order.action === "SELL") {
+      if (!reservation.positionId) {
+        throw new AppError(400, "Position reservation not found");
+      }
+
+      const position = await tx.position.findUnique({
+        where: {
+          id: reservation.positionId,
+        },
+      });
+
+      if (!position || position.lockedQuantity < remainingQuantity) {
+        throw new AppError(400, "Invalid position reservation");
+      }
+
+      await tx.position.update({
+        where: {
+          id: position.id,
+        },
+        data: {
+          lockedQuantity: {
+            decrement: remainingQuantity,
+          },
+        },
+      });
+
+      await tx.orderReservation.update({
+        where: {
+          id: reservation.id,
+        },
+        data: {
+          releasedQuantity: {
+            increment: remainingQuantity,
+          },
+          status: "RELEASED",
+        },
+      });
+    }
+
+    // Cancel the order
+    return tx.order.update({
+      where: {
+        id: order.id,
+      },
+      data: {
+        status: "CANCELLED",
+        cancelledAt: new Date(),
+      },
+    });
+  });
+};
 
