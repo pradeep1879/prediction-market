@@ -7,6 +7,7 @@ import splitMarketRouter from "./src/modules/splitAndMerge/split.routes"
 import positionsRouter from './src/modules/positions/positions.routes'
 import orderRouter from './src/modules/order/order.routes'
 import orderBookRouter from './src/modules/orderBook/orderBook.routes'
+import tradeRouter from './src/modules/trade/trade.routes'
 import { errorMiddleware } from "./src/middleware/error.middleware";
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/api/v1/markets", splitMarketRouter);
 app.use("/api/v1/positions", positionsRouter);
 app.use("/api/v1/order", orderRouter);
 app.use("/api/v1/orderBook", orderBookRouter);
+app.use("/api/v1/trades", tradeRouter);
 
 
 app.use(errorMiddleware);
