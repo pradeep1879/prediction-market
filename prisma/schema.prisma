@@ -4,242 +4,230 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider  = "prisma-client"
-  output    = "../generated/prisma"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
-
 
 // USER
 
-
 model User {
-  id                    String                    @id @default(uuid())
-  username              String                    @unique
-  password              String               
-  role                  UserRole                  @default(USER)
-  status                UserStatus                @default(ACTIVE)
+  id       String     @id @default(uuid())
+  username String     @unique
+  password String
+  role     UserRole   @default(USER)
+  status   UserStatus @default(ACTIVE)
 
-  createdAt             DateTime              @default(now())
-  updatedAt             DateTime              @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  wallet                Wallet?              
-  markets               Market[]                           @relation("MarketCreator")
-  positions             Position[]           
-  orders                Order[]              
-  splitMergeOperations  SplitMergeOperation[]
-  marketResolutions     MarketResolution[]       @relation("MarketResolver")
-  boughtTrades          Trade[]                             @relation("TradeBuyer")
-  soldTrades            Trade[]                             @relation("TradeSeller")
-  settlements           SettlementRecord[]   
+  wallet               Wallet?
+  markets              Market[]              @relation("MarketCreator")
+  positions            Position[]
+  orders               Order[]
+  splitMergeOperations SplitMergeOperation[]
+
+  resolutionsCreated   MarketResolution[] @relation("MarketResolver")
+  resolutionsConfirmed MarketResolution[] @relation("MarketResolutionConfirmer")
+
+  boughtTrades Trade[]            @relation("TradeBuyer")
+  soldTrades   Trade[]            @relation("TradeSeller")
+  settlements  SettlementRecord[]
 }
-
 
 // MARKET
 
-
 model Market {
-  id                    String                @id @default(uuid())
-  creatorId             String               
-  title                 String               
-  description           String?              
+  id          String  @id @default(uuid())
+  creatorId   String
+  title       String
+  description String?
 
-  status                MarketStatus          @default(DRAFT)
+  status MarketStatus @default(DRAFT)
 
-  payoutPerContract     Int                   @default(100)
-  minPrice              Int                   @default(1)
-  maxPrice              Int                   @default(99)
-  tickSize              Int                   @default(1)
-  minOrderQuantity      Int                   @default(1)
+  payoutPerContract Int @default(100)
+  minPrice          Int @default(1)
+  maxPrice          Int @default(99)
+  tickSize          Int @default(1)
+  minOrderQuantity  Int @default(1)
 
-  tradingStartsAt       DateTime             
-  tradingEndsAt         DateTime             
-  expiresAt             DateTime             
+  tradingStartsAt DateTime
+  tradingEndsAt   DateTime
+  expiresAt       DateTime
 
-  resolution            ResolutionType?      
+  resolution ResolutionType?
 
-  totalPairsCreated     Int                   @default(0)
-  totalPairsBurned      Int                   @default(0)
+  totalPairsCreated Int @default(0)
+  totalPairsBurned  Int @default(0)
 
-  createdAt             DateTime              @default(now())
-  updatedAt             DateTime              @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  creator               User                                  @relation("MarketCreator", fields: [creatorId], references: [id], onDelete: Restrict)
-  resolutions           MarketResolution[]   
-  ledgerAccounts        LedgerAccount[]      
-  positions             Position[]           
-  collateralPool        CollateralPool?      
-  splitMergeOperations  SplitMergeOperation[]
-  orders                Order[]              
-  trades                Trade[]              
-  settlementBatches     SettlementBatch[]    
-  settlementRecords     SettlementRecord[]   
+  creator              User                  @relation("MarketCreator", fields: [creatorId], references: [id], onDelete: Restrict)
+  resolutions          MarketResolution[]
+  ledgerAccounts       LedgerAccount[]
+  positions            Position[]
+  collateralPool       CollateralPool?
+  splitMergeOperations SplitMergeOperation[]
+  orders               Order[]
+  trades               Trade[]
+  settlementBatches    SettlementBatch[]
+  settlementRecords    SettlementRecord[]
 
   @@index([status, tradingStartsAt, tradingEndsAt])
   @@index([creatorId])
 }
 
-
 // MARKET RESOLUTION
 
-
 model MarketResolution {
-  id                String                 @id @default(uuid())
-  marketId          String                
-  resolvedBy        String                
+  id          String  @id @default(uuid())
+  marketId    String
+  resolvedBy  String
+  confirmedBy String?
 
-  outcome           ResolutionType        
-  resolutionSource  String?               
-  status            MarketResolutionStatus @default(PROPOSED)
+  outcome          ResolutionType
+  resolutionSource String?
+  status           MarketResolutionStatus @default(PROPOSED)
 
-  resolvedAt        DateTime?             
-  createdAt         DateTime               @default(now())
+  resolvedAt DateTime?
+  createdAt  DateTime  @default(now())
 
-  market            Market                 @relation(fields: [marketId], references: [id], onDelete: Restrict)
-  resolver          User                   @relation("MarketResolver", fields: [resolvedBy], references: [id], onDelete: Restrict)
+  market   Market @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  resolver User   @relation("MarketResolver", fields: [resolvedBy], references: [id], onDelete: Restrict)
 
-  settlementBatch   SettlementBatch?      
+  confirmer User? @relation("MarketResolutionConfirmer", fields: [confirmedBy], references: [id], onDelete: Restrict)
+
+  settlementBatch SettlementBatch?
 
   @@index([marketId, status])
 }
 
-
 // WALLET
 
-
 model Wallet {
-  id                 String             @id @default(uuid())
-  userId             String             @unique
+  id     String @id @default(uuid())
+  userId String @unique
 
-  availableBalance   Int                @default(0)
-  reservedBalance    Int                @default(0)
+  availableBalance Int @default(0)
+  reservedBalance  Int @default(0)
 
-  status             WalletStatus       @default(ACTIVE)
+  status WalletStatus @default(ACTIVE)
 
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  user               User               @relation(fields: [userId], references: [id], onDelete: Restrict)
-  deposits           Deposit[]         
-  withdrawals        Withdrawal[]      
-  ledgerAccounts     LedgerAccount[]   
-  orderReservations  OrderReservation[]
+  user              User               @relation(fields: [userId], references: [id], onDelete: Restrict)
+  deposits          Deposit[]
+  withdrawals       Withdrawal[]
+  ledgerAccounts    LedgerAccount[]
+  orderReservations OrderReservation[]
 }
-
 
 // DEPOSIT
 
-
 model Deposit {
-  id                 String        @id @default(uuid())
-  walletId           String       
+  id       String @id @default(uuid())
+  walletId String
 
-  amount             Int          
+  amount Int
 
-  provider           String?      
-  providerOrderId    String?       @unique
-  providerPaymentId  String?       @unique
+  provider          String?
+  providerOrderId   String? @unique
+  providerPaymentId String? @unique
 
-  status             DepositStatus @default(PENDING)
+  status DepositStatus @default(PENDING)
 
-  completedAt        DateTime?    
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @updatedAt
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
-  wallet             Wallet        @relation(fields: [walletId], references: [id], onDelete: Restrict)
+  wallet Wallet @relation(fields: [walletId], references: [id], onDelete: Restrict)
 
   @@index([walletId, status])
 }
-
 
 // WITHDRAWAL
 
-
 model Withdrawal {
-  id                     String           @id @default(uuid())
-  walletId               String          
+  id       String @id @default(uuid())
+  walletId String
 
-  amount                 Int             
+  amount Int
 
-  provider               String?         
-  providerTransactionId  String?          @unique
+  provider              String?
+  providerTransactionId String? @unique
 
-  status                 WithdrawalStatus @default(PENDING)
+  status WithdrawalStatus @default(PENDING)
 
-  requestedAt            DateTime         @default(now())
-  completedAt            DateTime?       
-  updatedAt              DateTime         @updatedAt
+  requestedAt DateTime  @default(now())
+  completedAt DateTime?
+  updatedAt   DateTime  @updatedAt
 
-  wallet                 Wallet           @relation(fields: [walletId], references: [id], onDelete: Restrict)
+  wallet Wallet @relation(fields: [walletId], references: [id], onDelete: Restrict)
 
   @@index([walletId, status])
 }
 
-
 // LEDGER ACCOUNT
 
-
 model LedgerAccount {
-  id             String              @id @default(uuid())
-  walletId       String?            
-  marketId       String?            
+  id       String  @id @default(uuid())
+  walletId String?
+  marketId String?
 
-  accountType    LedgerAccountType  
-  status         LedgerAccountStatus @default(ACTIVE)
+  accountType LedgerAccountType
+  status      LedgerAccountStatus @default(ACTIVE)
 
-  createdAt      DateTime            @default(now())
+  createdAt DateTime @default(now())
 
-  wallet         Wallet?             @relation(fields: [walletId], references: [id], onDelete: Restrict)
-  market         Market?             @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  wallet Wallet? @relation(fields: [walletId], references: [id], onDelete: Restrict)
+  market Market? @relation(fields: [marketId], references: [id], onDelete: Restrict)
 
-  ledgerEntries  LedgerEntry[]      
+  ledgerEntries LedgerEntry[]
 
   @@unique([walletId, accountType])
   @@unique([marketId, accountType])
 }
 
-
 // LEDGER TRANSACTION
 
-
 model LedgerTransaction {
-  id                   String                  @id @default(uuid())
+  id String @id @default(uuid())
 
-  referenceType        LedgerTransactionType  
-  referenceId          String                 
+  referenceType LedgerTransactionType
+  referenceId   String
 
-  idempotencyKey       String                  @unique
+  idempotencyKey String @unique
 
-  status               LedgerTransactionStatus @default(PENDING)
+  status LedgerTransactionStatus @default(PENDING)
 
-  createdAt            DateTime                @default(now())
-  postedAt             DateTime?              
-  reversedAt           DateTime?              
+  createdAt  DateTime  @default(now())
+  postedAt   DateTime?
+  reversedAt DateTime?
 
-  ledgerEntries        LedgerEntry[]          
-  splitMergeOperation  SplitMergeOperation?   
-  settlementsRecords   SettlementRecord[]     
+  ledgerEntries       LedgerEntry[]
+  splitMergeOperation SplitMergeOperation?
+  settlementsRecords  SettlementRecord[]
 }
-
 
 // LEDGER ENTRY
 
-
 model LedgerEntry {
-  id                 String            @id @default(uuid())
-  transactionId      String           
-  accountId          String           
+  id            String @id @default(uuid())
+  transactionId String
+  accountId     String
 
-  amount             Int              
-  direction          LedgerEntryType  
+  amount    Int
+  direction LedgerEntryType
 
-  createdAt          DateTime          @default(now())
+  createdAt DateTime @default(now())
 
-  ledgerTransaction  LedgerTransaction @relation(fields: [transactionId], references: [id], onDelete: Restrict)
-  account            LedgerAccount         @relation(fields: [accountId], references: [id], onDelete: Restrict)
+  ledgerTransaction LedgerTransaction @relation(fields: [transactionId], references: [id], onDelete: Restrict)
+  account           LedgerAccount     @relation(fields: [accountId], references: [id], onDelete: Restrict)
 
   @@index([accountId, createdAt])
 }
@@ -247,23 +235,23 @@ model LedgerEntry {
 // POSITION
 
 model Position {
-  id                 String             @id @default(uuid())
-  userId             String            
-  marketId           String            
+  id       String @id @default(uuid())
+  userId   String
+  marketId String
 
-  outcome            OutcomeType       
+  outcome OutcomeType
 
-  quantity           Int                @default(0)
-  lockedQuantity     Int                @default(0)
+  quantity       Int @default(0)
+  lockedQuantity Int @default(0)
 
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  user               User                 @relation(fields: [userId], references: [id], onDelete: Restrict)
-  market             Market             @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  market Market @relation(fields: [marketId], references: [id], onDelete: Restrict)
 
-  orderReservations  OrderReservation[]
-  settlementRecords  SettlementRecord[]
+  orderReservations OrderReservation[]
+  settlementRecords SettlementRecord[]
 
   @@unique([userId, marketId, outcome])
   @@index([marketId, outcome])
@@ -272,39 +260,39 @@ model Position {
 // COLLATERAL POOL
 
 model CollateralPool {
-  id            String               @id @default(uuid())
-  marketId      String               @unique
+  id       String @id @default(uuid())
+  marketId String @unique
 
-  lockedAmount  Int                  @default(0)
+  lockedAmount Int @default(0)
 
-  status        CollateralPoolStatus @default(ACTIVE)
+  status CollateralPoolStatus @default(ACTIVE)
 
-  createdAt     DateTime             @default(now())
-  updatedAt     DateTime             @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  market        Market               @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  market Market @relation(fields: [marketId], references: [id], onDelete: Restrict)
 }
 
 // SPLIT / MERGE
 
 model SplitMergeOperation {
-  id                   String                    @id @default(uuid())
-  userId               String                   
-  marketId             String                   
-  ledgerTransactionId  String                    @unique
+  id                  String @id @default(uuid())
+  userId              String
+  marketId            String
+  ledgerTransactionId String @unique
 
-  operationType        SplitMergeOperationType  
-  quantity             Int                      
-  collateralAmount     Int                      
+  operationType    SplitMergeOperationType
+  quantity         Int
+  collateralAmount Int
 
-  status               SplitMergeOperationStatus @default(PENDING)
+  status SplitMergeOperationStatus @default(PENDING)
 
-  createdAt            DateTime                  @default(now())
-  completedAt          DateTime?                
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
 
-  user                 User                      @relation(fields: [userId], references: [id], onDelete: Restrict)
-  market               Market                    @relation(fields: [marketId], references: [id], onDelete: Restrict)
-  ledgerTransaction    LedgerTransaction         @relation(fields: [ledgerTransactionId], references: [id], onDelete: Restrict)
+  user              User              @relation(fields: [userId], references: [id], onDelete: Restrict)
+  market            Market            @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  ledgerTransaction LedgerTransaction @relation(fields: [ledgerTransactionId], references: [id], onDelete: Restrict)
 
   @@index([marketId, createdAt])
   @@index([userId, createdAt])
@@ -313,38 +301,38 @@ model SplitMergeOperation {
 // ORDER
 
 model Order {
-  id                 String             @id @default(uuid())
-  userId             String            
-  marketId           String            
+  id       String @id @default(uuid())
+  userId   String
+  marketId String
 
-  outcome            OutcomeType       
-  action             OrderAction       
+  outcome OutcomeType
+  action  OrderAction
 
-  timeInForce        TimeInForce        @default(GTC)
+  timeInForce TimeInForce @default(GTC)
 
-  price              Int               
-  originalQuantity   Int               
-  filledQuantity     Int                @default(0)
+  price            Int
+  originalQuantity Int
+  filledQuantity   Int @default(0)
 
-  status             OrderStatus        @default(PENDING)
+  status OrderStatus @default(PENDING)
 
-  sequence           BigInt             @unique
+  sequence BigInt @unique
 
-  expiresAt          DateTime?         
+  expiresAt DateTime?
 
-  idempotencyKey     String            
+  idempotencyKey String
 
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
-  cancelledAt        DateTime?         
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  cancelledAt DateTime?
 
-  user               User                 @relation(fields: [userId], references: [id], onDelete: Restrict)
-  market             Market             @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  market Market @relation(fields: [marketId], references: [id], onDelete: Restrict)
 
-  orderReservations  OrderReservation[]
+  orderReservations OrderReservation[]
 
-  makerTrades        Trade[]            @relation("TradeMakerOrder")
-  takerTrades        Trade[]            @relation("TradeTakerOrder")
+  makerTrades Trade[] @relation("TradeMakerOrder")
+  takerTrades Trade[] @relation("TradeTakerOrder")
 
   @@unique([userId, idempotencyKey])
   @@index([marketId, outcome, action, status, price, sequence])
@@ -354,27 +342,27 @@ model Order {
 // ORDER RESERVATION
 
 model OrderReservation {
-  id                String                 @id @default(uuid())
-  orderId           String                
-  walletId          String?               
-  positionId        String?               
+  id         String  @id @default(uuid())
+  orderId    String
+  walletId   String?
+  positionId String?
 
-  reservationType   OrderReservationType  
+  reservationType OrderReservationType
 
-  reservedAmount    Int?                  
-  reservedQuantity  Int?                  
+  reservedAmount   Int?
+  reservedQuantity Int?
 
-  releasedAmount    Int                    @default(0)
-  releasedQuantity  Int                    @default(0)
+  releasedAmount   Int @default(0)
+  releasedQuantity Int @default(0)
 
-  status            OrderReservationStatus @default(ACTIVE)
+  status OrderReservationStatus @default(ACTIVE)
 
-  createdAt         DateTime               @default(now())
-  updatedAt         DateTime               @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  order             Order                      @relation(fields: [orderId], references: [id], onDelete: Restrict)
-  wallet            Wallet?                  @relation(fields: [walletId], references: [id], onDelete: Restrict)
-  position          Position?              @relation(fields: [positionId], references: [id], onDelete: Restrict)
+  order    Order     @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  wallet   Wallet?   @relation(fields: [walletId], references: [id], onDelete: Restrict)
+  position Position? @relation(fields: [positionId], references: [id], onDelete: Restrict)
 
   @@index([orderId, status])
 }
@@ -382,33 +370,33 @@ model OrderReservation {
 // TRADE
 
 model Trade {
-  id              String      @id @default(uuid())
+  id String @id @default(uuid())
 
-  marketId        String     
+  marketId String
 
-  outcome         OutcomeType
+  outcome OutcomeType
 
-  makerOrderId    String     
-  takerOrderId    String     
+  makerOrderId String
+  takerOrderId String
 
-  buyerId         String     
-  sellerId        String     
+  buyerId  String
+  sellerId String
 
-  executionPrice  Int        
-  quantity        Int        
+  executionPrice Int
+  quantity       Int
 
-  status          TradeStatus @default(EXECUTED)
+  status TradeStatus @default(EXECUTED)
 
-  executedAt      DateTime    @default(now())
-  createdAt       DateTime    @default(now())
+  executedAt DateTime @default(now())
+  createdAt  DateTime @default(now())
 
-  market          Market      @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  market Market @relation(fields: [marketId], references: [id], onDelete: Restrict)
 
-  makerOrder      Order       @relation("TradeMakerOrder", fields: [makerOrderId], references: [id], onDelete: Restrict)
-  takerOrder      Order       @relation("TradeTakerOrder", fields: [takerOrderId], references: [id], onDelete: Restrict)
+  makerOrder Order @relation("TradeMakerOrder", fields: [makerOrderId], references: [id], onDelete: Restrict)
+  takerOrder Order @relation("TradeTakerOrder", fields: [takerOrderId], references: [id], onDelete: Restrict)
 
-  buyer           User        @relation("TradeBuyer", fields: [buyerId], references: [id], onDelete: Restrict)
-  seller          User        @relation("TradeSeller", fields: [sellerId], references: [id], onDelete: Restrict)
+  buyer  User @relation("TradeBuyer", fields: [buyerId], references: [id], onDelete: Restrict)
+  seller User @relation("TradeSeller", fields: [sellerId], references: [id], onDelete: Restrict)
 
   @@index([marketId, outcome, executedAt])
   @@index([buyerId, executedAt])
@@ -418,55 +406,54 @@ model Trade {
 // SETTLEMENT BATCH
 
 model SettlementBatch {
-  id                    String                @id @default(uuid())
-  marketId              String               
-  resolutionId          String                @unique
+  id           String @id @default(uuid())
+  marketId     String
+  resolutionId String @unique
 
-  status                SettlementBatchStatus @default(PENDING)
+  status SettlementBatchStatus @default(PENDING)
 
-  totalWinningQuantity  Int                   @default(0)
-  totalPayoutAmount     Int                   @default(0)
+  totalWinningQuantity Int @default(0)
+  totalPayoutAmount    Int @default(0)
 
-  startedAt             DateTime?            
-  completedAt           DateTime?            
-  createdAt             DateTime              @default(now())
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
 
-  market                Market                          @relation(fields: [marketId], references: [id], onDelete: Restrict)
-  resolution            MarketResolution      @relation(fields: [resolutionId], references: [id], onDelete: Restrict)
+  market     Market           @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  resolution MarketResolution @relation(fields: [resolutionId], references: [id], onDelete: Restrict)
 
-  settlementRecords     SettlementRecord[]   
+  settlementRecords SettlementRecord[]
 
   @@index([marketId])
 }
 
-
 model SettlementRecord {
-  id                   String                 @id @default(uuid())
-  batchId              String                
-  marketId             String                
-  userId               String                
-  positionId           String                
+  id         String @id @default(uuid())
+  batchId    String
+  marketId   String
+  userId     String
+  positionId String
 
-  ledgerTransactionId  String?               
+  ledgerTransactionId String?
 
-  outcome              OutcomeType           
+  outcome OutcomeType
 
-  quantity             Int                   
-  payoutPerContract    Int                   
-  payoutAmount         Int                   
+  quantity          Int
+  payoutPerContract Int
+  payoutAmount      Int
 
-  status               SettlementRecordStatus @default(PENDING)
+  status SettlementRecordStatus @default(PENDING)
 
-  settledAt            DateTime?             
-  createdAt            DateTime               @default(now())
+  settledAt DateTime?
+  createdAt DateTime  @default(now())
 
-  batch                SettlementBatch        @relation(fields: [batchId], references: [id], onDelete: Restrict)
+  batch SettlementBatch @relation(fields: [batchId], references: [id], onDelete: Restrict)
 
-  position             Position               @relation(fields: [positionId], references: [id], onDelete: Restrict)
-  market               Market                 @relation(fields: [marketId], references: [id], onDelete: Restrict)
-  user                 User                     @relation(fields: [userId], references: [id], onDelete: Restrict)
+  position Position @relation(fields: [positionId], references: [id], onDelete: Restrict)
+  market   Market   @relation(fields: [marketId], references: [id], onDelete: Restrict)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Restrict)
 
-  ledgerTransaction    LedgerTransaction?     @relation(fields: [ledgerTransactionId], references: [id], onDelete: Restrict)
+  ledgerTransaction LedgerTransaction? @relation(fields: [ledgerTransactionId], references: [id], onDelete: Restrict)
 
   @@unique([batchId, positionId])
   @@index([status])
