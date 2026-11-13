@@ -1,7 +1,14 @@
 import type { Prisma } from "../../../generated/prisma/client";
 import { prisma } from "../../db/client";
+import { AppError } from "../../utils/AppError";
 
 type GetUserTradesInput = {
+  outcome?: "YES" | "NO";
+  page: number;
+  limit: number;
+}
+
+type getMarketTradesInput = {
   outcome?: "YES" | "NO";
   page: number;
   limit: number;
@@ -61,6 +68,67 @@ export const getUserTrades = async (
   }));
 
   return {
+    trades: formattedTrades,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total/limit)
+    }
+  }
+}
+
+
+export const getMarketTrades = async (
+  marketId: string,
+  query: getMarketTradesInput
+) => {
+  const { outcome, page, limit } = query;
+  const market = await prisma.market.findUnique({
+    where:{ id: marketId }
+  })
+
+  if(!market){
+    throw new AppError(404, "Market is not present.")
+  }
+
+  const where: Prisma.TradeWhereInput = {
+    ...(marketId && { marketId }),
+    ...(outcome && { outcome }),
+    status: "EXECUTED"
+  }
+
+  const [trades, total] = await prisma.$transaction([
+    prisma.trade.findMany({
+      where,
+      select:{
+        id: true,
+        outcome: true,
+        executionPrice: true,
+        quantity: true,
+        executedAt: true,
+      },
+      orderBy:{
+        executedAt: "desc"
+      },
+      skip: (page - 1) * limit,
+      take: limit,
+    }),
+
+    prisma.trade.count({
+      where
+    }),
+  ])
+
+  // format trades
+  const formattedTrades = trades.map((trade) => ({
+    ...trade,
+    totalAmout: trade.executionPrice * trade.quantity
+  }));
+
+
+  return {
+    market,
     trades: formattedTrades,
     pagination: {
       total,

@@ -5,5 +5,6 @@ const router = express.Router();
 
 
 router.get("/", authMiddleware, tradeController.getUserTrades);
+router.get("/markets/:marketId",  tradeController.getMarketTrades);
 
 export default router;
