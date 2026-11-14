@@ -28,6 +28,7 @@ export type MarketResolutionMinAggregateOutputType = {
   id: string | null
   marketId: string | null
   resolvedBy: string | null
+  confirmedBy: string | null
   outcome: $Enums.ResolutionType | null
   resolutionSource: string | null
   status: $Enums.MarketResolutionStatus | null
@@ -39,6 +40,7 @@ export type MarketResolutionMaxAggregateOutputType = {
   id: string | null
   marketId: string | null
   resolvedBy: string | null
+  confirmedBy: string | null
   outcome: $Enums.ResolutionType | null
   resolutionSource: string | null
   status: $Enums.MarketResolutionStatus | null
@@ -50,6 +52,7 @@ export type MarketResolutionCountAggregateOutputType = {
   id: number
   marketId: number
   resolvedBy: number
+  confirmedBy: number
   outcome: number
   resolutionSource: number
   status: number
@@ -63,6 +66,7 @@ export type MarketResolutionMinAggregateInputType = {
   id?: true
   marketId?: true
   resolvedBy?: true
+  confirmedBy?: true
   outcome?: true
   resolutionSource?: true
   status?: true
@@ -74,6 +78,7 @@ export type MarketResolutionMaxAggregateInputType = {
   id?: true
   marketId?: true
   resolvedBy?: true
+  confirmedBy?: true
   outcome?: true
   resolutionSource?: true
   status?: true
@@ -85,6 +90,7 @@ export type MarketResolutionCountAggregateInputType = {
   id?: true
   marketId?: true
   resolvedBy?: true
+  confirmedBy?: true
   outcome?: true
   resolutionSource?: true
   status?: true
@@ -169,6 +175,7 @@ export type MarketResolutionGroupByOutputType = {
   id: string
   marketId: string
   resolvedBy: string
+  confirmedBy: string | null
   outcome: $Enums.ResolutionType
   resolutionSource: string | null
   status: $Enums.MarketResolutionStatus
@@ -201,6 +208,7 @@ export type MarketResolutionWhereInput = {
   id?: Prisma.StringFilter<"MarketResolution"> | string
   marketId?: Prisma.StringFilter<"MarketResolution"> | string
   resolvedBy?: Prisma.StringFilter<"MarketResolution"> | string
+  confirmedBy?: Prisma.StringNullableFilter<"MarketResolution"> | string | null
   outcome?: Prisma.EnumResolutionTypeFilter<"MarketResolution"> | $Enums.ResolutionType
   resolutionSource?: Prisma.StringNullableFilter<"MarketResolution"> | string | null
   status?: Prisma.EnumMarketResolutionStatusFilter<"MarketResolution"> | $Enums.MarketResolutionStatus
@@ -208,6 +216,7 @@ export type MarketResolutionWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"MarketResolution"> | Date | string
   market?: Prisma.XOR<Prisma.MarketScalarRelationFilter, Prisma.MarketWhereInput>
   resolver?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  confirmer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   settlementBatch?: Prisma.XOR<Prisma.SettlementBatchNullableScalarRelationFilter, Prisma.SettlementBatchWhereInput> | null
 }
 
@@ -215,6 +224,7 @@ export type MarketResolutionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   marketId?: Prisma.SortOrder
   resolvedBy?: Prisma.SortOrder
+  confirmedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   outcome?: Prisma.SortOrder
   resolutionSource?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -222,6 +232,7 @@ export type MarketResolutionOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   market?: Prisma.MarketOrderByWithRelationInput
   resolver?: Prisma.UserOrderByWithRelationInput
+  confirmer?: Prisma.UserOrderByWithRelationInput
   settlementBatch?: Prisma.SettlementBatchOrderByWithRelationInput
 }
 
@@ -232,6 +243,7 @@ export type MarketResolutionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MarketResolutionWhereInput | Prisma.MarketResolutionWhereInput[]
   marketId?: Prisma.StringFilter<"MarketResolution"> | string
   resolvedBy?: Prisma.StringFilter<"MarketResolution"> | string
+  confirmedBy?: Prisma.StringNullableFilter<"MarketResolution"> | string | null
   outcome?: Prisma.EnumResolutionTypeFilter<"MarketResolution"> | $Enums.ResolutionType
   resolutionSource?: Prisma.StringNullableFilter<"MarketResolution"> | string | null
   status?: Prisma.EnumMarketResolutionStatusFilter<"MarketResolution"> | $Enums.MarketResolutionStatus
@@ -239,6 +251,7 @@ export type MarketResolutionWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"MarketResolution"> | Date | string
   market?: Prisma.XOR<Prisma.MarketScalarRelationFilter, Prisma.MarketWhereInput>
   resolver?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  confirmer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   settlementBatch?: Prisma.XOR<Prisma.SettlementBatchNullableScalarRelationFilter, Prisma.SettlementBatchWhereInput> | null
 }, "id">
 
@@ -246,6 +259,7 @@ export type MarketResolutionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   marketId?: Prisma.SortOrder
   resolvedBy?: Prisma.SortOrder
+  confirmedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   outcome?: Prisma.SortOrder
   resolutionSource?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -263,6 +277,7 @@ export type MarketResolutionScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"MarketResolution"> | string
   marketId?: Prisma.StringWithAggregatesFilter<"MarketResolution"> | string
   resolvedBy?: Prisma.StringWithAggregatesFilter<"MarketResolution"> | string
+  confirmedBy?: Prisma.StringNullableWithAggregatesFilter<"MarketResolution"> | string | null
   outcome?: Prisma.EnumResolutionTypeWithAggregatesFilter<"MarketResolution"> | $Enums.ResolutionType
   resolutionSource?: Prisma.StringNullableWithAggregatesFilter<"MarketResolution"> | string | null
   status?: Prisma.EnumMarketResolutionStatusWithAggregatesFilter<"MarketResolution"> | $Enums.MarketResolutionStatus
@@ -278,7 +293,8 @@ export type MarketResolutionCreateInput = {
   resolvedAt?: Date | string | null
   createdAt?: Date | string
   market: Prisma.MarketCreateNestedOneWithoutResolutionsInput
-  resolver: Prisma.UserCreateNestedOneWithoutMarketResolutionsInput
+  resolver: Prisma.UserCreateNestedOneWithoutResolutionsCreatedInput
+  confirmer?: Prisma.UserCreateNestedOneWithoutResolutionsConfirmedInput
   settlementBatch?: Prisma.SettlementBatchCreateNestedOneWithoutResolutionInput
 }
 
@@ -286,6 +302,7 @@ export type MarketResolutionUncheckedCreateInput = {
   id?: string
   marketId: string
   resolvedBy: string
+  confirmedBy?: string | null
   outcome: $Enums.ResolutionType
   resolutionSource?: string | null
   status?: $Enums.MarketResolutionStatus
@@ -302,7 +319,8 @@ export type MarketResolutionUpdateInput = {
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   market?: Prisma.MarketUpdateOneRequiredWithoutResolutionsNestedInput
-  resolver?: Prisma.UserUpdateOneRequiredWithoutMarketResolutionsNestedInput
+  resolver?: Prisma.UserUpdateOneRequiredWithoutResolutionsCreatedNestedInput
+  confirmer?: Prisma.UserUpdateOneWithoutResolutionsConfirmedNestedInput
   settlementBatch?: Prisma.SettlementBatchUpdateOneWithoutResolutionNestedInput
 }
 
@@ -310,6 +328,7 @@ export type MarketResolutionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   marketId?: Prisma.StringFieldUpdateOperationsInput | string
   resolvedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
   resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
@@ -322,6 +341,7 @@ export type MarketResolutionCreateManyInput = {
   id?: string
   marketId: string
   resolvedBy: string
+  confirmedBy?: string | null
   outcome: $Enums.ResolutionType
   resolutionSource?: string | null
   status?: $Enums.MarketResolutionStatus
@@ -342,6 +362,7 @@ export type MarketResolutionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   marketId?: Prisma.StringFieldUpdateOperationsInput | string
   resolvedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
   resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
@@ -363,6 +384,7 @@ export type MarketResolutionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   marketId?: Prisma.SortOrder
   resolvedBy?: Prisma.SortOrder
+  confirmedBy?: Prisma.SortOrder
   outcome?: Prisma.SortOrder
   resolutionSource?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -374,6 +396,7 @@ export type MarketResolutionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   marketId?: Prisma.SortOrder
   resolvedBy?: Prisma.SortOrder
+  confirmedBy?: Prisma.SortOrder
   outcome?: Prisma.SortOrder
   resolutionSource?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -385,6 +408,7 @@ export type MarketResolutionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   marketId?: Prisma.SortOrder
   resolvedBy?: Prisma.SortOrder
+  confirmedBy?: Prisma.SortOrder
   outcome?: Prisma.SortOrder
   resolutionSource?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -404,10 +428,24 @@ export type MarketResolutionCreateNestedManyWithoutResolverInput = {
   connect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
 }
 
+export type MarketResolutionCreateNestedManyWithoutConfirmerInput = {
+  create?: Prisma.XOR<Prisma.MarketResolutionCreateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput> | Prisma.MarketResolutionCreateWithoutConfirmerInput[] | Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput[]
+  connectOrCreate?: Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput | Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput[]
+  createMany?: Prisma.MarketResolutionCreateManyConfirmerInputEnvelope
+  connect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+}
+
 export type MarketResolutionUncheckedCreateNestedManyWithoutResolverInput = {
   create?: Prisma.XOR<Prisma.MarketResolutionCreateWithoutResolverInput, Prisma.MarketResolutionUncheckedCreateWithoutResolverInput> | Prisma.MarketResolutionCreateWithoutResolverInput[] | Prisma.MarketResolutionUncheckedCreateWithoutResolverInput[]
   connectOrCreate?: Prisma.MarketResolutionCreateOrConnectWithoutResolverInput | Prisma.MarketResolutionCreateOrConnectWithoutResolverInput[]
   createMany?: Prisma.MarketResolutionCreateManyResolverInputEnvelope
+  connect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+}
+
+export type MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput = {
+  create?: Prisma.XOR<Prisma.MarketResolutionCreateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput> | Prisma.MarketResolutionCreateWithoutConfirmerInput[] | Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput[]
+  connectOrCreate?: Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput | Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput[]
+  createMany?: Prisma.MarketResolutionCreateManyConfirmerInputEnvelope
   connect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
 }
 
@@ -425,6 +463,20 @@ export type MarketResolutionUpdateManyWithoutResolverNestedInput = {
   deleteMany?: Prisma.MarketResolutionScalarWhereInput | Prisma.MarketResolutionScalarWhereInput[]
 }
 
+export type MarketResolutionUpdateManyWithoutConfirmerNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketResolutionCreateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput> | Prisma.MarketResolutionCreateWithoutConfirmerInput[] | Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput[]
+  connectOrCreate?: Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput | Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput[]
+  upsert?: Prisma.MarketResolutionUpsertWithWhereUniqueWithoutConfirmerInput | Prisma.MarketResolutionUpsertWithWhereUniqueWithoutConfirmerInput[]
+  createMany?: Prisma.MarketResolutionCreateManyConfirmerInputEnvelope
+  set?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  disconnect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  delete?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  connect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  update?: Prisma.MarketResolutionUpdateWithWhereUniqueWithoutConfirmerInput | Prisma.MarketResolutionUpdateWithWhereUniqueWithoutConfirmerInput[]
+  updateMany?: Prisma.MarketResolutionUpdateManyWithWhereWithoutConfirmerInput | Prisma.MarketResolutionUpdateManyWithWhereWithoutConfirmerInput[]
+  deleteMany?: Prisma.MarketResolutionScalarWhereInput | Prisma.MarketResolutionScalarWhereInput[]
+}
+
 export type MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput = {
   create?: Prisma.XOR<Prisma.MarketResolutionCreateWithoutResolverInput, Prisma.MarketResolutionUncheckedCreateWithoutResolverInput> | Prisma.MarketResolutionCreateWithoutResolverInput[] | Prisma.MarketResolutionUncheckedCreateWithoutResolverInput[]
   connectOrCreate?: Prisma.MarketResolutionCreateOrConnectWithoutResolverInput | Prisma.MarketResolutionCreateOrConnectWithoutResolverInput[]
@@ -436,6 +488,20 @@ export type MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput = {
   connect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
   update?: Prisma.MarketResolutionUpdateWithWhereUniqueWithoutResolverInput | Prisma.MarketResolutionUpdateWithWhereUniqueWithoutResolverInput[]
   updateMany?: Prisma.MarketResolutionUpdateManyWithWhereWithoutResolverInput | Prisma.MarketResolutionUpdateManyWithWhereWithoutResolverInput[]
+  deleteMany?: Prisma.MarketResolutionScalarWhereInput | Prisma.MarketResolutionScalarWhereInput[]
+}
+
+export type MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput = {
+  create?: Prisma.XOR<Prisma.MarketResolutionCreateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput> | Prisma.MarketResolutionCreateWithoutConfirmerInput[] | Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput[]
+  connectOrCreate?: Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput | Prisma.MarketResolutionCreateOrConnectWithoutConfirmerInput[]
+  upsert?: Prisma.MarketResolutionUpsertWithWhereUniqueWithoutConfirmerInput | Prisma.MarketResolutionUpsertWithWhereUniqueWithoutConfirmerInput[]
+  createMany?: Prisma.MarketResolutionCreateManyConfirmerInputEnvelope
+  set?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  disconnect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  delete?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  connect?: Prisma.MarketResolutionWhereUniqueInput | Prisma.MarketResolutionWhereUniqueInput[]
+  update?: Prisma.MarketResolutionUpdateWithWhereUniqueWithoutConfirmerInput | Prisma.MarketResolutionUpdateWithWhereUniqueWithoutConfirmerInput[]
+  updateMany?: Prisma.MarketResolutionUpdateManyWithWhereWithoutConfirmerInput | Prisma.MarketResolutionUpdateManyWithWhereWithoutConfirmerInput[]
   deleteMany?: Prisma.MarketResolutionScalarWhereInput | Prisma.MarketResolutionScalarWhereInput[]
 }
 
@@ -515,12 +581,14 @@ export type MarketResolutionCreateWithoutResolverInput = {
   resolvedAt?: Date | string | null
   createdAt?: Date | string
   market: Prisma.MarketCreateNestedOneWithoutResolutionsInput
+  confirmer?: Prisma.UserCreateNestedOneWithoutResolutionsConfirmedInput
   settlementBatch?: Prisma.SettlementBatchCreateNestedOneWithoutResolutionInput
 }
 
 export type MarketResolutionUncheckedCreateWithoutResolverInput = {
   id?: string
   marketId: string
+  confirmedBy?: string | null
   outcome: $Enums.ResolutionType
   resolutionSource?: string | null
   status?: $Enums.MarketResolutionStatus
@@ -536,6 +604,40 @@ export type MarketResolutionCreateOrConnectWithoutResolverInput = {
 
 export type MarketResolutionCreateManyResolverInputEnvelope = {
   data: Prisma.MarketResolutionCreateManyResolverInput | Prisma.MarketResolutionCreateManyResolverInput[]
+  skipDuplicates?: boolean
+}
+
+export type MarketResolutionCreateWithoutConfirmerInput = {
+  id?: string
+  outcome: $Enums.ResolutionType
+  resolutionSource?: string | null
+  status?: $Enums.MarketResolutionStatus
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  market: Prisma.MarketCreateNestedOneWithoutResolutionsInput
+  resolver: Prisma.UserCreateNestedOneWithoutResolutionsCreatedInput
+  settlementBatch?: Prisma.SettlementBatchCreateNestedOneWithoutResolutionInput
+}
+
+export type MarketResolutionUncheckedCreateWithoutConfirmerInput = {
+  id?: string
+  marketId: string
+  resolvedBy: string
+  outcome: $Enums.ResolutionType
+  resolutionSource?: string | null
+  status?: $Enums.MarketResolutionStatus
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  settlementBatch?: Prisma.SettlementBatchUncheckedCreateNestedOneWithoutResolutionInput
+}
+
+export type MarketResolutionCreateOrConnectWithoutConfirmerInput = {
+  where: Prisma.MarketResolutionWhereUniqueInput
+  create: Prisma.XOR<Prisma.MarketResolutionCreateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput>
+}
+
+export type MarketResolutionCreateManyConfirmerInputEnvelope = {
+  data: Prisma.MarketResolutionCreateManyConfirmerInput | Prisma.MarketResolutionCreateManyConfirmerInput[]
   skipDuplicates?: boolean
 }
 
@@ -562,11 +664,28 @@ export type MarketResolutionScalarWhereInput = {
   id?: Prisma.StringFilter<"MarketResolution"> | string
   marketId?: Prisma.StringFilter<"MarketResolution"> | string
   resolvedBy?: Prisma.StringFilter<"MarketResolution"> | string
+  confirmedBy?: Prisma.StringNullableFilter<"MarketResolution"> | string | null
   outcome?: Prisma.EnumResolutionTypeFilter<"MarketResolution"> | $Enums.ResolutionType
   resolutionSource?: Prisma.StringNullableFilter<"MarketResolution"> | string | null
   status?: Prisma.EnumMarketResolutionStatusFilter<"MarketResolution"> | $Enums.MarketResolutionStatus
   resolvedAt?: Prisma.DateTimeNullableFilter<"MarketResolution"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"MarketResolution"> | Date | string
+}
+
+export type MarketResolutionUpsertWithWhereUniqueWithoutConfirmerInput = {
+  where: Prisma.MarketResolutionWhereUniqueInput
+  update: Prisma.XOR<Prisma.MarketResolutionUpdateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedUpdateWithoutConfirmerInput>
+  create: Prisma.XOR<Prisma.MarketResolutionCreateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedCreateWithoutConfirmerInput>
+}
+
+export type MarketResolutionUpdateWithWhereUniqueWithoutConfirmerInput = {
+  where: Prisma.MarketResolutionWhereUniqueInput
+  data: Prisma.XOR<Prisma.MarketResolutionUpdateWithoutConfirmerInput, Prisma.MarketResolutionUncheckedUpdateWithoutConfirmerInput>
+}
+
+export type MarketResolutionUpdateManyWithWhereWithoutConfirmerInput = {
+  where: Prisma.MarketResolutionScalarWhereInput
+  data: Prisma.XOR<Prisma.MarketResolutionUpdateManyMutationInput, Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerInput>
 }
 
 export type MarketResolutionCreateWithoutMarketInput = {
@@ -576,13 +695,15 @@ export type MarketResolutionCreateWithoutMarketInput = {
   status?: $Enums.MarketResolutionStatus
   resolvedAt?: Date | string | null
   createdAt?: Date | string
-  resolver: Prisma.UserCreateNestedOneWithoutMarketResolutionsInput
+  resolver: Prisma.UserCreateNestedOneWithoutResolutionsCreatedInput
+  confirmer?: Prisma.UserCreateNestedOneWithoutResolutionsConfirmedInput
   settlementBatch?: Prisma.SettlementBatchCreateNestedOneWithoutResolutionInput
 }
 
 export type MarketResolutionUncheckedCreateWithoutMarketInput = {
   id?: string
   resolvedBy: string
+  confirmedBy?: string | null
   outcome: $Enums.ResolutionType
   resolutionSource?: string | null
   status?: $Enums.MarketResolutionStatus
@@ -625,13 +746,15 @@ export type MarketResolutionCreateWithoutSettlementBatchInput = {
   resolvedAt?: Date | string | null
   createdAt?: Date | string
   market: Prisma.MarketCreateNestedOneWithoutResolutionsInput
-  resolver: Prisma.UserCreateNestedOneWithoutMarketResolutionsInput
+  resolver: Prisma.UserCreateNestedOneWithoutResolutionsCreatedInput
+  confirmer?: Prisma.UserCreateNestedOneWithoutResolutionsConfirmedInput
 }
 
 export type MarketResolutionUncheckedCreateWithoutSettlementBatchInput = {
   id?: string
   marketId: string
   resolvedBy: string
+  confirmedBy?: string | null
   outcome: $Enums.ResolutionType
   resolutionSource?: string | null
   status?: $Enums.MarketResolutionStatus
@@ -663,13 +786,15 @@ export type MarketResolutionUpdateWithoutSettlementBatchInput = {
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   market?: Prisma.MarketUpdateOneRequiredWithoutResolutionsNestedInput
-  resolver?: Prisma.UserUpdateOneRequiredWithoutMarketResolutionsNestedInput
+  resolver?: Prisma.UserUpdateOneRequiredWithoutResolutionsCreatedNestedInput
+  confirmer?: Prisma.UserUpdateOneWithoutResolutionsConfirmedNestedInput
 }
 
 export type MarketResolutionUncheckedUpdateWithoutSettlementBatchInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   marketId?: Prisma.StringFieldUpdateOperationsInput | string
   resolvedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
   resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
@@ -680,6 +805,18 @@ export type MarketResolutionUncheckedUpdateWithoutSettlementBatchInput = {
 export type MarketResolutionCreateManyResolverInput = {
   id?: string
   marketId: string
+  confirmedBy?: string | null
+  outcome: $Enums.ResolutionType
+  resolutionSource?: string | null
+  status?: $Enums.MarketResolutionStatus
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type MarketResolutionCreateManyConfirmerInput = {
+  id?: string
+  marketId: string
+  resolvedBy: string
   outcome: $Enums.ResolutionType
   resolutionSource?: string | null
   status?: $Enums.MarketResolutionStatus
@@ -695,12 +832,14 @@ export type MarketResolutionUpdateWithoutResolverInput = {
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   market?: Prisma.MarketUpdateOneRequiredWithoutResolutionsNestedInput
+  confirmer?: Prisma.UserUpdateOneWithoutResolutionsConfirmedNestedInput
   settlementBatch?: Prisma.SettlementBatchUpdateOneWithoutResolutionNestedInput
 }
 
 export type MarketResolutionUncheckedUpdateWithoutResolverInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   marketId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
   resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
@@ -712,6 +851,42 @@ export type MarketResolutionUncheckedUpdateWithoutResolverInput = {
 export type MarketResolutionUncheckedUpdateManyWithoutResolverInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   marketId?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
+  resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MarketResolutionUpdateWithoutConfirmerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
+  resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  market?: Prisma.MarketUpdateOneRequiredWithoutResolutionsNestedInput
+  resolver?: Prisma.UserUpdateOneRequiredWithoutResolutionsCreatedNestedInput
+  settlementBatch?: Prisma.SettlementBatchUpdateOneWithoutResolutionNestedInput
+}
+
+export type MarketResolutionUncheckedUpdateWithoutConfirmerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  marketId?: Prisma.StringFieldUpdateOperationsInput | string
+  resolvedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
+  resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  settlementBatch?: Prisma.SettlementBatchUncheckedUpdateOneWithoutResolutionNestedInput
+}
+
+export type MarketResolutionUncheckedUpdateManyWithoutConfirmerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  marketId?: Prisma.StringFieldUpdateOperationsInput | string
+  resolvedBy?: Prisma.StringFieldUpdateOperationsInput | string
   outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
   resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
@@ -722,6 +897,7 @@ export type MarketResolutionUncheckedUpdateManyWithoutResolverInput = {
 export type MarketResolutionCreateManyMarketInput = {
   id?: string
   resolvedBy: string
+  confirmedBy?: string | null
   outcome: $Enums.ResolutionType
   resolutionSource?: string | null
   status?: $Enums.MarketResolutionStatus
@@ -736,13 +912,15 @@ export type MarketResolutionUpdateWithoutMarketInput = {
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  resolver?: Prisma.UserUpdateOneRequiredWithoutMarketResolutionsNestedInput
+  resolver?: Prisma.UserUpdateOneRequiredWithoutResolutionsCreatedNestedInput
+  confirmer?: Prisma.UserUpdateOneWithoutResolutionsConfirmedNestedInput
   settlementBatch?: Prisma.SettlementBatchUpdateOneWithoutResolutionNestedInput
 }
 
 export type MarketResolutionUncheckedUpdateWithoutMarketInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   resolvedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
   resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
@@ -754,6 +932,7 @@ export type MarketResolutionUncheckedUpdateWithoutMarketInput = {
 export type MarketResolutionUncheckedUpdateManyWithoutMarketInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   resolvedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   outcome?: Prisma.EnumResolutionTypeFieldUpdateOperationsInput | $Enums.ResolutionType
   resolutionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumMarketResolutionStatusFieldUpdateOperationsInput | $Enums.MarketResolutionStatus
@@ -767,6 +946,7 @@ export type MarketResolutionSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   marketId?: boolean
   resolvedBy?: boolean
+  confirmedBy?: boolean
   outcome?: boolean
   resolutionSource?: boolean
   status?: boolean
@@ -774,6 +954,7 @@ export type MarketResolutionSelect<ExtArgs extends runtime.Types.Extensions.Inte
   createdAt?: boolean
   market?: boolean | Prisma.MarketDefaultArgs<ExtArgs>
   resolver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  confirmer?: boolean | Prisma.MarketResolution$confirmerArgs<ExtArgs>
   settlementBatch?: boolean | Prisma.MarketResolution$settlementBatchArgs<ExtArgs>
 }, ExtArgs["result"]["marketResolution"]>
 
@@ -781,6 +962,7 @@ export type MarketResolutionSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   marketId?: boolean
   resolvedBy?: boolean
+  confirmedBy?: boolean
   outcome?: boolean
   resolutionSource?: boolean
   status?: boolean
@@ -788,12 +970,14 @@ export type MarketResolutionSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   createdAt?: boolean
   market?: boolean | Prisma.MarketDefaultArgs<ExtArgs>
   resolver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  confirmer?: boolean | Prisma.MarketResolution$confirmerArgs<ExtArgs>
 }, ExtArgs["result"]["marketResolution"]>
 
 export type MarketResolutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   marketId?: boolean
   resolvedBy?: boolean
+  confirmedBy?: boolean
   outcome?: boolean
   resolutionSource?: boolean
   status?: boolean
@@ -801,12 +985,14 @@ export type MarketResolutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   createdAt?: boolean
   market?: boolean | Prisma.MarketDefaultArgs<ExtArgs>
   resolver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  confirmer?: boolean | Prisma.MarketResolution$confirmerArgs<ExtArgs>
 }, ExtArgs["result"]["marketResolution"]>
 
 export type MarketResolutionSelectScalar = {
   id?: boolean
   marketId?: boolean
   resolvedBy?: boolean
+  confirmedBy?: boolean
   outcome?: boolean
   resolutionSource?: boolean
   status?: boolean
@@ -814,19 +1000,22 @@ export type MarketResolutionSelectScalar = {
   createdAt?: boolean
 }
 
-export type MarketResolutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "marketId" | "resolvedBy" | "outcome" | "resolutionSource" | "status" | "resolvedAt" | "createdAt", ExtArgs["result"]["marketResolution"]>
+export type MarketResolutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "marketId" | "resolvedBy" | "confirmedBy" | "outcome" | "resolutionSource" | "status" | "resolvedAt" | "createdAt", ExtArgs["result"]["marketResolution"]>
 export type MarketResolutionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   market?: boolean | Prisma.MarketDefaultArgs<ExtArgs>
   resolver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  confirmer?: boolean | Prisma.MarketResolution$confirmerArgs<ExtArgs>
   settlementBatch?: boolean | Prisma.MarketResolution$settlementBatchArgs<ExtArgs>
 }
 export type MarketResolutionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   market?: boolean | Prisma.MarketDefaultArgs<ExtArgs>
   resolver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  confirmer?: boolean | Prisma.MarketResolution$confirmerArgs<ExtArgs>
 }
 export type MarketResolutionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   market?: boolean | Prisma.MarketDefaultArgs<ExtArgs>
   resolver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  confirmer?: boolean | Prisma.MarketResolution$confirmerArgs<ExtArgs>
 }
 
 export type $MarketResolutionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -834,12 +1023,14 @@ export type $MarketResolutionPayload<ExtArgs extends runtime.Types.Extensions.In
   objects: {
     market: Prisma.$MarketPayload<ExtArgs>
     resolver: Prisma.$UserPayload<ExtArgs>
+    confirmer: Prisma.$UserPayload<ExtArgs> | null
     settlementBatch: Prisma.$SettlementBatchPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     marketId: string
     resolvedBy: string
+    confirmedBy: string | null
     outcome: $Enums.ResolutionType
     resolutionSource: string | null
     status: $Enums.MarketResolutionStatus
@@ -1241,6 +1432,7 @@ export interface Prisma__MarketResolutionClient<T, Null = never, ExtArgs extends
   readonly [Symbol.toStringTag]: "PrismaPromise"
   market<T extends Prisma.MarketDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MarketDefaultArgs<ExtArgs>>): Prisma.Prisma__MarketClient<runtime.Types.Result.GetResult<Prisma.$MarketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   resolver<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  confirmer<T extends Prisma.MarketResolution$confirmerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MarketResolution$confirmerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   settlementBatch<T extends Prisma.MarketResolution$settlementBatchArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MarketResolution$settlementBatchArgs<ExtArgs>>): Prisma.Prisma__SettlementBatchClient<runtime.Types.Result.GetResult<Prisma.$SettlementBatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1274,6 +1466,7 @@ export interface MarketResolutionFieldRefs {
   readonly id: Prisma.FieldRef<"MarketResolution", 'String'>
   readonly marketId: Prisma.FieldRef<"MarketResolution", 'String'>
   readonly resolvedBy: Prisma.FieldRef<"MarketResolution", 'String'>
+  readonly confirmedBy: Prisma.FieldRef<"MarketResolution", 'String'>
   readonly outcome: Prisma.FieldRef<"MarketResolution", 'ResolutionType'>
   readonly resolutionSource: Prisma.FieldRef<"MarketResolution", 'String'>
   readonly status: Prisma.FieldRef<"MarketResolution", 'MarketResolutionStatus'>
@@ -1677,6 +1870,25 @@ export type MarketResolutionDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many MarketResolutions to delete.
    */
   limit?: number
+}
+
+/**
+ * MarketResolution.confirmer
+ */
+export type MarketResolution$confirmerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

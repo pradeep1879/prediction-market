@@ -127,6 +127,7 @@ export const MarketResolutionScalarFieldEnum = {
   id: 'id',
   marketId: 'marketId',
   resolvedBy: 'resolvedBy',
+  confirmedBy: 'confirmedBy',
   outcome: 'outcome',
   resolutionSource: 'resolutionSource',
   status: 'status',

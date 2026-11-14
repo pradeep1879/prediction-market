@@ -203,7 +203,8 @@ export type UserWhereInput = {
   positions?: Prisma.PositionListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   splitMergeOperations?: Prisma.SplitMergeOperationListRelationFilter
-  marketResolutions?: Prisma.MarketResolutionListRelationFilter
+  resolutionsCreated?: Prisma.MarketResolutionListRelationFilter
+  resolutionsConfirmed?: Prisma.MarketResolutionListRelationFilter
   boughtTrades?: Prisma.TradeListRelationFilter
   soldTrades?: Prisma.TradeListRelationFilter
   settlements?: Prisma.SettlementRecordListRelationFilter
@@ -222,7 +223,8 @@ export type UserOrderByWithRelationInput = {
   positions?: Prisma.PositionOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   splitMergeOperations?: Prisma.SplitMergeOperationOrderByRelationAggregateInput
-  marketResolutions?: Prisma.MarketResolutionOrderByRelationAggregateInput
+  resolutionsCreated?: Prisma.MarketResolutionOrderByRelationAggregateInput
+  resolutionsConfirmed?: Prisma.MarketResolutionOrderByRelationAggregateInput
   boughtTrades?: Prisma.TradeOrderByRelationAggregateInput
   soldTrades?: Prisma.TradeOrderByRelationAggregateInput
   settlements?: Prisma.SettlementRecordOrderByRelationAggregateInput
@@ -244,7 +246,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   positions?: Prisma.PositionListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   splitMergeOperations?: Prisma.SplitMergeOperationListRelationFilter
-  marketResolutions?: Prisma.MarketResolutionListRelationFilter
+  resolutionsCreated?: Prisma.MarketResolutionListRelationFilter
+  resolutionsConfirmed?: Prisma.MarketResolutionListRelationFilter
   boughtTrades?: Prisma.TradeListRelationFilter
   soldTrades?: Prisma.TradeListRelationFilter
   settlements?: Prisma.SettlementRecordListRelationFilter
@@ -289,7 +292,8 @@ export type UserCreateInput = {
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
@@ -308,7 +312,8 @@ export type UserUncheckedCreateInput = {
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
@@ -327,7 +332,8 @@ export type UserUpdateInput = {
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
@@ -346,7 +352,8 @@ export type UserUncheckedUpdateInput = {
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
@@ -417,6 +424,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -447,18 +459,34 @@ export type UserUpdateOneRequiredWithoutMarketsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMarketsInput, Prisma.UserUpdateWithoutMarketsInput>, Prisma.UserUncheckedUpdateWithoutMarketsInput>
 }
 
-export type UserCreateNestedOneWithoutMarketResolutionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketResolutionsInput, Prisma.UserUncheckedCreateWithoutMarketResolutionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketResolutionsInput
+export type UserCreateNestedOneWithoutResolutionsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionsCreatedInput, Prisma.UserUncheckedCreateWithoutResolutionsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionsCreatedInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutMarketResolutionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketResolutionsInput, Prisma.UserUncheckedCreateWithoutMarketResolutionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketResolutionsInput
-  upsert?: Prisma.UserUpsertWithoutMarketResolutionsInput
+export type UserCreateNestedOneWithoutResolutionsConfirmedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionsConfirmedInput, Prisma.UserUncheckedCreateWithoutResolutionsConfirmedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionsConfirmedInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMarketResolutionsInput, Prisma.UserUpdateWithoutMarketResolutionsInput>, Prisma.UserUncheckedUpdateWithoutMarketResolutionsInput>
+}
+
+export type UserUpdateOneRequiredWithoutResolutionsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionsCreatedInput, Prisma.UserUncheckedCreateWithoutResolutionsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutResolutionsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResolutionsCreatedInput, Prisma.UserUpdateWithoutResolutionsCreatedInput>, Prisma.UserUncheckedUpdateWithoutResolutionsCreatedInput>
+}
+
+export type UserUpdateOneWithoutResolutionsConfirmedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResolutionsConfirmedInput, Prisma.UserUncheckedCreateWithoutResolutionsConfirmedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResolutionsConfirmedInput
+  upsert?: Prisma.UserUpsertWithoutResolutionsConfirmedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResolutionsConfirmedInput, Prisma.UserUpdateWithoutResolutionsConfirmedInput>, Prisma.UserUncheckedUpdateWithoutResolutionsConfirmedInput>
 }
 
 export type UserCreateNestedOneWithoutWalletInput = {
@@ -571,7 +599,8 @@ export type UserCreateWithoutMarketsInput = {
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
@@ -589,7 +618,8 @@ export type UserUncheckedCreateWithoutMarketsInput = {
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
@@ -623,7 +653,8 @@ export type UserUpdateWithoutMarketsInput = {
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
@@ -641,13 +672,14 @@ export type UserUncheckedUpdateWithoutMarketsInput = {
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutMarketResolutionsInput = {
+export type UserCreateWithoutResolutionsCreatedInput = {
   id?: string
   username: string
   password: string
@@ -660,12 +692,13 @@ export type UserCreateWithoutMarketResolutionsInput = {
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutMarketResolutionsInput = {
+export type UserUncheckedCreateWithoutResolutionsCreatedInput = {
   id?: string
   username: string
   password: string
@@ -678,28 +711,72 @@ export type UserUncheckedCreateWithoutMarketResolutionsInput = {
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutMarketResolutionsInput = {
+export type UserCreateOrConnectWithoutResolutionsCreatedInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutMarketResolutionsInput, Prisma.UserUncheckedCreateWithoutMarketResolutionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionsCreatedInput, Prisma.UserUncheckedCreateWithoutResolutionsCreatedInput>
 }
 
-export type UserUpsertWithoutMarketResolutionsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutMarketResolutionsInput, Prisma.UserUncheckedUpdateWithoutMarketResolutionsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutMarketResolutionsInput, Prisma.UserUncheckedCreateWithoutMarketResolutionsInput>
+export type UserCreateWithoutResolutionsConfirmedInput = {
+  id?: string
+  username: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.WalletCreateNestedOneWithoutUserInput
+  markets?: Prisma.MarketCreateNestedManyWithoutCreatorInput
+  positions?: Prisma.PositionCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
+  soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
+  settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutResolutionsConfirmedInput = {
+  id?: string
+  username: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutUserInput
+  markets?: Prisma.MarketUncheckedCreateNestedManyWithoutCreatorInput
+  positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
+  soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
+  settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutResolutionsConfirmedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionsConfirmedInput, Prisma.UserUncheckedCreateWithoutResolutionsConfirmedInput>
+}
+
+export type UserUpsertWithoutResolutionsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutResolutionsCreatedInput, Prisma.UserUncheckedUpdateWithoutResolutionsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionsCreatedInput, Prisma.UserUncheckedCreateWithoutResolutionsCreatedInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutMarketResolutionsInput = {
+export type UserUpdateToOneWithWhereWithoutResolutionsCreatedInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutMarketResolutionsInput, Prisma.UserUncheckedUpdateWithoutMarketResolutionsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutResolutionsCreatedInput, Prisma.UserUncheckedUpdateWithoutResolutionsCreatedInput>
 }
 
-export type UserUpdateWithoutMarketResolutionsInput = {
+export type UserUpdateWithoutResolutionsCreatedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -712,12 +789,13 @@ export type UserUpdateWithoutMarketResolutionsInput = {
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutMarketResolutionsInput = {
+export type UserUncheckedUpdateWithoutResolutionsCreatedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -730,6 +808,56 @@ export type UserUncheckedUpdateWithoutMarketResolutionsInput = {
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
+  boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
+  soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
+  settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutResolutionsConfirmedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutResolutionsConfirmedInput, Prisma.UserUncheckedUpdateWithoutResolutionsConfirmedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResolutionsConfirmedInput, Prisma.UserUncheckedCreateWithoutResolutionsConfirmedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutResolutionsConfirmedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutResolutionsConfirmedInput, Prisma.UserUncheckedUpdateWithoutResolutionsConfirmedInput>
+}
+
+export type UserUpdateWithoutResolutionsConfirmedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.WalletUpdateOneWithoutUserNestedInput
+  markets?: Prisma.MarketUpdateManyWithoutCreatorNestedInput
+  positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
+  soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
+  settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutResolutionsConfirmedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutUserNestedInput
+  markets?: Prisma.MarketUncheckedUpdateManyWithoutCreatorNestedInput
+  positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
@@ -747,7 +875,8 @@ export type UserCreateWithoutWalletInput = {
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
@@ -765,7 +894,8 @@ export type UserUncheckedCreateWithoutWalletInput = {
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
@@ -799,7 +929,8 @@ export type UserUpdateWithoutWalletInput = {
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
@@ -817,7 +948,8 @@ export type UserUncheckedUpdateWithoutWalletInput = {
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
@@ -835,7 +967,8 @@ export type UserCreateWithoutPositionsInput = {
   markets?: Prisma.MarketCreateNestedManyWithoutCreatorInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
@@ -853,7 +986,8 @@ export type UserUncheckedCreateWithoutPositionsInput = {
   markets?: Prisma.MarketUncheckedCreateNestedManyWithoutCreatorInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
@@ -887,7 +1021,8 @@ export type UserUpdateWithoutPositionsInput = {
   markets?: Prisma.MarketUpdateManyWithoutCreatorNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
@@ -905,7 +1040,8 @@ export type UserUncheckedUpdateWithoutPositionsInput = {
   markets?: Prisma.MarketUncheckedUpdateManyWithoutCreatorNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
@@ -923,7 +1059,8 @@ export type UserCreateWithoutSplitMergeOperationsInput = {
   markets?: Prisma.MarketCreateNestedManyWithoutCreatorInput
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
@@ -941,7 +1078,8 @@ export type UserUncheckedCreateWithoutSplitMergeOperationsInput = {
   markets?: Prisma.MarketUncheckedCreateNestedManyWithoutCreatorInput
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
@@ -975,7 +1113,8 @@ export type UserUpdateWithoutSplitMergeOperationsInput = {
   markets?: Prisma.MarketUpdateManyWithoutCreatorNestedInput
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
@@ -993,7 +1132,8 @@ export type UserUncheckedUpdateWithoutSplitMergeOperationsInput = {
   markets?: Prisma.MarketUncheckedUpdateManyWithoutCreatorNestedInput
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
@@ -1011,7 +1151,8 @@ export type UserCreateWithoutOrdersInput = {
   markets?: Prisma.MarketCreateNestedManyWithoutCreatorInput
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
@@ -1029,7 +1170,8 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   markets?: Prisma.MarketUncheckedCreateNestedManyWithoutCreatorInput
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
@@ -1063,7 +1205,8 @@ export type UserUpdateWithoutOrdersInput = {
   markets?: Prisma.MarketUpdateManyWithoutCreatorNestedInput
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
@@ -1081,7 +1224,8 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   markets?: Prisma.MarketUncheckedUpdateManyWithoutCreatorNestedInput
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
@@ -1100,7 +1244,8 @@ export type UserCreateWithoutBoughtTradesInput = {
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
 }
@@ -1118,7 +1263,8 @@ export type UserUncheckedCreateWithoutBoughtTradesInput = {
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1141,7 +1287,8 @@ export type UserCreateWithoutSoldTradesInput = {
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   settlements?: Prisma.SettlementRecordCreateNestedManyWithoutUserInput
 }
@@ -1159,7 +1306,8 @@ export type UserUncheckedCreateWithoutSoldTradesInput = {
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   settlements?: Prisma.SettlementRecordUncheckedCreateNestedManyWithoutUserInput
 }
@@ -1193,7 +1341,8 @@ export type UserUpdateWithoutBoughtTradesInput = {
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
 }
@@ -1211,7 +1360,8 @@ export type UserUncheckedUpdateWithoutBoughtTradesInput = {
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1240,7 +1390,8 @@ export type UserUpdateWithoutSoldTradesInput = {
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   settlements?: Prisma.SettlementRecordUpdateManyWithoutUserNestedInput
 }
@@ -1258,7 +1409,8 @@ export type UserUncheckedUpdateWithoutSoldTradesInput = {
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   settlements?: Prisma.SettlementRecordUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -1276,7 +1428,8 @@ export type UserCreateWithoutSettlementsInput = {
   positions?: Prisma.PositionCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeCreateNestedManyWithoutSellerInput
 }
@@ -1294,7 +1447,8 @@ export type UserUncheckedCreateWithoutSettlementsInput = {
   positions?: Prisma.PositionUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedCreateNestedManyWithoutUserInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutResolverInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedCreateNestedManyWithoutConfirmerInput
   boughtTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutBuyerInput
   soldTrades?: Prisma.TradeUncheckedCreateNestedManyWithoutSellerInput
 }
@@ -1328,7 +1482,8 @@ export type UserUpdateWithoutSettlementsInput = {
   positions?: Prisma.PositionUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUpdateManyWithoutSellerNestedInput
 }
@@ -1346,7 +1501,8 @@ export type UserUncheckedUpdateWithoutSettlementsInput = {
   positions?: Prisma.PositionUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   splitMergeOperations?: Prisma.SplitMergeOperationUncheckedUpdateManyWithoutUserNestedInput
-  marketResolutions?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsCreated?: Prisma.MarketResolutionUncheckedUpdateManyWithoutResolverNestedInput
+  resolutionsConfirmed?: Prisma.MarketResolutionUncheckedUpdateManyWithoutConfirmerNestedInput
   boughtTrades?: Prisma.TradeUncheckedUpdateManyWithoutBuyerNestedInput
   soldTrades?: Prisma.TradeUncheckedUpdateManyWithoutSellerNestedInput
 }
@@ -1361,7 +1517,8 @@ export type UserCountOutputType = {
   positions: number
   orders: number
   splitMergeOperations: number
-  marketResolutions: number
+  resolutionsCreated: number
+  resolutionsConfirmed: number
   boughtTrades: number
   soldTrades: number
   settlements: number
@@ -1372,7 +1529,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   positions?: boolean | UserCountOutputTypeCountPositionsArgs
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
   splitMergeOperations?: boolean | UserCountOutputTypeCountSplitMergeOperationsArgs
-  marketResolutions?: boolean | UserCountOutputTypeCountMarketResolutionsArgs
+  resolutionsCreated?: boolean | UserCountOutputTypeCountResolutionsCreatedArgs
+  resolutionsConfirmed?: boolean | UserCountOutputTypeCountResolutionsConfirmedArgs
   boughtTrades?: boolean | UserCountOutputTypeCountBoughtTradesArgs
   soldTrades?: boolean | UserCountOutputTypeCountSoldTradesArgs
   settlements?: boolean | UserCountOutputTypeCountSettlementsArgs
@@ -1419,7 +1577,14 @@ export type UserCountOutputTypeCountSplitMergeOperationsArgs<ExtArgs extends run
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountMarketResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountResolutionsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketResolutionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountResolutionsConfirmedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MarketResolutionWhereInput
 }
 
@@ -1458,7 +1623,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   positions?: boolean | Prisma.User$positionsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   splitMergeOperations?: boolean | Prisma.User$splitMergeOperationsArgs<ExtArgs>
-  marketResolutions?: boolean | Prisma.User$marketResolutionsArgs<ExtArgs>
+  resolutionsCreated?: boolean | Prisma.User$resolutionsCreatedArgs<ExtArgs>
+  resolutionsConfirmed?: boolean | Prisma.User$resolutionsConfirmedArgs<ExtArgs>
   boughtTrades?: boolean | Prisma.User$boughtTradesArgs<ExtArgs>
   soldTrades?: boolean | Prisma.User$soldTradesArgs<ExtArgs>
   settlements?: boolean | Prisma.User$settlementsArgs<ExtArgs>
@@ -1502,7 +1668,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   positions?: boolean | Prisma.User$positionsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   splitMergeOperations?: boolean | Prisma.User$splitMergeOperationsArgs<ExtArgs>
-  marketResolutions?: boolean | Prisma.User$marketResolutionsArgs<ExtArgs>
+  resolutionsCreated?: boolean | Prisma.User$resolutionsCreatedArgs<ExtArgs>
+  resolutionsConfirmed?: boolean | Prisma.User$resolutionsConfirmedArgs<ExtArgs>
   boughtTrades?: boolean | Prisma.User$boughtTradesArgs<ExtArgs>
   soldTrades?: boolean | Prisma.User$soldTradesArgs<ExtArgs>
   settlements?: boolean | Prisma.User$settlementsArgs<ExtArgs>
@@ -1519,7 +1686,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     positions: Prisma.$PositionPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     splitMergeOperations: Prisma.$SplitMergeOperationPayload<ExtArgs>[]
-    marketResolutions: Prisma.$MarketResolutionPayload<ExtArgs>[]
+    resolutionsCreated: Prisma.$MarketResolutionPayload<ExtArgs>[]
+    resolutionsConfirmed: Prisma.$MarketResolutionPayload<ExtArgs>[]
     boughtTrades: Prisma.$TradePayload<ExtArgs>[]
     soldTrades: Prisma.$TradePayload<ExtArgs>[]
     settlements: Prisma.$SettlementRecordPayload<ExtArgs>[]
@@ -1931,7 +2099,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   positions<T extends Prisma.User$positionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$positionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   splitMergeOperations<T extends Prisma.User$splitMergeOperationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$splitMergeOperationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SplitMergeOperationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  marketResolutions<T extends Prisma.User$marketResolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$marketResolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resolutionsCreated<T extends Prisma.User$resolutionsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resolutionsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resolutionsConfirmed<T extends Prisma.User$resolutionsConfirmedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resolutionsConfirmedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boughtTrades<T extends Prisma.User$boughtTradesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boughtTradesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   soldTrades<T extends Prisma.User$soldTradesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$soldTradesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   settlements<T extends Prisma.User$settlementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$settlementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SettlementRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2479,9 +2648,33 @@ export type User$splitMergeOperationsArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * User.marketResolutions
+ * User.resolutionsCreated
  */
-export type User$marketResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$resolutionsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketResolution
+   */
+  select?: Prisma.MarketResolutionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketResolution
+   */
+  omit?: Prisma.MarketResolutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketResolutionInclude<ExtArgs> | null
+  where?: Prisma.MarketResolutionWhereInput
+  orderBy?: Prisma.MarketResolutionOrderByWithRelationInput | Prisma.MarketResolutionOrderByWithRelationInput[]
+  cursor?: Prisma.MarketResolutionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketResolutionScalarFieldEnum | Prisma.MarketResolutionScalarFieldEnum[]
+}
+
+/**
+ * User.resolutionsConfirmed
+ */
+export type User$resolutionsConfirmedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the MarketResolution
    */
