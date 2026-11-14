@@ -23,7 +23,35 @@ export const createMarketResolution = async (
     const resolution = await resolutionService.createMarketResolution(userId!, marketId, result.data)
 
     return res.status(201).json({
-      message: "Market resolution created successfully."
+      success: true,
+      message: "Market resolution created successfully.",
+      data: resolution
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+export const confirmMarketResolution = async (
+  req: Request, 
+  res: Response, 
+  next: NextFunction
+) => {
+  try {
+    const userId = req.userId;
+    const { resolutionId } = req.params;
+
+    if(!resolutionId || typeof resolutionId !== "string"){
+      throw new AppError(400, "resolutionId is not valid.")
+    }
+    const resolution = await resolutionService.confirmMarketResolution(userId!, resolutionId)
+
+    return res.status(201).json({
+      success: true,
+      message: "Market resolution cofirmed successfully.",
+      data: resolution
     })
 
   } catch (error) {
