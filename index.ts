@@ -9,6 +9,7 @@ import orderRouter from './src/modules/order/order.routes'
 import orderBookRouter from './src/modules/orderBook/orderBook.routes'
 import tradeRouter from './src/modules/trade/trade.routes'
 import resolutionRouter from './src/modules/resolution/resolution.routes'
+import settlementRouter from './src/modules/settlement/settlement.routes'
 import { errorMiddleware } from "./src/middleware/error.middleware";
 const app = express();
 
@@ -23,6 +24,8 @@ app.use("/api/v1/order", orderRouter);
 app.use("/api/v1/orderBook", orderBookRouter);
 app.use("/api/v1/trades", tradeRouter);
 app.use("/api/v1/resolutions", resolutionRouter);
+app.use("/api/v1/settlement", settlementRouter);
+
 
 
 app.use(errorMiddleware);

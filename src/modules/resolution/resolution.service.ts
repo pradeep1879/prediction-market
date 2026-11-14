@@ -134,7 +134,3 @@ export const confirmMarketResolution = async (
     return updatedResolution
   })
 }
-
-
-
-
