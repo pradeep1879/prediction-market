@@ -1,4 +1,3 @@
-
 import { prisma } from "../../db/client";
 import { AppError } from "../../utils/AppError";
 
@@ -418,4 +417,148 @@ export const settleMarket = async (
 
     throw error;
   }
+};
+
+type GetMarketSettlementInput = {
+  page: number,
+  limit: number,
+}
+
+export const getMarketSettlement = async (
+  marketId: string,
+  query: GetMarketSettlementInput
+) => {
+  const { page, limit } = query;
+  // check whether market exists
+  const market = await prisma.market.findUnique({
+    where: { id: marketId },
+    select: {
+      id: true,
+      title: true,
+      status: true,
+      resolution: true,
+      payoutPerContract: true,
+    },
+  });
+
+  if (!market) {
+    throw new AppError(404, "Market not found.");
+  }
+
+  // find settlement batch
+  const settlementBatch = await prisma.settlementBatch.findUnique({
+    where: {
+      // use this only if marketId is unique in SettlementBatch.
+      // otherwise use findFirst as below.
+      resolutionId: (
+        await prisma.marketResolution.findFirst({
+          where: { marketId, status: "CONFIRMED" },
+          select: { id: true },
+        })
+      )?.id ?? "",
+    },
+    include: {
+      resolution: true,
+    },
+  });
+
+  if (!settlementBatch) {
+    throw new AppError(404, "No settlement batch found.");
+  }
+
+  // calculate pagination
+  const skip = (page - 1) * limit;
+
+  // fetch settlement records
+  const [records, totalRecords] = await prisma.$transaction([
+    prisma.settlementRecord.findMany({
+      where: {
+        batchId: settlementBatch.id,
+      },
+      select: {
+        id: true,
+        outcome: true,
+        quantity: true,
+        payoutPerContract: true,
+        payoutAmount: true,
+        status: true,
+        settledAt: true,
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      skip,
+      take: limit,
+    }),
+
+    prisma.settlementRecord.count({
+      where: {
+        batchId: settlementBatch.id,
+      },
+    }),
+  ]);
+
+  // calculate statistics
+  const [completedRecords, pendingRecords, failedRecords] =
+    await prisma.settlementRecord.groupBy({
+      by: ["status"],
+      where: {
+        batchId: settlementBatch.id,
+      },
+      _count: {
+        id: true,
+      },
+    }).then((groups) => [
+      groups.find((g) => g.status === "COMPLETED")?._count.id ?? 0,
+      groups.find((g) => g.status === "PENDING")?._count.id ?? 0,
+      groups.find((g) => g.status === "FAILED")?._count.id ?? 0,
+    ]);
+
+  const totalWinners = await prisma.settlementRecord.count({
+    where: {
+      batchId: settlementBatch.id,
+      payoutAmount: { gt: 0 },
+    },
+  });
+
+  return {
+    market: {
+      id: market.id,
+      title: market.title,
+      status: market.status,
+    },
+
+    settlement: {
+      id: settlementBatch.id,
+      status: settlementBatch.status,
+      winningOutcome: settlementBatch.resolution.outcome,
+      totalWinningQuantity: settlementBatch.totalWinningQuantity,
+      totalPayoutAmount: settlementBatch.totalPayoutAmount,
+      startedAt: settlementBatch.startedAt,
+      completedAt: settlementBatch.completedAt,
+    },
+
+    statistics: {
+      totalRecords,
+      totalWinners,
+      totalLosers: totalRecords - totalWinners,
+      completedRecords,
+      pendingRecords,
+      failedRecords,
+    },
+
+    records,
+
+    pagination: {
+      page,
+      limit,
+      totalRecords,
+      totalPages: Math.ceil(totalRecords / limit),
+    },
+  };
 };
